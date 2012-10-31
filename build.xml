@@ -5,4 +5,10 @@
 <project name="shaderblow" default="netbeans" basedir=".">
     <description>Builds, tests, and runs the project shaderblow.</description>
     <import file="nbproject/build-impl.xml"/>
+	
+	<target name="init" depends="basic-init,files-init,build-init,-javac-init,-build-subproject"/>
+	<target name="-build-subproject">
+	    <ant dir="./ShaderBlow" inheritall="false" target="jar"/>
+	    <copy file="./ShaderBlow/dist/ShaderBlow.jar" todir="release/libs"/>
+	</target>
 </project>
