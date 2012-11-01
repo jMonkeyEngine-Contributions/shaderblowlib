@@ -198,7 +198,7 @@ float overlayMode(float color, float overlayColor)
             if (color < 0.5) {
                    result = 2.0 * color * overlayColor;
                 } else {
-               result = vec4(1.0) - 2.0 * (vec4(1.0) - overlayColor) * (vec4(1.0) - color);
+               result = 1.0 - 2.0 * (1.0 - overlayColor) * (1.0 - color);
             }
 		return result;
 }

@@ -5,6 +5,8 @@ MaterialDef ColorScale {
         Texture2D Texture
         Vector4 FilterColor
         Float ColorDensity
+        Boolean Multyply : False
+        Boolean Overlay : False
     }
   
     Technique {
@@ -17,6 +19,8 @@ MaterialDef ColorScale {
  
         Defines {
             RESOLVE_MS : NumSamples
+            MULTYPLY : Multyply
+            OVERLAY : Overlay
         }
     }
   
@@ -26,6 +30,11 @@ MaterialDef ColorScale {
   
         WorldParameters {
             WorldViewProjectionMatrix
+        }
+
+        Defines {
+            MULTYPLY : Multyply
+            OVERLAY : Overlay
         }
     }
 }
