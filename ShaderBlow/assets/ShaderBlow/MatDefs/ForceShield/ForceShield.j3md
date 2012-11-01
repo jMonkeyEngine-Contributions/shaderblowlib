@@ -25,19 +25,5 @@ MaterialDef Solid Color {
         }
     }
 
-    Technique PreNormalPass {
-
-        VertexShader GLSL100 :   Common/MatDefs/SSAO/normal.vert
-        FragmentShader GLSL100 : Common/MatDefs/SSAO/normal.frag
-
-        WorldParameters {
-            WorldViewProjectionMatrix
-            WorldViewMatrix
-            NormalMatrix
-        }
-
-        RenderState {
-            }
-    }
 
 }
