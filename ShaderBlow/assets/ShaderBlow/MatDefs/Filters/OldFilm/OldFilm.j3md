@@ -1,0 +1,36 @@
+MaterialDef ColorScale {
+  
+    MaterialParameters {
+        Int NumSamples
+        Texture2D Texture
+        Vector4 FilterColor
+        Float ColorDensity
+        Float RandomValue
+        Float NoiseDensity
+        Float ScratchDensity
+    }
+  
+    Technique {
+        VertexShader GLSL150:   Common/MatDefs/Post/Post15.vert
+        FragmentShader GLSL150: ShaderBlow/Filters/OldFilm/OldFilm15.frag
+  
+        WorldParameters {
+            WorldViewProjectionMatrix
+            Time
+        }
+ 
+        Defines {
+            RESOLVE_MS : NumSamples
+        }
+    }
+  
+    Technique {
+        VertexShader GLSL100:   Common/MatDefs/Post/Post.vert
+        FragmentShader GLSL100: ShaderBlow/Filters/OldFilm/OldFilm.frag
+  
+        WorldParameters {
+            WorldViewProjectionMatrix
+            Time
+        }
+    }
+}

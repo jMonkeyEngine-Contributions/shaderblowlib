@@ -1,0 +1,120 @@
+MaterialDef FakeParticleBlow {
+ 
+    MaterialParameters {
+
+        Texture2D MatCapSpecular // matcap fake specularity texture
+        Float specularIntensity : 1.0 // matcap fake specular intensity
+
+        // Ref Map for refraction
+        TextureCubeMap RefMap
+        
+        // Refraction Index 
+        Float refIndex : 0.66
+        
+        // Chromatic Abberation
+        Boolean ChromaticAbberation
+        Float abberIndex : 0.05    // Use between 0.01 - 0.1
+        
+        // Fog
+        Color FogColor
+        TextureCubeMap FogSkyBox
+
+        // Toon System
+        Boolean Toon
+        Color EdgesColor 
+        Float EdgeSize
+        Boolean Fog_Edges
+
+        // Switch Normal Map xyz(rgb) channels
+        Boolean Nor_Inv_X
+        Boolean Nor_Inv_Y
+        Boolean Nor_Inv_Z
+        Texture2D NormalMap
+        Float NormalMapPower : 0.6
+
+        // Multiply Color - Color manipulations
+        Color Multiply_Color : 1.0 1.0 1.0 1.0
+        Float colorIntensity : 1.0   
+    }
+ 
+    Technique {
+          VertexShader GLSL100:   ShaderBlow/Shaders/Glass/Glass.vert
+          FragmentShader GLSL100: ShaderBlow/Shaders/Glass/Glass.frag
+ 
+        WorldParameters {
+            WorldViewProjectionMatrix
+            NormalMatrix
+            WorldViewMatrix
+            CameraPosition
+            WorldMatrix
+            
+        }
+ 
+        Defines {
+
+            SPECULAR : MatCapSpecular
+            NORMALMAP : NormalMap
+            NOR_INV_X : Nor_Inv_X
+            NOR_INV_Y : Nor_Inv_Y
+            NOR_INV_Z : Nor_Inv_Z
+            CHROMATIC_ABERRATION : ChromaticAbberation
+            FOG : FogColor
+            FOG_SKY : FogSkyBox
+            TOON_EDGES : EdgesColor
+            
+        }
+    }
+ 
+    Technique CartoonEdge {
+
+        LightMode MultiPass
+
+        VertexShader GLSL100:   ShaderBlow/Shaders/ToonBlow/ToonBlow_Edges.vert
+        FragmentShader GLSL100: ShaderBlow/Shaders/ToonBlow/ToonBlow_Edges.frag
+
+
+        WorldParameters {
+            WorldViewProjectionMatrix
+            NormalMatrix
+            WorldViewMatrix
+            ViewMatrix
+            CameraPosition
+            WorldMatrix
+        }
+
+        Defines {
+
+            SPHERE_MAP : SphereMap
+            FOG : FogColor
+            FOG_SKY : FogSkyBox
+            TOON_EDGES : EdgesColor
+            FOG_EDGES : Fog_Edges
+        }
+
+        RenderState {
+            FaceCull Front
+            DepthTest On
+            DepthWrite On
+        }
+    }
+
+
+    Technique {
+    }
+
+      Technique PreNormalPass {
+
+            VertexShader GLSL100 :   Common/MatDefs/SSAO/normal.vert
+            FragmentShader GLSL100 : Common/MatDefs/SSAO/normal.frag
+
+            WorldParameters {
+                WorldViewProjectionMatrix
+                WorldViewMatrix
+                NormalMatrix
+            }
+
+            RenderState {
+            }
+        }
+
+ }

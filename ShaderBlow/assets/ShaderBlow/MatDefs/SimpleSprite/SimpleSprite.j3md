@@ -1,0 +1,40 @@
+MaterialDef SimpleSprite {
+ 
+    MaterialParameters {
+
+        Texture2D AniTexMap
+       
+        // Number of Tiles U and V
+        Int numTilesU
+        Int numTilesV
+        Int Speed
+        
+        // Fog
+        Color FogColor
+        TextureCubeMap FogSkyBox
+
+        // Multiply Color system
+        Color Multiply_Color
+
+    }
+ 
+    Technique {
+          VertexShader GLSL100:   ShaderBlow/Shaders/SimpleSprite/SimpleSprite.vert
+          FragmentShader GLSL100: ShaderBlow/Shaders/SimpleSprite/SimpleSprite.frag
+ 
+        WorldParameters {
+            WorldViewProjectionMatrix
+            Time
+        }
+ 
+        Defines {
+
+            MULTIPLY_COLOR : Multiply_Color
+            FOG : FogColor
+            FOG_SKY : FogSkyBox
+            
+        }
+    }
+
+ 
+}

@@ -1,0 +1,48 @@
+MaterialDef Simple Water {
+
+    MaterialParameters {
+      //  Texture2D water_reflection
+        Texture2D water_refraction
+   //     Texture2D water_depthmap
+        Texture2D water_normalmap
+        Texture2D water_dudvmap
+      //  Vector4 waterColor
+        Float time
+        Float waterDepth
+        Vector4 distortionScale
+        Vector4 distortionMix
+        Vector4 texScale
+        Vector2 FrustumNearFar
+        Float waterTransparency
+    }
+
+    Technique {
+        VertexShader GLSL100:   ShaderBlow/Shaders/SimpleRefraction/simple_refraction.vert
+        FragmentShader GLSL100: ShaderBlow/Shaders/SimpleRefraction/simple_refraction.frag
+
+        WorldParameters {
+            WorldViewProjectionMatrix
+            WorldViewMatrix
+            Resolution
+            CameraPosition
+        }
+    }
+
+    Technique {
+        VertexShader GLSL150:   ShaderBlow/Shaders/SimpleRefraction/simple_refraction15.vert
+        FragmentShader GLSL150: ShaderBlow/Shaders/SimpleRefraction/simple_refraction15.frag
+
+        WorldParameters {
+            WorldViewProjectionMatrix
+            WorldViewMatrix
+            Resolution
+            CameraPosition
+        }
+
+        Defines {
+            RESOLVE_MS : NumSamples          
+        }
+
+    }
+
+}
