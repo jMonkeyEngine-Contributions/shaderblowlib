@@ -10,7 +10,7 @@ and open the template in the editor.
     <localizing-bundle>shaderblow.Bundle</localizing-bundle>
     <volume>
         <type>classpath</type>
-        <resource>jar:nbinst://shaderblow/libs/shaderblowlib.jar!/</resource>
+        <resource>jar:nbinst://shaderblow/libs/ShaderBlow.jar!/</resource>
     </volume>
     <volume>
         <type>src</type>
