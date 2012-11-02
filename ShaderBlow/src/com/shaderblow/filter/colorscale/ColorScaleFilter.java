@@ -34,6 +34,14 @@ public class ColorScaleFilter extends Filter {
         return this.material;
     }    
 
+    public void setOverlay(boolean overlay) {
+        this.material.setBoolean("Overlay", overlay);
+    }     
+
+    public void setMultiply(boolean multiply) {
+        this.material.setBoolean("Multiply", multiply);
+    }         
+    
     @Override
     protected void initFilter(final AssetManager manager, final RenderManager renderManager, final ViewPort vp,
             final int w, final int h) {

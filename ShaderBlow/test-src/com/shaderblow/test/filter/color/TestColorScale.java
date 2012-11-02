@@ -88,22 +88,22 @@ public class TestColorScale extends SimpleApplication {
             public void onAction(final String name, final boolean keyPressed, final float tpf) {
                 if (name.equals("Overlay") && keyPressed) {
                     if (TestColorScale.this.enabled) {
-                        TestColorScale.this.colorScale.getTheMaterial().setBoolean("Overlay", true);
-                        TestColorScale.this.colorScale.getTheMaterial().setBoolean("Multiply", false);
+                        TestColorScale.this.colorScale.setMultiply(false);
+                        TestColorScale.this.colorScale.setOverlay(true);
                     }
                 }
 
                 if (name.equals("Multiply") && keyPressed) {
                     if (TestColorScale.this.enabled) {
-                        TestColorScale.this.colorScale.getTheMaterial().setBoolean("Multiply", true);
-                        TestColorScale.this.colorScale.getTheMaterial().setBoolean("Overlay", false);
+                        TestColorScale.this.colorScale.setMultiply(true);
+                        TestColorScale.this.colorScale.setOverlay(false);
                     }
                 }
 
                 if (name.equals("Normal") && keyPressed) {
                     if (TestColorScale.this.enabled) {
-                        TestColorScale.this.colorScale.getTheMaterial().setBoolean("Multiply", false);
-                        TestColorScale.this.colorScale.getTheMaterial().setBoolean("Overlay", false);
+                        TestColorScale.this.colorScale.setMultiply(false);
+                        TestColorScale.this.colorScale.setOverlay(false);
                     }
                 }
 
