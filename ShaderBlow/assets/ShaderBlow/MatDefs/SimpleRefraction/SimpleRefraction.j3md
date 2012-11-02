@@ -12,7 +12,7 @@ MaterialDef Simple Water {
         Vector4 distortionScale
         Vector4 distortionMix
         Vector4 texScale
-        Vector2 FrustumNearFar
+      //  Vector2 FrustumNearFar
         Float waterTransparency
     }
 
