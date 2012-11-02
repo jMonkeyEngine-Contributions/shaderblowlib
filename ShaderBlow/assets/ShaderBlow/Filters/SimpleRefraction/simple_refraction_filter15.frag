@@ -7,7 +7,7 @@ Converted by Mars_999
 8/20/2005
 */
 
-uniform sampler2D m_Texture;
+uniform COLORTEXTURE m_Texture;
 uniform sampler2D m_water_dudvmap;
 uniform float m_distortionScale;
 uniform float m_distortionMix;

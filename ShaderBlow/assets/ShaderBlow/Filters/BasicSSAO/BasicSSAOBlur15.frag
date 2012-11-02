@@ -1,6 +1,6 @@
 #import "Common/ShaderLib/MultiSample.glsllib"
 
-uniform sampler2D m_Texture;
+uniform COLORTEXTURE m_Texture;
 uniform sampler2D m_DepthTexture;
 uniform sampler2D m_SSAOMap;
 uniform vec2 g_Resolution;

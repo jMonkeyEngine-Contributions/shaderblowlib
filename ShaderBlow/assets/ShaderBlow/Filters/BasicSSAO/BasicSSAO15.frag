@@ -2,7 +2,7 @@
 
 uniform vec2 g_Resolution;
 uniform vec2 m_FrustumNearFar;
-uniform sampler2D m_Texture;
+uniform COLORTEXTURE m_Texture;
 uniform sampler2D m_Normals;
 uniform sampler2D m_Noise;
 uniform sampler2D m_DepthTexture;
