@@ -29,6 +29,10 @@ public class ColorScaleFilter extends Filter {
     protected Material getMaterial() {
         return this.material;
     }
+    
+    public Material getTheMaterial() {
+        return this.material;
+    }    
 
     @Override
     protected void initFilter(final AssetManager manager, final RenderManager renderManager, final ViewPort vp,

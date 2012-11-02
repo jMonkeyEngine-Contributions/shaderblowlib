@@ -5,7 +5,7 @@ MaterialDef ColorScale {
         Texture2D Texture
         Vector4 FilterColor
         Float ColorDensity
-        Boolean Multyply : False
+        Boolean Multiply : False
         Boolean Overlay : False
     }
   
@@ -19,7 +19,7 @@ MaterialDef ColorScale {
  
         Defines {
             RESOLVE_MS : NumSamples
-            MULTYPLY : Multyply
+            MULTIPLY : Multiply
             OVERLAY : Overlay
         }
     }
@@ -33,7 +33,7 @@ MaterialDef ColorScale {
         }
 
         Defines {
-            MULTYPLY : Multyply
+            MULTYPLY : Multiply
             OVERLAY : Overlay
         }
     }

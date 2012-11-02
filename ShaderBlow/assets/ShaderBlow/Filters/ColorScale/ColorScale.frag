@@ -5,8 +5,8 @@ uniform float m_ColorDensity;
 varying vec2 texCoord;
  
 void main() {
-    vec3 color = texture2D(m_Texture, texCoord).rgb;
-    vec4 originalColor = vec4(color, 1.0);
+    vec4 color = texture2D(m_Texture, texCoord);
+  //  vec4 originalColor = vec4(color, 1.0);
     float colorFactor = clamp(m_ColorDensity, 0.0, 1.0);
 
     vec4 color2 = vec4(1.0);
@@ -30,12 +30,12 @@ if (color.r < 0.5) {
 } else {
     color2.b = 1.0 - 2.0 * (1.0 - m_FilterColor.b) * (1.0 - color.b);
 }
-#elif defined(MULTYPLY)
+#elif defined(MULTIPLY)
 color2.rgb = color.rgb * m_FilterColor.rgb;
 #else
 color2.rgb = m_FilterColor.rgb;
 #endif
 
-    gl_FragColor.rgb = mix(originalColor.rgb, color2.rgb, colorFactor);
-    gl_FragColor.a = 1.0;
+    gl_FragColor.rgb = mix(color.rgb, color2.rgb, colorFactor);
+    gl_FragColor.a = color.a;
 }
