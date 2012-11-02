@@ -27,8 +27,6 @@ MaterialDef Simple Water {
         WorldParameters {
             WorldViewProjectionMatrix
             WorldViewMatrix
-            Resolution
-            CameraPosition
         }
     }
 
@@ -39,8 +37,6 @@ MaterialDef Simple Water {
         WorldParameters {
             WorldViewProjectionMatrix
             WorldViewMatrix
-            Resolution
-            CameraPosition
         }
 
         Defines {

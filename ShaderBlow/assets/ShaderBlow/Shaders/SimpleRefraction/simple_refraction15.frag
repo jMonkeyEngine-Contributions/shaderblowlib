@@ -11,11 +11,11 @@ uniform sampler2D m_water_refraction;
 uniform sampler2D m_water_dudvmap;
 //uniform sampler2D m_water_depthmap;
 //uniform vec4 m_waterColor;
-uniform float m_waterDepth;
+//uniform float m_waterDepth;
 uniform vec4 m_distortionScale;
 uniform vec4 m_distortionMix;
 uniform vec4 m_texScale;
-uniform vec2 m_FrustumNearFar;
+//uniform vec2 m_FrustumNearFar;
 uniform float m_waterTransparency;
 
 
@@ -24,9 +24,9 @@ uniform float m_waterTransparency;
 in vec4 waterTex1; //moving texcoords
 in vec4 waterTex2; //moving texcoords
 in vec4 position; //for projection
-in vec4 viewDir; //viewts
+//in vec4 viewDir; //viewts
 // varying vec4 viewLightDir;
-in vec4 viewCamDir;
+//in vec4 viewCamDir;
 
 out vec4 fragColor;
 //unit 0 = m_water_reflection
@@ -62,10 +62,10 @@ void main(void)
  
 
 //     vec4 lightTS = normalize(lightDir);
-     vec4 viewt = normalize(viewDir);
+    // vec4 viewt = normalize(viewDir);
      vec4 disdis = texture2D(m_water_dudvmap, vec2(waterTex2 * m_texScale));
      vec4 fdist = texture2D(m_water_dudvmap, vec2(waterTex1 + disdis*m_distortionMix));
-     fdist =normalize( fdist * 2.0 - 1.0)* m_distortionScale;
+     fdist = normalize( fdist * 2.0 - 1.0)* m_distortionScale;
   
 
      //load normalmap

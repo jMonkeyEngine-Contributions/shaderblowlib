@@ -9,7 +9,7 @@ uniform float m_time;
 
 uniform mat4 g_WorldViewProjectionMatrix;
 uniform mat4 g_WorldViewMatrix;
-uniform mat4 g_ViewMatrix;
+//uniform mat4 g_ViewMatrix;
 uniform vec3 g_CameraPosition;
 uniform mat3 g_NormalMatrix;
 
@@ -22,7 +22,7 @@ in vec3 inNormal;
 out vec4 waterTex1;
 out vec4 waterTex2;
 out vec4 position;
-out vec4 viewDir;
+//out vec4 viewDir;
 out vec4 viewpos;
 //varying vec4 viewLightDir;
 out vec4 viewCamDir;
