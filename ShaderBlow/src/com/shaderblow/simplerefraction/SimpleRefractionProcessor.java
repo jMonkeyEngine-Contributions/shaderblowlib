@@ -133,8 +133,8 @@ public class SimpleRefractionProcessor implements SceneProcessor {
 
         createPreViews();
 
-        this.material.setVector2("FrustumNearFar", new Vector2f(vp.getCamera().getFrustumNear(), vp.getCamera()
-                .getFrustumFar()));
+       // this.material.setVector2("FrustumNearFar", new Vector2f(vp.getCamera().getFrustumNear(), vp.getCamera()
+       //         .getFrustumFar()));
 
         if (this.debug) {
             this.dispRefraction = new Picture("dispRefraction");
@@ -182,6 +182,7 @@ public class SimpleRefractionProcessor implements SceneProcessor {
         this.refractionCam.setRotation(sceneCam.getRotation());
         this.refractionCam.setFrustum(sceneCam.getFrustumNear(), sceneCam.getFrustumFar(), sceneCam.getFrustumLeft(),
                 sceneCam.getFrustumRight(), sceneCam.getFrustumTop(), sceneCam.getFrustumBottom());
+        this.refractionCam.setParallelProjection(false);
 
         // update reflection cam
         // boolean inv = false;
