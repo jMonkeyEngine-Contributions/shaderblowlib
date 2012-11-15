@@ -223,6 +223,9 @@ Technique PostShadow15{
             DISCARD_ALPHA : AlphaDiscardThreshold
             COLOR_MAP : ColorMap
             SHADOWMAP_SIZE : ShadowMapSize
+            FADE : FadeInfo
+            PSSM : Splits
+            POINTLIGHT : LightViewProjectionMatrix5
         }
 
          ForcedRenderState {
@@ -248,6 +251,9 @@ Technique PostShadow15{
             DISCARD_ALPHA : AlphaDiscardThreshold
             COLOR_MAP : ColorMap
             SHADOWMAP_SIZE : ShadowMapSize
+            FADE : FadeInfo
+            PSSM : Splits
+            POINTLIGHT : LightViewProjectionMatrix5
         }
 
         ForcedRenderState {
