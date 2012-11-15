@@ -113,14 +113,22 @@ MaterialDef Phong Lighting {
         Texture2D ShadowMap1
         Texture2D ShadowMap2
         Texture2D ShadowMap3
+        //pointLights
+        Texture2D ShadowMap4
+        Texture2D ShadowMap5
         
         Float ShadowIntensity
         Vector4 Splits
+        Vector2 FadeInfo
 
         Matrix4 LightViewProjectionMatrix0
         Matrix4 LightViewProjectionMatrix1
         Matrix4 LightViewProjectionMatrix2
         Matrix4 LightViewProjectionMatrix3
+        //pointLight
+        Matrix4 LightViewProjectionMatrix4
+        Matrix4 LightViewProjectionMatrix5   
+        Vector3 LightPos
 
         Float PCFEdge
         Float ShadowMapSize
