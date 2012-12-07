@@ -362,19 +362,19 @@ vec4 normalHeightCalc;
     #if defined(NORMALMAP_1)
         #if  defined(TEXTURE_MASK) || defined(VERTEX_COLOR)
         vec4 normalHeight1 = texture2D(m_NormalMap_1, newTexCoord * m_uv_1_scale);
-        normalHeightCalc.rg = mix( normalHeightCalc.rg, normalHeight1.rg, textureBlend.r ).rg;
+        normalHeightCalc.rgb = mix( normalHeightCalc.rgb, normalHeight1.rgb, textureBlend.r ).rgb;
         #endif
     #endif
     #if defined(NORMALMAP_2)
         #if  defined(TEXTURE_MASK) || defined(VERTEX_COLOR)
         vec4 normalHeight2 = texture2D(m_NormalMap_2, newTexCoord * m_uv_2_scale);
-        normalHeightCalc.rg = mix( normalHeightCalc.rg, normalHeight2.rg, textureBlend.g ).rg;
+        normalHeightCalc.rgb = mix( normalHeightCalc.rgb, normalHeight2.rgb, textureBlend.g ).rgb;
         #endif
     #endif
     #if defined(NORMALMAP_3)
         #if  defined(TEXTURE_MASK) || defined(VERTEX_COLOR)
         vec4 normalHeight3 = texture2D(m_NormalMap_3, newTexCoord * m_uv_3_scale);
-        normalHeightCalc.rg = mix( normalHeightCalc.rg, normalHeight3.rg, textureBlend.b ).rg;
+        normalHeightCalc.rgb = mix( normalHeightCalc.rgb, normalHeight3.rgb, textureBlend.b ).rgb;
         #endif
     #endif
 
