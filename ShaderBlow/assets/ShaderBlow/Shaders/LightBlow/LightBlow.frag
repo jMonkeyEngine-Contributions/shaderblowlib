@@ -152,7 +152,7 @@ uniform vec4 m_RimLighting2;
 // uniform vec4 g_AmbientLightColor;
 #endif
 
-#if defined(IBL) || defined(REFLECTION)
+#if defined(IBL) || defined(REFLECTION) || defined(FOG_SKY)
 #import "Common/ShaderLib/Optics.glsllib"
 #endif
 
