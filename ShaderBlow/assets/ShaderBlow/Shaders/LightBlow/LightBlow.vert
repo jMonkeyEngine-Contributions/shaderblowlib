@@ -13,8 +13,12 @@ uniform vec4 m_Diffuse;
 
 #if defined(SPECULAR_LIGHTING)
 varying vec3 SpecularSum;
-uniform vec4 m_Specular;
 uniform float m_Shininess;
+
+#if defined(MATERIAL_COLORS)
+uniform vec4 m_Specular;
+#endif
+
 #endif
 
 uniform vec4 g_LightColor;
