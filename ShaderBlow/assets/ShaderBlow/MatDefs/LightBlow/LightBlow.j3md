@@ -324,7 +324,7 @@ MaterialDef LightBlow {
             DISCARD_ALPHA : AlphaDiscardThreshold
         }
 
-        RenderState {
+        ForcedRenderState {
             FaceCull Off
             DepthTest On
             DepthWrite On
