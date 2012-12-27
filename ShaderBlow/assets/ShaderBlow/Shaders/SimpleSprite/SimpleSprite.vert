@@ -32,7 +32,7 @@ void main(){
 	int selectedTile = 1;
 	
 
-        selectedTile += int(g_Time*m_Speed);
+        selectedTile += int(g_Time*float(m_Speed));
 
 	// the "1 - " bit is because otherwise it goes from right to left
 	texCoordAni.x = -(1.0 - float((texCoordAni.x + mod(float(selectedTile),  float(iNumTilesU))) / float(iNumTilesU))); ///selectedTile;
