@@ -57,7 +57,7 @@ public class TestFakeParticleBlow2 extends SimpleApplication {
     public void simpleInitApp() {
         this.assetManager.registerLocator("assets", FileLocator.class);
 
-        this.flyCam.setMoveSpeed(5);
+        this.flyCam.setMoveSpeed(55);
 
         final TextureKey skylow = new TextureKey("TestTextures/Water256.dds", true);
         skylow.setGenerateMips(true);
@@ -86,6 +86,8 @@ public class TestFakeParticleBlow2 extends SimpleApplication {
         // mat.setBoolean("Animation_X", true); // Enable X axis animation
         mat.setBoolean("Animation_Y", true); // Enable Y axis animation
         mat.setBoolean("Change_Direction", true); // Change direction of the texture animation
+        mat.getAdditionalRenderState().setDepthTest(true);
+        mat.getAdditionalRenderState().setDepthWrite(false);          
 
         mat.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off); // Allow to see both sides of a face
         mat.getAdditionalRenderState().setBlendMode(BlendMode.Additive);

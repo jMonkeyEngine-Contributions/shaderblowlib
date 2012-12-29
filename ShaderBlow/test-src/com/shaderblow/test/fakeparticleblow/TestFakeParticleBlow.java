@@ -64,6 +64,8 @@ public class TestFakeParticleBlow extends SimpleApplication {
         final Spatial fire = this.assetManager.loadModel("TestModels/FakeParticleBlow/FakeParticleBlow.j3o");
         final Material mat = this.assetManager.loadMaterial("TestMaterials/FakeParticleBlow/FakeParticleBlow.j3m");
         mat.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
+        mat.getAdditionalRenderState().setDepthTest(true);
+        mat.getAdditionalRenderState().setDepthWrite(false);        
         fire.setMaterial(mat);
         TangentBinormalGenerator.generate(fire);
         fire.setQueueBucket(Bucket.Transparent);
@@ -72,6 +74,8 @@ public class TestFakeParticleBlow extends SimpleApplication {
         final Spatial fire2 = this.assetManager.loadModel("TestModels/FakeParticleBlow/FakeParticleBlow.j3o");
         final Material mat2 = this.assetManager.loadMaterial("TestMaterials/FakeParticleBlow/FakeParticleBlow_2.j3m");
         mat2.getAdditionalRenderState().setFaceCullMode(RenderState.FaceCullMode.Off);
+        mat2.getAdditionalRenderState().setDepthTest(true);
+        mat2.getAdditionalRenderState().setDepthWrite(false);        
         fire2.setMaterial(mat2);
         TangentBinormalGenerator.generate(fire2);
         fire2.setQueueBucket(Bucket.Transparent);
