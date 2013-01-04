@@ -23,8 +23,8 @@ void main()
 {
  
 
-     vec4 disdis = texture2D(m_water_dudvmap, vec2(waterTex2 * vec2(m_texScale)));
-     vec4 fdist = texture2D(m_water_dudvmap, vec2(waterTex1 + disdis.xy*vec2(m_distortionMix)));
+     vec4 disdis = texture2D(m_water_dudvmap, vec2(waterTex2.xy * vec2(m_texScale)));
+     vec4 fdist = texture2D(m_water_dudvmap, vec2(waterTex1.xy + disdis.xy*vec2(m_distortionMix)));
      fdist =normalize( fdist * 2.0 - 1.0)* vec4(m_distortionScale);
 
 

@@ -1,0 +1,21 @@
+MaterialDef Unshaded {
+
+    MaterialParameters {
+
+    }
+
+    Technique {
+        VertexShader GLSL100:   Shaders/Empty/Empty.vert
+        FragmentShader GLSL100: Shaders/Empty/Empty.frag
+
+        WorldParameters {
+
+        }
+
+        Defines {
+
+        }
+    }
+
+
+}

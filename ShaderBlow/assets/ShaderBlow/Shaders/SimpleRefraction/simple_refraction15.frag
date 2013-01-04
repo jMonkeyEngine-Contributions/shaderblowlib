@@ -63,8 +63,8 @@ void main(void)
 
 //     vec4 lightTS = normalize(lightDir);
     // vec4 viewt = normalize(viewDir);
-     vec4 disdis = texture2D(m_water_dudvmap, vec2(waterTex2 * m_texScale));
-     vec4 fdist = texture2D(m_water_dudvmap, vec2(waterTex1 + disdis*m_distortionMix));
+     vec4 disdis = texture2D(m_water_dudvmap, vec2(waterTex2.xy * vec2(m_texScale)));
+     vec4 fdist = texture2D(m_water_dudvmap, vec2(waterTex1.xy + disdis.xy*vec2(m_distortionMix)));
      fdist = normalize( fdist * 2.0 - 1.0)* m_distortionScale;
   
 

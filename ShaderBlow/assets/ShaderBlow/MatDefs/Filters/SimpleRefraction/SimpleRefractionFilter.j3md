@@ -31,8 +31,8 @@ MaterialDef Simple Water {
     }
 
     Technique {
-        VertexShader GLSL150:   ShaderBlow/Shaders/SimpleRefraction/simple_refraction_filter15.vert
-        FragmentShader GLSL150: ShaderBlow/Shaders/SimpleRefraction/simple_refraction_filter15.frag
+        VertexShader GLSL150:   ShaderBlow/Filters/SimpleRefraction/simple_refraction_filter15.vert
+        FragmentShader GLSL150: ShaderBlow/Filters/SimpleRefraction/simple_refraction_filter15.frag
 
         WorldParameters {
             WorldViewProjectionMatrix

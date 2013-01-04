@@ -170,55 +170,32 @@ public class SimpleRefractionProcessor implements SceneProcessor {
 
     @Override
     public void postQueue(final RenderQueue rq) {
+        
+
+        
         final Camera sceneCam = this.rm.getCurrentCamera();
 
-        // //update ray
-        // ray.setOrigin(sceneCam.getLocation());
-        // ray.setDirection(sceneCam.getDirection());
-
-        // update refraction cam
-        // refractionCam.setProjectionMatrix(null);
         this.refractionCam.setLocation(sceneCam.getLocation());
         this.refractionCam.setRotation(sceneCam.getRotation());
         this.refractionCam.setFrustum(sceneCam.getFrustumNear(), sceneCam.getFrustumFar(), sceneCam.getFrustumLeft(),
                 sceneCam.getFrustumRight(), sceneCam.getFrustumTop(), sceneCam.getFrustumBottom());
         this.refractionCam.setParallelProjection(false);
+//
 
-        // update reflection cam
-        // boolean inv = false;
-        // if (!ray.intersectsWherePlane(plane, targetLocation)) {
-        // ray.setDirection(ray.getDirection().negateLocal());
-        // ray.intersectsWherePlane(plane, targetLocation);
-        // inv = true;
-        // }
-        // Vector3f loc = plane.reflect(sceneCam.getLocation(), new Vector3f());
-        // reflectionCam.setLocation(loc);
-        // reflectionCam.setFrustum(sceneCam.getFrustumNear(),
-        // sceneCam.getFrustumFar(),
-        // sceneCam.getFrustumLeft(),
-        // sceneCam.getFrustumRight(),
-        // sceneCam.getFrustumTop(),
-        // sceneCam.getFrustumBottom());
-        // // tempVec and calcVect are just temporary vector3f objects
-        // vect1.set(sceneCam.getLocation()).addLocal(sceneCam.getUp());
-        // float planeDistance = plane.pseudoDistance(vect1);
-        // vect2.set(plane.getNormal()).multLocal(planeDistance * 2.0f);
-        // vect3.set(vect1.subtractLocal(vect2)).subtractLocal(loc).normalizeLocal().negateLocal();
-        // // now set the up vector
-        // reflectionCam.lookAt(targetLocation, vect3);
-        // if (inv) {
-        // reflectionCam.setAxes(reflectionCam.getLeft().negateLocal(), reflectionCam.getUp(),
-        // reflectionCam.getDirection().negateLocal());
-        // }
+        
 
-        // Rendering reflection and refraction
-        // rm.renderViewPort(reflectionView, savedTpf);
-        // rm.getRenderer().setDepthRange(0, 1);
+        
+
         this.rm.renderViewPort(this.refractionView, this.savedTpf);
         this.rm.getRenderer().setFrameBuffer(this.vp.getOutputFrameBuffer());
         this.rm.setCamera(sceneCam, false);
-        this.rm.getRenderer().clearBuffers(true, true, true);
-
+        this.rm.getRenderer().clearBuffers(true, true, true);   
+        
+        this.rm.setForcedTechnique("Simple_Refraction");
+        this.rm.renderViewPortQueues(this.vp, false);        
+        this.rm.setForcedTechnique(null);    
+    
+        
     }
 
     @Override

@@ -72,7 +72,7 @@ public class TestSimpleRefraction extends SimpleApplication {
 
         //create processor
         SimpleRefractionProcessor refract = new SimpleRefractionProcessor(assetManager);
-        refract.setRefractionScene(sceneNode);
+        refract.setRefractionScene(rootNode);
         refract.setDebug(true);
         refract.setRenderSize(256, 256);
         viewPort.addProcessor(refract);
