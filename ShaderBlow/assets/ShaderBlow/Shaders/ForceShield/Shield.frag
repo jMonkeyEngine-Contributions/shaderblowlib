@@ -43,5 +43,9 @@ void main(void) {
         color *= texture2D(m_ColorMap, texCoord1);
     #endif
 
+    if(color.a < 0.02){
+        discard;
+    }
+
     gl_FragColor = color;   
 }

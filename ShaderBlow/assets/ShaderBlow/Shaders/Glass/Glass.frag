@@ -112,7 +112,13 @@ void main() {
         gl_FragColor.rgb = color;
     #endif
 
-    gl_FragColor.a = m_Multiply_Color.w;
+
+    float alpha = m_Multiply_Color.w;
+    if(alpha < 0.02){
+        discard;
+    }
+    gl_FragColor.a = alpha;
+
 
     #ifdef FOG
         fogColor = m_FogColor;

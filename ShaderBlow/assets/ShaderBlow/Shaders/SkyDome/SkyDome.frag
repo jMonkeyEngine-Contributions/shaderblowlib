@@ -94,5 +94,9 @@ color = mix(color,c_Color,cloud.r*m_CloudsAlpha);
 float fogAlpha = 1.0-texture2D(m_FogAlphaMap, texCoord1).r;
 color = mix(color,fogColor,fogAlpha);
 
+ if(color.a < 0.01){
+     discard;
+ }
+
 gl_FragColor = color;
 }

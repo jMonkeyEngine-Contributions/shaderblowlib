@@ -42,5 +42,9 @@ void main(){
        gl_FragColor.rgb = mix(fogColor.rgb,gl_FragColor.rgb,vec3(fogFactor));
     #endif
 
+    if(Mask < 0.02){
+        discard;
+    }
+
     gl_FragColor.a = Mask;
 }
