@@ -19,20 +19,6 @@ MaterialDef Simple Water {
 
 
     Technique {
-        VertexShader GLSL100:   ShaderBlow/Shaders/Empty/Empty.vert
-        FragmentShader GLSL100: ShaderBlow/Shaders/Empty/Empty.frag
-
-        WorldParameters {
-
-        }
-
-        Defines {
-
-        }
-    }
-
-
-    Technique Simple_Refraction {
         VertexShader GLSL100:   ShaderBlow/Shaders/SimpleRefraction/simple_refraction.vert
         FragmentShader GLSL100: ShaderBlow/Shaders/SimpleRefraction/simple_refraction.frag
 
@@ -44,7 +30,7 @@ MaterialDef Simple Water {
         }
     }
 
-    Technique Simple_Refraction {
+    Technique {
         VertexShader GLSL150:   ShaderBlow/Shaders/SimpleRefraction/simple_refraction15.vert
         FragmentShader GLSL150: ShaderBlow/Shaders/SimpleRefraction/simple_refraction15.frag
 
