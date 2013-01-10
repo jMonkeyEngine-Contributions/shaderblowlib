@@ -20,12 +20,14 @@ out vec4 waterTex1;
 out vec4 waterTex2;
 out vec4 position;
 
-
+#ifdef REFRACT_OBJECTS
+out vec2 texCoord;
+#endif
 
 void main(void)
 {
 
-   vec4 viewSpacePos=g_WorldViewMatrix*inPosition;
+ //  vec4 viewSpacePos=g_WorldViewMatrix*inPosition;
    vec3 wvNormal  = normalize(g_NormalMatrix * inNormal);
    vec3 wvTangent = normalize(g_NormalMatrix * inTangent);
    vec3 wvBinormal = cross(wvNormal, wvTangent);
@@ -36,6 +38,10 @@ void main(void)
 
     waterTex1 =vec4(inTexCoord,0.0,0.0) + t1;
     waterTex2 =vec4(inTexCoord ,0.0,0.0)+ t2;
+
+#ifdef REFRACT_OBJECTS
+    texCoord = inTexCoord;
+#endif
 
     position = g_WorldViewProjectionMatrix * inPosition;
     gl_Position = position;

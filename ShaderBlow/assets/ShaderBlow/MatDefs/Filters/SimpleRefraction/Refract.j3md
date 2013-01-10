@@ -1,0 +1,33 @@
+MaterialDef Simple Water {
+
+    MaterialParameters {
+
+Boolean DoRefract : False
+Float Distance : 200.0
+        
+    }
+
+    Technique {
+        VertexShader GLSL100:   ShaderBlow/Shaders/Empty/Empty.vert
+        FragmentShader GLSL100: ShaderBlow/Shaders/Empty/Empty.frag
+
+        WorldParameters {
+        }
+    }
+
+Technique Refract {
+
+VertexShader GLSL100:   ShaderBlow/Filters/SimpleRefraction/Refract.vert
+FragmentShader GLSL100: ShaderBlow/Filters/SimpleRefraction/Refract.frag
+
+WorldParameters {
+WorldViewProjectionMatrix
+}
+
+Defines {
+DO_REFRACT : DoRefract
+}
+}
+
+
+}

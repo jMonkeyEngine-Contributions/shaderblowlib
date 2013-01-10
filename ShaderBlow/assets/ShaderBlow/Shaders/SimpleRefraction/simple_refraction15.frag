@@ -75,7 +75,7 @@ void main(void)
    //  vec4 vNorm = normalize(nmap);
 
      
-     vec4 projCoord = position / position.w;
+     vec4 projCoord = position / vec4(position.w);
      projCoord =(projCoord+1.0)*0.5 + fdist;
      projCoord = clamp(projCoord, 0.001, 0.999);
 

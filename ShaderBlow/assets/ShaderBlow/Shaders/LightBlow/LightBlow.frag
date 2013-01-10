@@ -602,10 +602,10 @@ diffuseColor.rgb *= m_Diffuse.rgb;
 
            vec4 tempVec1;
            #if  defined (IBL_SIMPLE) && defined (NORMALMAP)
-            srgb_to_linearrgb(texture2D(m_IblMap_Simple, (((refVec.xy) - mat.xy * normal.xy) * vec2(0.49)) + vec2(0.49)),tempVec1);
+            srgb_to_linearrgb(texture2D(m_IblMap_Simple, vec2((((refVec) - mat * normal) * vec3(0.49)) + vec3(0.49))),tempVec1);
             vec3 iblLight = tempVec1.rgb;
            #elif  defined (IBL_SIMPLE) && !defined (NORMALMAP)
-            srgb_to_linearrgb(texture2D(m_IblMap_Simple,  ((refVec.xy) * vec2(0.49)) + vec2(0.49)), tempVec1);
+            srgb_to_linearrgb(texture2D(m_IblMap_Simple,  vec2((refVec * vec3(0.49)) + vec3(0.49))), tempVec1);
             vec3 iblLight = tempVec1.rgb;
            #endif
         
@@ -650,7 +650,7 @@ diffuseColor.rgb *= m_Diffuse.rgb;
     
     #if  defined (REFLECTION) && defined (NORMALMAP)
   //  vec4 refGet = Optics_GetEnvColor(m_RefMap, (refVec.xyz - mat.xyz * normal.xyz)*-1.5);
-    vec4 refGet = Optics_GetEnvColor(m_RefMap, (refVec - ((mat * normal)*0.7)));
+    vec4 refGet = Optics_GetEnvColor(m_RefMap, (refVec - (mat * normal)));
     srgb_to_linearrgb(refGet,tempVecRef);
   #elif defined (REFLECTION) && !defined (NORMALMAP)
     vec4 refGet = Optics_GetEnvColor(m_RefMap, refVec);

@@ -88,7 +88,7 @@ void main() {
         #endif
 
         #if defined (SPECULAR)
-            specularColor = texture2D(m_MatCapSpecular, (coords.xy * vec2(0.495) + vec2(0.5)) + (normalz.xy) * vec2(m_NormalMapPower)).rgb;
+            specularColor = texture2D(m_MatCapSpecular, vec2(coords.xyz * vec3(0.495) + vec3(0.5)) + (normalz.xyz) * vec3(m_NormalMapPower)).rgb;
         #endif
 
     #else
@@ -100,7 +100,7 @@ void main() {
         #endif
 
         #if defined (SPECULAR)
-            specularColor = texture2D(m_MatCapSpecular, vec2(coords * vec3(0.495) + vec3(0.5)).xy).rgb;
+            specularColor = texture2D(m_MatCapSpecular, vec2(coords * vec3(0.495) + vec3(0.5))).rgb;
         #endif
     #endif
 

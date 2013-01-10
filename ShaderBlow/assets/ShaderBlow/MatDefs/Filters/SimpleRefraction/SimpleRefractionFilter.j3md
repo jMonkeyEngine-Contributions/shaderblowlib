@@ -1,11 +1,18 @@
-MaterialDef Simple Water {
+MaterialDef SimpleRefractionFilter {
 
     MaterialParameters {
 
         Int NumSamples
         Int NumSamplesDepth
       //  Texture2D water_reflection
+
         Texture2D Texture
+
+        // For objects Mode
+        Texture2D GrayTex
+        Boolean Refract_Detail : False
+        Boolean Refract_Faloff : True
+
     //    Texture2D DepthTexture
    //     Texture2D water_depthmap
         Texture2D water_normalmap
@@ -18,6 +25,7 @@ MaterialDef Simple Water {
         Float texScale
      //   Vector2 FrustumNearFar
         Float waterTransparency
+        
     }
 
     Technique {
@@ -27,6 +35,12 @@ MaterialDef Simple Water {
         WorldParameters {
             WorldViewProjectionMatrix
             WorldViewMatrix
+        }
+
+        Defines {
+            REFRACT_OBJECTS : GrayTex
+            REFRACT_DETAIL : Refract_Detail
+            REFRACT_FALOFF : Refract_Faloff
         }
     }
 
@@ -40,7 +54,9 @@ MaterialDef Simple Water {
         }
 
         Defines {
-            RESOLVE_MS : NumSamples          
+            RESOLVE_MS : NumSamples 
+            REFRACT_OBJECTS : GrayTex
+            REFRACT_DETAIL : Refract_Detail
         }
 
     }
