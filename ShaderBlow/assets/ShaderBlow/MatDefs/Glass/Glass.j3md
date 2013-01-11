@@ -117,4 +117,19 @@ MaterialDef FakeParticleBlow {
             }
         }
 
+Technique Refract {
+
+VertexShader GLSL100:   ShaderBlow/Filters/SimpleRefraction/Refract.vert
+FragmentShader GLSL100: ShaderBlow/Filters/SimpleRefraction/Refract.frag
+
+WorldParameters {
+WorldViewProjectionMatrix
+}
+
+Defines {
+DO_REFRACT : DoRefract
+MASK_TEXTURE : Mask_Texture
+}
+}
+
  }
