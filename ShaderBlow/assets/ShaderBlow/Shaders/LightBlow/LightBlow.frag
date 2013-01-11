@@ -490,16 +490,19 @@ vec4 diffuseColor;
 
     #if defined(DIFFUSEMAP_1) && defined(SPEC_A_DIF)
         #if  defined(TEXTURE_MASK) || defined(VERTEX_COLOR)
+         diffuseColor1.a = srgb_to_linearrgb(diffuseColor1.a);
          specA = mix( specA, diffuseColor1.a, textureBlend.r );
         #endif
     #endif  
     #if defined(DIFFUSEMAP_2) && defined(SPEC_A_DIF)
         #if  defined(TEXTURE_MASK) || defined(VERTEX_COLOR)
-          specA = mix( specA, diffuseColor2.a, textureBlend.g );
+         diffuseColor2.a = srgb_to_linearrgb(diffuseColor2.a);
+         specA = mix( specA, diffuseColor2.a, textureBlend.g );
         #endif
     #endif  
     #if defined(DIFFUSEMAP_3) && defined(SPEC_A_DIF)
         #if  defined(TEXTURE_MASK) || defined(VERTEX_COLOR)
+         diffuseColor3.a = srgb_to_linearrgb(diffuseColor3.a);
          specA = mix( specA, diffuseColor3.a, textureBlend.b );
         #endif
     #endif  
@@ -666,8 +669,8 @@ diffuseColor.rgb *= m_Diffuse.rgb;
     refColor.rgb *= vec3(normalHeight.a);
     #elif defined(REF_A_DIF)  && defined(DIFFUSEMAP)
     //refTex = diffuseColor.a;
-    normalHeight.a = srgb_to_linearrgb(normalHeight.a);
-    refColor.rgb *= vec3(normalHeight.a);
+    diffuseColor.a = srgb_to_linearrgb(diffuseColor.a);
+    refColor.rgb *= vec3(diffuseColor.a);
     #endif
     
     
@@ -718,13 +721,20 @@ light.x = max(vec3(light.x), refColor);
 
 
  #ifdef HAS_LIGHTMAP
+
      vec4 lightMapColor;
+
+    // Convert diffuse to srgb, as layer effects are made in srgb color space
+    vec4 tempC1;
+    linearrgb_to_srgb(diffuseColor,tempC1);
+    diffuseColor.rgb = tempC1.rgb;
+
            #if defined(SEPERATE_TEXCOORD) && !defined(SEPERATE_TEXCOORD2)
-            srgb_to_linearrgb(texture2D(m_LightMap, texCoord2), lightMapColor);
+            lightMapColor = (texture2D(m_LightMap, texCoord2));
            #elif defined(SEPERATE_TEXCOORD) && defined(SEPERATE_TEXCOORD2)
-            srgb_to_linearrgb(texture2D(m_LightMap, texCoord3), lightMapColor);
+            lightMapColor = (texture2D(m_LightMap, texCoord3));
         #else
-            srgb_to_linearrgb(texture2D(m_LightMap, texCoord), lightMapColor);
+            lightMapColor = (texture2D(m_LightMap, texCoord));
         #endif
     
 
@@ -758,7 +768,7 @@ light.x = max(vec3(light.x), refColor);
              #endif
 
         #elif defined(LIGHTMAP_A)
-        lightMapColor.a = srgb_to_linearrgb(lightMapColor.a);
+     //   lightMapColor.a = srgb_to_linearrgb(lightMapColor.a);
             #if defined(OVERLAYLIGHTMAP)
                 diffuseColor.r = overlayMode(diffuseColor.r, lightMapColor.a);
                 diffuseColor.g = overlayMode(diffuseColor.g, lightMapColor.a);
@@ -826,6 +836,11 @@ light.x = max(vec3(light.x), refColor);
              #endif
         #endif
     #endif
+
+// Convert Diffuse to linear again
+    vec4 tempC2;
+    srgb_to_linearrgb(diffuseColor,tempC2);
+    diffuseColor.rgb = tempC2.rgb;
 
  #endif
 

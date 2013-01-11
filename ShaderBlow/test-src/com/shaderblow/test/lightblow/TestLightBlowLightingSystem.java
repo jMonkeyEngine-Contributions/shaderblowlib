@@ -61,7 +61,7 @@ public class TestLightBlowLightingSystem extends SimpleApplication {
         final Material mat4 = this.assetManager
                 .loadMaterial("TestMaterials/LightBlow/Lighting_System/LightBlow_Base_Specular.j3m");
         char_boy4.setMaterial(mat4);
-        char_boy4.setLocalTranslation(-6f, 0, 0);
+        char_boy4.setLocalTranslation(2f, 0, 0);
         TangentBinormalGenerator.generate(char_boy4);
         this.rootNode.attachChild(char_boy4);
 

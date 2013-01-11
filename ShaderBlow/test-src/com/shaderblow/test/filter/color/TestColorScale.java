@@ -58,7 +58,7 @@ public class TestColorScale extends SimpleApplication {
 
         this.fpp = new FilterPostProcessor(this.assetManager);
         this.fpp.setNumSamples(4);
-        this.colorScale = new ColorScaleFilter(new ColorRGBA(255f / 255f, 66f / 255f, 20f / 255f, 1.0f), 0.7f);
+        this.colorScale = new ColorScaleFilter(new ColorRGBA(130f / 255f, 26f / 255f, 90f / 255f, 1.0f), 0.7f);
         this.fpp.addFilter(this.colorScale);
         this.viewPort.addProcessor(this.fpp);
         this.initInputs();

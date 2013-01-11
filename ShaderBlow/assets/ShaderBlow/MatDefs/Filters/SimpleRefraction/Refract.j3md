@@ -1,10 +1,11 @@
-MaterialDef Simple Water {
+MaterialDef Refraction {
 
     MaterialParameters {
 
-Boolean DoRefract : False
-Float Distance : 200.0
-        
+        Boolean DoRefract : False
+        Float Distance : 200.0
+        Texture2D Mask_Texture        
+
     }
 
     Technique {
@@ -26,6 +27,7 @@ WorldViewProjectionMatrix
 
 Defines {
 DO_REFRACT : DoRefract
+MASK_TEXTURE : Mask_Texture
 }
 }
 

@@ -1,0 +1,44 @@
+MaterialDef Sky Plane {
+
+    MaterialParameters {
+        Texture2D ColorMap
+        Texture2D LightMap
+        Color Color (Color)
+        Boolean VertexColor (UseVertexColor)
+        Boolean SeparateTexCoord
+
+        // Texture of the glowing parts of the material
+      // Texture2D GlowMap
+        // The glow color of the object
+       // Color GlowColor
+    }
+
+    Technique {
+        VertexShader GLSL100:   Shaders/Sky2/Sky2.vert
+        FragmentShader GLSL100: Common/MatDefs/Misc/Unshaded.frag
+
+        RenderState {
+            FaceCull Off
+        }
+
+        WorldParameters {
+            ViewMatrix
+            ProjectionMatrix
+  //          WorldMatrix
+  //          WorldViewProjectionMatrix
+        }
+
+        Defines {
+            SEPARATE_TEXCOORD : SeparateTexCoord
+            HAS_COLORMAP : ColorMap
+            HAS_LIGHTMAP : LightMap
+            HAS_VERTEXCOLOR : VertexColor
+            HAS_COLOR : Color
+        }
+    }
+
+    Technique {
+    }
+
+
+}

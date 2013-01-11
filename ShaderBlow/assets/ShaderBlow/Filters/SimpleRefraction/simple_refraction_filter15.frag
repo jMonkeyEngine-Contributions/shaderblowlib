@@ -39,7 +39,7 @@ float distortion;
     #ifdef REFRACT_FALOFF
     distortion = m_distortionScale * grayT.r;
     #else
-    distortion = m_distortionScale*grayT.a;
+    distortion = m_distortionScale*grayT.g;
     #endif
 #else
     distortion = m_distortionScale;

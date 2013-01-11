@@ -114,7 +114,7 @@ void main() {
 
 
     float alpha = m_Multiply_Color.w;
-    if(alpha < 0.02){
+    if(alpha < 0.015){
         discard;
     }
     gl_FragColor.a = alpha;

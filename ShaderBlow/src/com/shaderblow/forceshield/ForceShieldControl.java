@@ -93,8 +93,12 @@ public class ForceShieldControl implements Control {
         if (this.work && this.enabled) {
 
             if (this.timer > this.timerSize) {
-                this.timer = 0f;
-                this.work = false;
+                timer = 0f;
+                collisions.clear();
+                collisionTimes.clear();
+                numChanged = false;
+                material.setBoolean("Work", false);
+                work = false;
                 return;
             }
 
@@ -132,13 +136,15 @@ public class ForceShieldControl implements Control {
             return;
         }
 
-        this.timer = 0f;
-        this.work = true;
-        final Vector3f lposition = new Vector3f();
-        this.model.worldToLocal(position, lposition);
-        this.collisions.add(new Vector3f(lposition.x, lposition.y, lposition.z));
-        this.collisionTimes.add(this.maxTime);
-        this.numChanged = true;
+        timer = 0f;
+        material.setBoolean("Work", true);
+        work = true;
+
+        Vector3f lposition = new Vector3f();
+        model.worldToLocal(position.clone(), lposition);
+        collisions.add(new Vector3f(lposition.x, lposition.y, lposition.z));
+        collisionTimes.add(maxTime);
+        numChanged = true;
         updateCollisionPoints();
     }
 

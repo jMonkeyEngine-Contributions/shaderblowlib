@@ -9,6 +9,7 @@ MaterialDef Solid Color {
         Float MinAlpha
         Float MaxDistance
         Int CollisionNum
+        Boolean Work : False
     }
     
     Technique {
@@ -22,6 +23,7 @@ MaterialDef Solid Color {
         Defines {
             HAS_COLORMAP : ColorMap
             HAS_COLOR : Color
+            WORK : Work
         }
     }
 

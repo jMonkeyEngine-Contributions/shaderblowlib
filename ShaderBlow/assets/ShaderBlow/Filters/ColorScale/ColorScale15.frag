@@ -22,13 +22,13 @@ if (color.r < 0.5) {
     color2.r = 1.0 - 2.0 * (1.0 - m_FilterColor.r) * (1.0 - color.r);
 }
 
-if (color.r < 0.5) {
+if (color.g < 0.5) {
     color2.g = 2.0 * color.g * m_FilterColor.g;
 } else {
     color2.g = 1.0 - 2.0 * (1.0 - m_FilterColor.g) * (1.0 - color.g);
 }
 
-if (color.r < 0.5) {
+if (color.b < 0.5) {
     color2.b = 2.0 * color.b * m_FilterColor.b;
 } else {
     color2.b = 1.0 - 2.0 * (1.0 - m_FilterColor.b) * (1.0 - color.b);

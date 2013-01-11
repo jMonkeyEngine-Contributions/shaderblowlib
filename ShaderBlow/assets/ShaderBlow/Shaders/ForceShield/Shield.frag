@@ -1,6 +1,5 @@
 uniform float m_MinAlpha;
 uniform float m_MaxDistance;
-
 const float pi = 3.141592;
 const float e = 2.71828183;
 
@@ -10,42 +9,43 @@ const float e = 2.71828183;
 #endif
 
 #ifdef HAS_COLOR
-    uniform vec4 m_Color;
+	uniform vec4 m_Color;
 #endif
 
 uniform int m_CollisionNum;
-uniform float m_CollisionAlphas[8];
-
-varying float dists[8];
+uniform float m_CollisionAlphas[4];
+varying float dists[4];
 
 void main(void) {
-    vec4 color = vec4(1.0,1.0,1.0,m_MinAlpha);
+	vec4 color = vec4(1.0,1.0,1.0,m_MinAlpha);
+	
 
-    for (int i = 0; i < 8; i++) {
+        #ifdef WORK
+	for (int i=0;i<4;i++){
 
-        float x = dists[i] / (m_MaxDistance);
-        float y = (1.0 - m_CollisionAlphas[i]);
+		  float x = dists[i]/(m_MaxDistance);//+();
+		  float y = (1.0-m_CollisionAlphas[i]);
+		 /* if (x < 2){
+		  	float alpha = (2-x)*cos(pi/2*(x-(1.0-m_CollisionAlphas[i]))+2.8*pi/2.0); 
+		  	if (alpha > 0)
+		  		color.a += alpha;
+		  }*/
+		  color.a += pow(e,(-1.0*((x-y)*(x-y))*20.0))*(1.0-y);
+	}
+        #endif
+	
+	#ifdef HAS_COLOR
+		color *= m_Color;
+	#endif
+	
+	#ifdef HAS_COLORMAP
+		color *= texture2D(m_ColorMap, texCoord1);
+	#endif
+	
 
-        //if (x < 2) {
-        //    float alpha = (2 - x) * cos(pi / 2 * (x - (1.0 - m_CollisionAlphas[i])) + 2.8 * pi / 2.0); 
-        //    if (alpha > 0)
-        //        color.a += alpha;
-        //}
-
-        color.a += pow(e, (-1.0 * ((x - y) * (x - y)) * 20.0)) * (1.0 - y);
-    }
-
-    #ifdef HAS_COLOR
-        color *= m_Color;
-    #endif
-
-    #ifdef HAS_COLORMAP
-        color *= texture2D(m_ColorMap, texCoord1);
-    #endif
-
-    if(color.a < 0.02){
+    if(color.a < 0.015){
         discard;
     }
 
-    gl_FragColor = color;   
+	gl_FragColor = color;   
 }

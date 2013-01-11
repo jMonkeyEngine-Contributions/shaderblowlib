@@ -46,7 +46,7 @@ gl_FragColor.rgb = mix(fogColor.rgb,gl_FragColor.rgb,vec3(fogFactor));
 
 #endif
 
- if(AniTex.a < 0.02){
+ if(AniTex.a < 0.015){
      discard;
  }
  gl_FragColor.a = AniTex.a;

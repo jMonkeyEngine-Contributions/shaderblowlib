@@ -56,7 +56,7 @@ public class TestLightBlowLightMapDirty extends SimpleApplication {
         this.rootNode.addLight(dl);
 
         final AmbientLight al = new AmbientLight();
-        al.setColor(new ColorRGBA(1.0f, 1.0f, 1.7f, 1));
+        al.setColor(new ColorRGBA(3.0f, 3.0f, 3.2f, 1));
         this.rootNode.addLight(al);
 
     }
