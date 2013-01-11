@@ -26,6 +26,10 @@ MaterialDef FakeParticleBlow {
         Boolean Nor_Inv_Y
         Boolean Nor_Inv_Z
 
+        // Refraction Filter
+        Boolean DoRefract : False
+        Float Distance : 200.0
+        Texture2D Mask_Texture        
      
     }
  

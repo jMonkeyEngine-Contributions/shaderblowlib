@@ -188,6 +188,12 @@ MaterialDef LightBlow {
 
         Float PCFEdge
         Float ShadowMapSize
+
+        // Refraction Filter
+        Boolean DoRefract : False
+        Float Distance : 200.0
+        Texture2D Mask_Texture        
+
     }
 
     Technique {

@@ -35,6 +35,12 @@ MaterialDef FakeParticleBlow {
         // Multiply Color - Color manipulations
         Color Multiply_Color : 1.0 1.0 1.0 1.0
         Float colorIntensity : 1.0   
+
+        // Refraction Filter
+        Boolean DoRefract : False
+        Float Distance : 200.0
+        Texture2D Mask_Texture        
+
     }
  
     Technique {

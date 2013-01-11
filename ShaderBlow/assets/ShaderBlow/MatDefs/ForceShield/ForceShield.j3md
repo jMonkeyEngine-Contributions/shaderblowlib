@@ -10,6 +10,11 @@ MaterialDef Solid Color {
         Float MaxDistance
         Int CollisionNum
         Boolean Work : False
+
+        // Refraction Filter
+        Boolean DoRefract : False
+        Float Distance : 200.0
+        Texture2D Mask_Texture        
     }
     
     Technique {
