@@ -178,12 +178,12 @@ public class SimpleRefractionProcessor implements SceneProcessor {
     }
 
     protected void loadTextures(final AssetManager manager) {
-        this.normalTexture = (Texture2D) manager.loadTexture("Common/MatDefs/Water/Textures/water_normalmap.dds");
+        this.normalTexture = (Texture2D) manager.loadTexture("TestTextures/Refraction/water_normalmap.png");
         this.normalTexture.setWrap(WrapMode.Repeat);
         this.normalTexture.setMagFilter(MagFilter.Bilinear);
         this.normalTexture.setMinFilter(MinFilter.BilinearNearestMipMap);
 
-        this.dudvTexture = (Texture2D) manager.loadTexture("Common/MatDefs/Water/Textures/dudv_map.jpg");
+        this.dudvTexture = (Texture2D) manager.loadTexture("TestTextures/Refraction/dudv_map.png");
         this.dudvTexture.setMagFilter(MagFilter.Bilinear);
         this.dudvTexture.setMinFilter(MinFilter.BilinearNearestMipMap);
         this.dudvTexture.setWrap(WrapMode.Repeat);
