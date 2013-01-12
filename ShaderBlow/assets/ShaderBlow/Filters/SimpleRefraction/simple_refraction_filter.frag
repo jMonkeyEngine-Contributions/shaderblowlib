@@ -17,8 +17,8 @@ uniform float m_distortionScale;
 uniform float m_distortionMix;
 uniform float m_texScale;
 
-varying vec4 waterTex1; //moving texcoords
-varying vec4 waterTex2; //moving texcoords
+varying vec2 waterTex1; //moving texcoords
+varying vec2 waterTex2; //moving texcoords
 varying vec4 position; //for projection
 
 

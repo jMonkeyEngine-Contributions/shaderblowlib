@@ -62,7 +62,8 @@ public class SimpleRefractionProcessor implements SceneProcessor {
     private Picture dispRefraction;
     // private Picture dispReflection;
     private Picture dispDepth;
-
+    float realTpf = 0;
+   
     // private Plane reflectionClipPlane;
     // private Plane refractionClipPlane;
     // private float refractionClippingOffset = 100f;
@@ -80,10 +81,8 @@ public class SimpleRefractionProcessor implements SceneProcessor {
     public SimpleRefractionProcessor(final AssetManager manager) {
         this.manager = manager;
         this.material = new Material(manager, "ShaderBlow/MatDefs/SimpleRefraction/SimpleRefraction.j3md");
-        // material.setFloat("waterDepth", waterDepth);
         this.material.setFloat("waterTransparency", this.waterTransparency / 10);
-        // material.setColor("waterColor", ColorRGBA.White);
-        // material.setVector3("lightPos", new Vector3f(1, -1, 1));
+
 
         this.material.setColor("distortionScale", new ColorRGBA(0.2f, 0.2f, 0.2f, 0.2f));
         this.material.setColor("distortionMix", new ColorRGBA(0.5f, 0.5f, 0.5f, 0.5f));
@@ -100,6 +99,8 @@ public class SimpleRefractionProcessor implements SceneProcessor {
         loadTextures(this.manager);
         createTextures();
         applyTextures(this.material);
+//        this.material.setFloat("timeFlow", 0.5f);        
+        
         createPreViews();
 
         if (this.debug) {
@@ -119,18 +120,8 @@ public class SimpleRefractionProcessor implements SceneProcessor {
         return this.rm != null;
     }
 
-    float time = 0;
-//    float savedTpf = 0;
-    float realTpf = 0;
-
     @Override
     public void preFrame(final float tpf) {
-        this.time = this.time + tpf * this.speed;
-        if (this.time > 1f) {
-            this.time = 0;
-        }
-        this.material.setFloat("time", this.time);
-//        this.savedTpf += tpf*0.76f;
         this.realTpf = tpf;
     }
 
@@ -139,7 +130,6 @@ public class SimpleRefractionProcessor implements SceneProcessor {
         
         final Camera sceneCam = this.rm.getCurrentCamera();
 
-//        if (savedTpf >= realTpf) {
         this.refractionCam.setLocation(sceneCam.getLocation());
         this.refractionCam.setRotation(sceneCam.getRotation());
         this.refractionCam.setFrustum(sceneCam.getFrustumNear(), sceneCam.getFrustumFar(), sceneCam.getFrustumLeft(),
@@ -152,9 +142,6 @@ public class SimpleRefractionProcessor implements SceneProcessor {
 
 //        this.rm.getRenderer().clearBuffers(true, true, true);   
      
-        
-//        savedTpf = 0f;
-//        }
         
 //        this.rm.setForcedTechnique("Simple_Refraction");
 //        this.rm.renderViewPortQueues(this.vp, false);        

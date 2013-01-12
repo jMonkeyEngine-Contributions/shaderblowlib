@@ -36,7 +36,6 @@ package com.shaderblow.filter.simplerefractionfilter;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 import java.io.IOException;
-import java.util.ArrayList;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.export.InputCapsule;
@@ -45,20 +44,15 @@ import com.jme3.export.JmeImporter;
 import com.jme3.export.OutputCapsule;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector2f;
 import com.jme3.post.Filter;
-import com.jme3.renderer.Camera;
 import com.jme3.renderer.RenderManager;
-import com.jme3.renderer.Renderer;
 import com.jme3.renderer.ViewPort;
 import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.texture.Image.Format;
-import com.jme3.texture.Texture;
 import com.jme3.texture.Texture.MagFilter;
 import com.jme3.texture.Texture.MinFilter;
 import com.jme3.texture.Texture.WrapMode;
 import com.jme3.texture.Texture2D;
-import com.jme3.ui.Picture;
 
 /**
  * BloomFilter is used to make objects in the scene have a glow effect.<br>
@@ -86,10 +80,6 @@ public class SimpleRefractionFilter extends Filter {
         Objects,}
     // Refract parameters
     private RefractMode refractMode = RefractMode.Scene;
-    private float blurScale = 1.5f;
-    private float exposurePower = 5.0f;
-    private float exposureCutOff = 0.0f;
-    private float bloomIntensity = 2.0f;
     private float downSamplingFactor = 1;
 //    private Pass refractPass = new Pass();
     private int screenWidth;
@@ -98,11 +88,9 @@ public class SimpleRefractionFilter extends Filter {
     protected Texture2D depthTexture;
     protected Texture2D normalTexture;
     protected Texture2D dudvTexture;
-    protected Texture2D preGrayTexture;
+    protected Texture2D preRefractTexture;
     private final AssetManager manager;
     // private Material matRefraction;
-    private float time = 0;
-    private final float speed = 0.05f;
     private RenderManager renderManager;
     private ViewPort viewPort;
     private Pass preGrayPass;
@@ -121,35 +109,29 @@ public class SimpleRefractionFilter extends Filter {
     @Override
     protected void initFilter(final AssetManager manager, final RenderManager renderManager, final ViewPort vp,
             final int w, final int h) {
-//        this.screenWidth = (int) Math.max(1, w / this.downSamplingFactor);
-//        this.screenHeight = (int) Math.max(1, h / this.downSamplingFactor);
 
         this.renderManager = renderManager;
         this.viewPort = vp;
 
-        this.normalTexture = (Texture2D) manager.loadTexture("Common/MatDefs/Water/Textures/water_normalmap.dds");
+        this.normalTexture = (Texture2D) manager.loadTexture("TestTextures/Refraction/water_normalmap.png");
         this.normalTexture.setWrap(WrapMode.Repeat);
         this.normalTexture.setMagFilter(MagFilter.Bilinear);
         this.normalTexture.setMinFilter(MinFilter.BilinearNearestMipMap);
 
-        this.dudvTexture = (Texture2D) manager.loadTexture("Common/MatDefs/Water/Textures/dudv_map.jpg");
+        this.dudvTexture = (Texture2D) manager.loadTexture("TestTextures/Refraction/dudv_map.png");
         this.dudvTexture.setMagFilter(MagFilter.Bilinear);
         this.dudvTexture.setMinFilter(MinFilter.BilinearNearestMipMap);
         this.dudvTexture.setWrap(WrapMode.Repeat);
 
-        //   this.material.setFloat("waterTransparency", 0.5f / 10);
-        // material.setColor("waterColor", ColorRGBA.White);
-        // material.setVector3("lightPos", new Vector3f(1, -1, 1));
-//        this.material.setTexture("Texture", this.refractPass.getRenderedTexture());
+
         this.material.setFloat("distortionScale", 0.1f);
         this.material.setFloat("distortionMix", 0.3f);
         this.material.setFloat("texScale", 0.3f);
-        //   this.material.setVector2("FrustumNearFar", new Vector2f(vp.getCamera().getFrustumNear(), vp.getCamera().getFrustumFar()));
+//        this.material.setFloat("timeFlow", 0.5f);
 
 
         this.material.setTexture("water_normalmap", this.normalTexture);
         this.material.setTexture("water_dudvmap", this.dudvTexture);
-        this.material.setFloat("time", 1f);
 
 
         if (refractMode != refractMode.Scene) {
@@ -166,12 +148,6 @@ public class SimpleRefractionFilter extends Filter {
             };
             preGrayPass.init(renderManager.getRenderer(), w, h, Format.RGBA8, Format.Depth);
 
-            //final material
-//        this.material = new Material(manager, "Shaders/GrayScaleFilter.j3md");
-//        this.preGrayTexture = (Texture2D) manager.loadTexture("Common/MatDefs/Water/Textures/water_normalmap.dds");
-//        this.preGrayTexture.setWrap(WrapMode.Repeat);
-//        this.preGrayTexture.setMagFilter(MagFilter.Bilinear);
-//        this.preGrayTexture.setMinFilter(MinFilter.BilinearNearestMipMap);        
             material.setTexture("GrayTex", preGrayPass.getRenderedTexture());
         }
     }
@@ -182,14 +158,10 @@ public class SimpleRefractionFilter extends Filter {
         return this.material;
     }
 
-    @Override
-    public void preFrame(final float tpf) {
-        this.time = this.time + tpf * this.speed;
-        if (this.time > 1f) {
-            this.time = 0;
-        }
-        this.material.setFloat("time", this.time);
-    }
+//    @Override
+//    public void preFrame(final float tpf) {
+//        
+//    }
 
     @Override
     protected void postQueue(RenderQueue queue) {

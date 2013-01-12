@@ -7,7 +7,7 @@ MaterialDef SimpleRefractionProcessor {
         Texture2D water_normalmap
         Texture2D water_dudvmap
       //  Vector4 waterColor
-        Float time
+        Float timeFlow : 0.1
         Float waterDepth
         Vector4 distortionScale
         Vector4 distortionMix
@@ -27,6 +27,7 @@ MaterialDef SimpleRefractionProcessor {
             WorldViewMatrix
             Resolution
             CameraPosition
+            Time
         }
     }
 
@@ -39,6 +40,7 @@ MaterialDef SimpleRefractionProcessor {
             WorldViewMatrix
             Resolution
             CameraPosition
+            Time
         }
 
         Defines {

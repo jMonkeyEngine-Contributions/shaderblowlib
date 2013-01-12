@@ -5,13 +5,14 @@ Converted by Mars_999
 8/20/2005
 */
 // uniform vec3 m_lightPos;
-uniform float m_time;
+uniform float m_timeFlow;
 
 uniform mat4 g_WorldViewProjectionMatrix;
 uniform mat4 g_WorldViewMatrix;
 //uniform mat4 g_ViewMatrix;
 uniform vec3 g_CameraPosition;
 uniform mat3 g_NormalMatrix;
+uniform float g_Time;
 
 attribute vec4 inPosition;
 attribute vec2 inTexCoord;
@@ -19,8 +20,8 @@ attribute vec3 inTangent;
 attribute vec3 inNormal;
 
 // varying vec4 lightDir;
-varying vec4 waterTex1;
-varying vec4 waterTex2;
+varying vec2 waterTex1;
+varying vec2 waterTex2;
 varying vec4 position;
 //varying vec4 viewDir;
 varying vec4 viewpos;
@@ -76,11 +77,11 @@ void main(void)
  //   viewCamDir.w = 0.0;
 
 
-    vec4 t1 = vec4(0.0, -m_time, 0.0,0.0);
-    vec4 t2 = vec4(0.0, m_time, 0.0,0.0);
+    float t1 = -g_Time*m_timeFlow;
+    float t2 = g_Time*m_timeFlow;
 
-    waterTex1 =vec4(inTexCoord,0.0,0.0) + t1;
-    waterTex2 =vec4(inTexCoord ,0.0,0.0)+ t2;
+    waterTex1 = inTexCoord + vec2(t1);
+    waterTex2 = inTexCoord + vec2(t2);
 
     position = g_WorldViewProjectionMatrix * inPosition;
     gl_Position = position;

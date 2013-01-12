@@ -62,7 +62,7 @@ MaterialDef LightBlow {
 
         // Specular lighting
         Boolean Specular_Lighting
-        Float Shininess (MaterialShininess) : 1 // Specular power/shininess
+        Float Shininess (MaterialShininess) : 3 // Specular power/shininess
         Boolean Spec_A_Nor // Output specular from the normal map alpha channel
         Boolean Spec_A_Dif // Output specular from the diffuse map alpha channel
 

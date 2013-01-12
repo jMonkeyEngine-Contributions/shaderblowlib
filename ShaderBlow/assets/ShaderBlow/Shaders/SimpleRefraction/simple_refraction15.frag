@@ -21,8 +21,8 @@ uniform float m_waterTransparency;
 
 
 // varying vec4 lightDir; //lightpos
-in vec4 waterTex1; //moving texcoords
-in vec4 waterTex2; //moving texcoords
+in vec2 waterTex1; //moving texcoords
+in vec2 waterTex2; //moving texcoords
 in vec4 position; //for projection
 //in vec4 viewDir; //viewts
 // varying vec4 viewLightDir;
