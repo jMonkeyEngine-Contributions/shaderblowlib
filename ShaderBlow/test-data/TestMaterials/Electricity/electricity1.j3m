@@ -1,0 +1,23 @@
+Material My Material : ShaderBlow/MatDefs/Electricity/Electricity1.j3md {
+     MaterialParameters {
+        speed : 0.01
+        outlineColorFallOff : 0.70000005
+        fallOff : 1.1
+        width : 0.01
+        outlineColor : 0.2 0.6 0.9 0.3
+        noise : Repeat TestTextures/Electricity/noise.png
+        ramp : TestTextures/Electricity/ramp2.png
+        Fog : 10.0
+        Distance : 0.0
+        DoRefract : false
+     }
+    AdditionalRenderState {
+      FaceCull Off
+      ColorWrite On
+      Blend Alpha
+      DepthTest On
+      DepthWrite Off
+      PointSprite Off
+      Wireframe Off
+    }
+}

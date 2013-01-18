@@ -1,0 +1,64 @@
+// author: cvlad
+
+MaterialDef Electricity1 {
+
+    MaterialParameters {
+        Float speed
+        Float fallOff
+        Float width
+        Float noiseAmount : 1.0
+        Color outlineColor
+        Float outlineColorFallOff
+        Texture2D noise
+        Texture2D ramp
+
+        // Fog
+        Float Fog
+
+
+        // Refraction Filter
+        Boolean DoRefract : False
+        Float Distance : 200.0
+        Texture2D Mask_Texture  
+    }
+
+    Technique {
+
+        LightMode Disable
+
+        VertexShader GLSL100:   ShaderBlow/Shaders/Electricity/Electricity1.vert
+        FragmentShader GLSL100: ShaderBlow/Shaders/Electricity/Electricity1.frag
+
+        WorldParameters {
+            WorldViewProjectionMatrix
+            WorldViewMatrixInverse
+            Time
+        }
+
+        Defines {
+            FOG : Fog
+        }
+
+        RenderState {
+            DepthTest On
+            DepthWrite Off
+            ColorWrite On
+        }
+    }
+
+Technique Refract {
+
+VertexShader GLSL100:   ShaderBlow/Filters/SimpleRefraction/Refract.vert
+FragmentShader GLSL100: ShaderBlow/Filters/SimpleRefraction/Refract.frag
+
+WorldParameters {
+WorldViewProjectionMatrix
+}
+
+Defines {
+DO_REFRACT : DoRefract
+MASK_TEXTURE : Mask_Texture
+}
+}
+
+}
