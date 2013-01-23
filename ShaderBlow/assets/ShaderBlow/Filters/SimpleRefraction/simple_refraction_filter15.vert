@@ -44,6 +44,7 @@ void main(void)
     texCoord = inTexCoord;
 #endif
 
-    position = g_WorldViewProjectionMatrix * inPosition;
+    vec2 pos = (g_WorldViewProjectionMatrix * inPosition).xy;
+    position = vec4(pos, 0.0, 1.0);
     gl_Position = position;
 }

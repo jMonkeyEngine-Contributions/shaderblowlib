@@ -83,6 +83,7 @@ void main(void)
     waterTex1 = inTexCoord + vec2(t1);
     waterTex2 = inTexCoord + vec2(t2);
 
-    position = g_WorldViewProjectionMatrix * inPosition;
+    vec2 pos = (g_WorldViewProjectionMatrix * inPosition).xy;
+    position = vec4(pos, 0.0, 1.0);
     gl_Position = position;
 }
