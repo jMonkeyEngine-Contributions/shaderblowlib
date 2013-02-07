@@ -214,7 +214,7 @@ vec2 deformFRipple(in vec2 texCoords) {
     // Centered Ripple //
      
     vec2 tc = vecOut;
-    vec2 p = -1.0 + 2.0 * tc;
+    vec2 p = vec2(-1.0) + vec2(2.0) * tc;
     float len = length(p);
     vecOut.x = center.x*cos(len*m_DeformF_Wave_SizeX-(g_Time*m_DeformF_Wave_SpeedX)*m_DeformF_Wave_DepthX)*(m_DeformF_Wave_DepthX*0.01);
     vecOut.y = center.y*cos(len*m_DeformF_Wave_SizeY-(g_Time*m_DeformF_Wave_SpeedY)*m_DeformF_Wave_DepthY)*(m_DeformF_Wave_DepthY*0.01);
@@ -228,7 +228,7 @@ vec2 deformFRipple(in vec2 texCoords) {
 vec2 deformFBreath(in vec2 texCoords, in vec2 texSize, in float len) {
     vec2 dist = deformFGradientDistance(texCoords,true);
     vec2 vecOut = vec2(0.0);
-    vecOut = texSize/len*dot(texSize/len,texSize)*(sin(g_Time))*4.0*dist;
+    vecOut = texSize/vec2(len)*dot(texSize/vec2(len),texSize)*vec2((sin(g_Time)))*vec2(4.0)*dist;
     return vecOut;
 }
 #endif
@@ -257,7 +257,7 @@ vec2 deformFWarp(in vec2 texCoords) {
 vec2 deformFMixer(in vec2 texCoords, in vec2 texSize, in float len) {
     float i;
     vec2 vecOut = texCoords;
-    vec2 center = (texSize/len);
+    vec2 center = (texSize/vec2(len));
     vec2 outter = -center;
     #ifdef USE_ANIMATION
         vecOut.x = (outter.x+m_DeformF_Mixer_DepthX+(mod(g_Time,i)*m_DeformF_Mixer_SpeedX))*m_DeformF_Mixer_SizeX;
@@ -282,7 +282,7 @@ void main(){
     vec4 color = vec4(1.0);
     vec2 texCoordFinal = animTexCoord1;
  
-    vec2 p = -0.1 + 0.2 * animTexCoord2;
+    vec2 p = vec2(-0.1) + vec2(0.2) * animTexCoord2;
     float len = length(p);
     #ifdef USE_DEFORM
         #ifdef USE_FWAVE
@@ -327,18 +327,18 @@ void main(){
            #endif
        #endif
     #else
-       texCoordFinal = texCoordFinal;    
+       newTexCoord = texCoordFinal;    
     #endif
      
    #ifdef DIFFUSEMAP
-      vec4 diffuseColor = texture2D(m_DiffuseMap, texCoordFinal*m_Scale);
+      vec4 diffuseColor = texture2D(m_DiffuseMap, newTexCoord*vec2(m_Scale));
     #else
       vec4 diffuseColor = vec4(1.0);
     #endif
  
     float alpha = DiffuseSum.a * diffuseColor.a;
     #ifdef ALPHAMAP
-       alpha = alpha * texture2D(m_AlphaMap, texCoordFinal*m_Scale).r;
+       alpha = alpha * texture2D(m_AlphaMap, newTexCoord*vec2(m_Scale)).r;
     #endif
 
     if(alpha < m_AlphaDiscardThreshold){
@@ -379,7 +379,7 @@ void main(){
     // Read from textures
     // ***********************
     #if defined(NORMALMAP) && !defined(VERTEX_LIGHTING)
-      vec4 normalHeight = texture2D(m_NormalMap, newTexCoord*m_Scale);
+      vec4 normalHeight = texture2D(m_NormalMap, newTexCoord*vec2(m_Scale));
       vec3 normal = (normalHeight.xyz * vec3(2.0) - vec3(1.0));
       #ifdef LATC
         normal.z = sqrt(1.0 - (normal.x * normal.x) - (normal.y * normal.y));
@@ -393,7 +393,7 @@ void main(){
     #endif
  
     #ifdef SPECULARMAP
-      vec4 specularColor = texture2D(m_SpecularMap, newTexCoord*m_Scale);
+      vec4 specularColor = texture2D(m_SpecularMap, newTexCoord*vec2(m_Scale));
     #else
       vec4 specularColor = vec4(1.0);
     #endif
@@ -401,9 +401,9 @@ void main(){
     #ifdef LIGHTMAP
        vec3 lightMapColor;
        #ifdef SEPARATE_TEXCOORD
-          lightMapColor = texture2D(m_LightMap, texCoord2*m_Scale).rgb;
+          lightMapColor = texture2D(m_LightMap, texCoord2*vec2(m_Scale)).rgb;
        #else
-          lightMapColor = texture2D(m_LightMap, texCoord*m_Scale).rgb;
+          lightMapColor = texture2D(m_LightMap, texCoord*vec2(m_Scale)).rgb;
        #endif
        specularColor.rgb *= lightMapColor;
        diffuseColor.rgb  *= lightMapColor;

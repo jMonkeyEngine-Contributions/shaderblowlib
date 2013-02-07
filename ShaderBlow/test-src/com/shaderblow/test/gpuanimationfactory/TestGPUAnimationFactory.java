@@ -27,8 +27,9 @@ public class TestGPUAnimationFactory extends SimpleApplication {
         final Material mat_1D = new Material(this.assetManager,
                 "ShaderBlow/MatDefs/GPUAnimationFactory/GPUAnimationFactory.j3md");
 
-        // // Standard uniforms for lighting
-        mat_1D.setBoolean("SteepParallax", true);
+//// Standard uniforms for lighting
+//mat_1D.setBoolean("SteepParallax", true);
+        mat_1D.setFloat("Scale", 3.0f);
 
         final TextureKey tkDif = new TextureKey("TestTextures/Terrain_Textures/pattern_69/pattern_69_diffus.png", false);
         tkDif.setAnisotropy(2);
@@ -42,71 +43,72 @@ public class TestGPUAnimationFactory extends SimpleApplication {
         normalTex.setWrap(Texture.WrapMode.Repeat);
         mat_1D.setTexture("NormalMap", normalTex);
 
-        // Applying movement to the texture
-        mat_1D.setBoolean("Texture_Move", true);
-        mat_1D.setFloat("MoveF_Speed", 3f);
-        mat_1D.setFloat("MoveF_Rotation", 23);
 
-        // Turn on & Animate texture deformation
+// Applying movement to the texture
+        mat_1D.setBoolean("Texture_Move", true);
+        mat_1D.setFloat("MoveF_Speed", 1f);
+        mat_1D.setFloat("MoveF_Rotation", 10);
+
+// Turn on & Animate texture deformation
         mat_1D.setBoolean("Texture_Deform", true);
         mat_1D.setBoolean("Texture_Animate", true);
 
-        // Applying texture ripple
+// Applying texture ripple
         mat_1D.setBoolean("DeformF_Wave", true);
-        mat_1D.setFloat("DeformF_Wave_SizeX", 12f);
-        mat_1D.setFloat("DeformF_Wave_SizeY", 12f);
-        mat_1D.setFloat("DeformF_Wave_DepthX", 12f);
-        mat_1D.setFloat("DeformF_Wave_DepthY", 12f);
-        mat_1D.setFloat("DeformF_Wave_SpeedX", 1f);
-        mat_1D.setFloat("DeformF_Wave_SpeedY", 1f);
+        mat_1D.setFloat("DeformF_Wave_SizeX", 5f);
+        mat_1D.setFloat("DeformF_Wave_SizeY", 5f);
+        mat_1D.setFloat("DeformF_Wave_DepthX", 5f);
+        mat_1D.setFloat("DeformF_Wave_DepthY", 5f);
+        mat_1D.setFloat("DeformF_Wave_SpeedX", 0.5f);
+        mat_1D.setFloat("DeformF_Wave_SpeedY", 0.5f);
 
-        // // Applying texture warp
-        // mat_1D.setBoolean("DeformF_Warp", true);
-        // mat_1D.setFloat("DeformF_Warp_SizeX",12f);
-        // mat_1D.setFloat("DeformF_Warp_SizeY",12f);
-        // mat_1D.setFloat("DeformF_Warp_DepthX",12f);
-        // mat_1D.setFloat("DeformF_Warp_DepthY",12f);
-        // mat_1D.setFloat("DeformF_Warp_SpeedX",1f);
-        // mat_1D.setFloat("DeformF_Warp_SpeedY",1f);
+//// Applying texture warp
+//mat_1D.setBoolean("DeformF_Warp", true);
+//mat_1D.setFloat("DeformF_Warp_SizeX",12f);
+//mat_1D.setFloat("DeformF_Warp_SizeY",12f);
+//mat_1D.setFloat("DeformF_Warp_DepthX",12f);
+//mat_1D.setFloat("DeformF_Warp_DepthY",12f);
+//mat_1D.setFloat("DeformF_Warp_SpeedX",1f);
+//mat_1D.setFloat("DeformF_Warp_SpeedY",1f);
 
-        // // Applying texture warp
-        // mat_1D.setBoolean("DeformF_Mixer", true);
-        // mat_1D.setFloat("DeformF_Mixer_SizeX",12f);
-        // mat_1D.setFloat("DeformF_Mixer_SizeY",12f);
-        // mat_1D.setFloat("DeformF_Mixer_DepthX",12f);
-        // mat_1D.setFloat("DeformF_Mixer_DepthY",12f);
-        // mat_1D.setFloat("DeformF_Mixer_SpeedX",1f);
-        // mat_1D.setFloat("DeformF_Mixer_SpeedY",1f);
-        //
-        // Applying texture breath
+//// Applying texture warp
+//mat_1D.setBoolean("DeformF_Mixer", true);
+//mat_1D.setFloat("DeformF_Mixer_SizeX",12f);
+//mat_1D.setFloat("DeformF_Mixer_SizeY",12f);
+//mat_1D.setFloat("DeformF_Mixer_DepthX",12f);
+//mat_1D.setFloat("DeformF_Mixer_DepthY",12f);
+//mat_1D.setFloat("DeformF_Mixer_SpeedX",1f);
+//mat_1D.setFloat("DeformF_Mixer_SpeedY",1f);
+// 
+// Applying texture breath
         mat_1D.setBoolean("DeformF_Breath", true);
 
-        // Applying vertex deforms (X axis)
+// Applying vertex deforms (X axis)
         mat_1D.setBoolean("DeformX_Wave", true);
         mat_1D.setBoolean("DeformX_Ripple", true);
         mat_1D.setBoolean("DeformX_Warble", true);
         mat_1D.setBoolean("DeformX_Pulse", true);
         mat_1D.setBoolean("DeformX_Swell", true);
 
-        // Global X axis settings
+// Global X axis settings
         mat_1D.setInt("DirX", 180);
-        mat_1D.setFloat("SpeedX", 10f);
-        mat_1D.setFloat("SizeX", 20f);
+        mat_1D.setFloat("SpeedX", 5f);
+        mat_1D.setFloat("SizeX", 10f);
         mat_1D.setFloat("DepthX", .02f);
 
-        // Mirror deforms along X axis
+// Mirror deforms along X axis
         mat_1D.setBoolean("MirrorX", true);
 
-        // To apply these along other axis replace X with either Y or Z in the examples for X axis
+// To apply these along other axis replace X with either Y or Z in the examples for X axis
 
-        // To rotate textures:
-        // Auto-rotation:
+// To rotate textures:
+// Auto-rotation:
         mat_1D.setBoolean("RotF_Rotate", true); // turn rotation on
         mat_1D.setBoolean("RotF_AutoRotate", true); // turn auto-rotation on
-        mat_1D.setBoolean("RotF_Clockwise", false); // true is default setting
+        mat_1D.setBoolean("RotF_Clockwise", false);  // true is default setting
         mat_1D.setFloat("RotF_Speed", 0.35f); // sets the rotation speed
 
-        // Picking a static rotation:
+// Picking a static rotation:
         mat_1D.setBoolean("RotF_Rotate", true); // turn rotation on
         mat_1D.setBoolean("RotF_AutoRotate", false); // turn auto-rotation off
         mat_1D.setFloat("RotF_Angle", 35f); // pick an angle
@@ -128,5 +130,4 @@ public class TestGPUAnimationFactory extends SimpleApplication {
         this.viewPort.setBackgroundColor(ColorRGBA.Gray);
 
     }
-
 }
