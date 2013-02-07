@@ -280,24 +280,25 @@ vec2 deformFFisheye(in vec2 texCoords, in vec2 texSize, in float len) {
  
 void main(){
     vec4 color = vec4(1.0);
+    vec2 texCoordFinal = animTexCoord1;
  
     vec2 p = -0.1 + 0.2 * animTexCoord2;
     float len = length(p);
     #ifdef USE_DEFORM
         #ifdef USE_FWAVE
-            animTexCoord1 += deformFRipple(animTexCoord2);
+            texCoordFinal = animTexCoord1 + deformFRipple(animTexCoord2);
         #endif
         #ifdef USE_FBREATH
-            animTexCoord1 += deformFBreath(animTexCoord2, p, len);
+            texCoordFinal = animTexCoord1 + deformFBreath(animTexCoord2, p, len);
         #endif
         #ifdef USE_FWARP
-            animTexCoord1 += deformFWarp(animTexCoord2);
+            texCoordFinal = animTexCoord1 + deformFWarp(animTexCoord2);
         #endif
         #ifdef USE_FMIXER
-            animTexCoord1 += deformFMixer(animTexCoord2, p, len);
+            texCoordFinal = animTexCoord1 + deformFMixer(animTexCoord2, p, len);
         #endif
         #ifdef USE_FFISHEYE
-            animTexCoord1 += deformFFisheye(animTexCoord2, p, len);
+            texCoordFinal = animTexCoord1 + deformFFisheye(animTexCoord2, p, len);
         #endif
     //  color *= texture2D(m_Texture, animTexCoord1);
     #else
@@ -311,33 +312,33 @@ void main(){
        #ifdef STEEP_PARALLAX
            #ifdef NORMALMAP_PARALLAX
                //parallax map is stored in the alpha channel of the normal map         
-               newTexCoord = steepParallaxOffset(m_NormalMap, vViewDir, animTexCoord1, m_ParallaxHeight);
+               texCoordFinal = steepParallaxOffset(m_NormalMap, vViewDir, texCoordFinal, m_ParallaxHeight);
            #else
                //parallax map is a texture
-               newTexCoord = steepParallaxOffset(m_ParallaxMap, vViewDir, animTexCoord1, m_ParallaxHeight);         
+               texCoordFinal = steepParallaxOffset(m_ParallaxMap, vViewDir, texCoordFinal, m_ParallaxHeight);         
            #endif
        #else
            #ifdef NORMALMAP_PARALLAX
                //parallax map is stored in the alpha channel of the normal map         
-               newTexCoord = classicParallaxOffset(m_NormalMap, vViewDir, animTexCoord1, m_ParallaxHeight);
+               texCoordFinal = classicParallaxOffset(m_NormalMap, vViewDir, texCoordFinal, m_ParallaxHeight);
            #else
                //parallax map is a texture
-               newTexCoord = classicParallaxOffset(m_ParallaxMap, vViewDir, animTexCoord1, m_ParallaxHeight);
+               texCoordFinal = classicParallaxOffset(m_ParallaxMap, vViewDir, texCoordFinal, m_ParallaxHeight);
            #endif
        #endif
     #else
-       newTexCoord = animTexCoord1;    
+       texCoordFinal = texCoordFinal;    
     #endif
      
    #ifdef DIFFUSEMAP
-      vec4 diffuseColor = texture2D(m_DiffuseMap, newTexCoord*m_Scale);
+      vec4 diffuseColor = texture2D(m_DiffuseMap, texCoordFinal*m_Scale);
     #else
       vec4 diffuseColor = vec4(1.0);
     #endif
  
     float alpha = DiffuseSum.a * diffuseColor.a;
     #ifdef ALPHAMAP
-       alpha = alpha * texture2D(m_AlphaMap, newTexCoord*m_Scale).r;
+       alpha = alpha * texture2D(m_AlphaMap, texCoordFinal*m_Scale).r;
     #endif
 
     if(alpha < m_AlphaDiscardThreshold){
@@ -422,8 +423,7 @@ void main(){
        vec4 lightDir = vLightDir;
        lightDir.xyz = normalize(lightDir.xyz);
        vec3 viewDir = normalize(vViewDir);
- 
-       vec2   light = computeLighting(normal, viewDir, lightDir.xyz) * spotFallOff;
+        vec2   light = computeLighting(normal, viewDir, lightDir.xyz) * spotFallOff;
        #ifdef COLORRAMP
            diffuseColor.rgb  *= texture2D(m_ColorRamp, vec2(light.x, 0.0)).rgb;
            specularColor.rgb *= texture2D(m_ColorRamp, vec2(light.y, 0.0)).rgb;

@@ -152,9 +152,10 @@ MaterialDef GPUAnimationFactory {
         Matrix4 LightViewProjectionMatrix5   
         Vector3 LightPos
 
+        Float Scale : 1.0
+
         Float PCFEdge
         Float ShadowMapSize
-
 
         // Refraction Filter
         Boolean DoRefract : False

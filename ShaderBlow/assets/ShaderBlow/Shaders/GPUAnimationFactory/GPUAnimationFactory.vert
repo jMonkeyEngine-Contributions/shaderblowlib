@@ -907,8 +907,8 @@ void main(){
     #ifdef IS_MOVING
         float i;
         float time = (g_Time*(m_MoveF_Speed*0.1));
-        animTexCoord1.x += (time*sin((m_MoveF_Rotation*(pi/180))));
-        animTexCoord1.y += (time*cos((m_MoveF_Rotation*(pi/180))));
+        animTexCoord1.x += (time*sin((m_MoveF_Rotation*(pi/180.0))));
+        animTexCoord1.y += (time*cos((m_MoveF_Rotation*(pi/180.0))));
     #endif
      
 //  fog_z = gl_Position.z;
