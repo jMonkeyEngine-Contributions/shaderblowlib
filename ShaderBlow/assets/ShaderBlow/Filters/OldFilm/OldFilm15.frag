@@ -102,7 +102,7 @@ void main() {
             float yPeriod = 1.0;
             float pi = 3.141592;
             float phase = g_Time;
-            float turbulence = snoise(texCoord * 2.5);
+            float turbulence = snoise(texCoord * (2.5 * (2.0 - m_RandomValue)));
             float vScratch = 0.5 + (sin(((texCoord.x * xPeriod + texCoord.y * yPeriod + turbulence)) * pi + phase) * 0.5);
             vScratch = clamp((vScratch * 10000.0) + 0.35, 0.0, 1.0);
 
