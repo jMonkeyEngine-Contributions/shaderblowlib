@@ -36,80 +36,64 @@ import com.jme3.asset.plugins.FileLocator;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
-import com.jme3.light.AmbientLight;
-import com.jme3.light.DirectionalLight;
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.math.Vector3f;
 import com.jme3.post.FilterPostProcessor;
-import com.jme3.scene.Spatial;
-import com.jme3.util.TangentBinormalGenerator;
 import com.shaderblow.filter.grayscale.GrayScaleFilter;
+import com.shaderblow.test.TestObjectBuilder;
 
 public class TestGrayScale extends SimpleApplication {
 
-    private FilterPostProcessor fpp;
-    private boolean enabled = true;
-    private GrayScaleFilter grayScale;
+	private FilterPostProcessor fpp;
+	private boolean enabled = true;
+	private GrayScaleFilter grayScale;
 
-    public static void main(final String[] args) {
-        final TestGrayScale app = new TestGrayScale();
-        app.start();
-    }
+	public static void main(final String[] args) {
+		final TestGrayScale app = new TestGrayScale();
+		app.start();
+	}
 
-    @Override
-    public void simpleInitApp() {
+	@Override
+	public void simpleInitApp() {
 
-        this.assetManager.registerLocator("assets", FileLocator.class);
+		this.assetManager.registerLocator("assets", FileLocator.class);
 
-        this.flyCam.setMoveSpeed(10);
+		this.flyCam.setMoveSpeed(10);
 
-        final Spatial char_boy = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
-        final Material mat = this.assetManager.loadMaterial("TestMaterials/LightBlow/Shading_System/LightBlow_ibl.j3m");
-        char_boy.setMaterial(mat);
-        TangentBinormalGenerator.generate(char_boy);
-        this.rootNode.attachChild(char_boy);
+		TestObjectBuilder.buildTestModel(this.assetManager, this.rootNode);
+		TestObjectBuilder.buildSkybox(this.assetManager, this.rootNode);
+		TestObjectBuilder.buildFloor(this.assetManager, this.rootNode);
+		TestObjectBuilder.buildLights(this.rootNode);
 
-        final DirectionalLight dl = new DirectionalLight();
-        dl.setDirection(new Vector3f(-0.8f, -0.6f, -0.08f).normalizeLocal());
-        dl.setColor(new ColorRGBA(1, 1, 1, 1));
-        this.rootNode.addLight(dl);
+		this.flyCam.setMoveSpeed(15);
 
-        final AmbientLight al = new AmbientLight();
-        al.setColor(new ColorRGBA(1.5f, 1.5f, 1.5f, 1.0f));
-        this.rootNode.addLight(al);
+		this.fpp = new FilterPostProcessor(this.assetManager);
+		// this.fpp.setNumSamples(4);
+		this.grayScale = new GrayScaleFilter();
+		this.fpp.addFilter(this.grayScale);
+		this.viewPort.addProcessor(this.fpp);
+		this.initInputs();
+	}
 
-        this.flyCam.setMoveSpeed(15);
+	private void initInputs() {
+		this.inputManager.addMapping("toggle", new KeyTrigger(KeyInput.KEY_SPACE));
 
-        this.fpp = new FilterPostProcessor(this.assetManager);
-        this.fpp.setNumSamples(4);
-        this.grayScale = new GrayScaleFilter();
-        this.fpp.addFilter(this.grayScale);
-        this.viewPort.addProcessor(this.fpp);
-        this.initInputs();
-    }
+		final ActionListener acl = new ActionListener() {
 
-    private void initInputs() {
-        this.inputManager.addMapping("toggle", new KeyTrigger(KeyInput.KEY_SPACE));
+			@Override
+			public void onAction(final String name, final boolean keyPressed, final float tpf) {
+				if (name.equals("toggle") && keyPressed) {
+					if (TestGrayScale.this.enabled) {
+						TestGrayScale.this.enabled = false;
+						TestGrayScale.this.viewPort.removeProcessor(TestGrayScale.this.fpp);
+					} else {
+						TestGrayScale.this.enabled = true;
+						TestGrayScale.this.viewPort.addProcessor(TestGrayScale.this.fpp);
+					}
+				}
 
-        final ActionListener acl = new ActionListener() {
+			}
+		};
 
-            @Override
-            public void onAction(final String name, final boolean keyPressed, final float tpf) {
-                if (name.equals("toggle") && keyPressed) {
-                    if (TestGrayScale.this.enabled) {
-                        TestGrayScale.this.enabled = false;
-                        TestGrayScale.this.viewPort.removeProcessor(TestGrayScale.this.fpp);
-                    } else {
-                        TestGrayScale.this.enabled = true;
-                        TestGrayScale.this.viewPort.addProcessor(TestGrayScale.this.fpp);
-                    }
-                }
+		this.inputManager.addListener(acl, "toggle");
 
-            }
-        };
-
-        this.inputManager.addListener(acl, "toggle");
-
-    }
+	}
 }
