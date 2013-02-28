@@ -44,29 +44,29 @@ import com.jme3.renderer.ViewPort;
  */
 public class GrayScaleFilter extends Filter {
 
-    /**
-     * Constructor.
-     */
-    public GrayScaleFilter() {
-        super("GrayScaleFilter");
-    }
+	/**
+	 * Constructor.
+	 */
+	public GrayScaleFilter() {
+		super("GrayScaleFilter");
+	}
 
-    /**
-     * @see com.jme3.post.Filter#getMaterial()
-     */
-    @Override
-    protected Material getMaterial() {
-        return this.material;
-    }
+	/**
+	 * @see com.jme3.post.Filter#getMaterial()
+	 */
+	@Override
+	protected Material getMaterial() {
+		return this.material;
+	}
 
-    /**
-     * @see com.jme3.post.Filter#initFilter(com.jme3.asset.AssetManager, com.jme3.renderer.RenderManager,
-     *      com.jme3.renderer.ViewPort, int, int)
-     */
-    @Override
-    protected void initFilter(final AssetManager manager, final RenderManager renderManager, final ViewPort vp,
-            final int w, final int h) {
-        this.material = new Material(manager, "ShaderBlow/MatDefs/Filters/GrayScale/GrayScale.j3md");
-    }
+	/**
+	 * @see com.jme3.post.Filter#initFilter(com.jme3.asset.AssetManager, com.jme3.renderer.RenderManager,
+	 *      com.jme3.renderer.ViewPort, int, int)
+	 */
+	@Override
+	protected void initFilter(final AssetManager manager, final RenderManager renderManager, final ViewPort vp,
+			final int w, final int h) {
+		this.material = new Material(manager, "ShaderBlow/MatDefs/Filters/GrayScale/GrayScale.j3md");
+	}
 
 }
