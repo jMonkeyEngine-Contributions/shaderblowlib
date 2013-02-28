@@ -8,6 +8,8 @@ MaterialDef ColorScale {
         Float RandomValue
         Float NoiseDensity
         Float ScratchDensity
+        Float InnerVignetting
+        Float OuterVignetting
     }
   
     Technique {

@@ -8,6 +8,8 @@ uniform float m_ColorDensity;
 uniform float m_RandomValue;
 uniform float m_NoiseDensity;
 uniform float m_ScratchDensity;
+uniform float m_InnerVignetting;
+uniform float m_OuterVignetting;
 
 in vec2 texCoord;
 
@@ -110,6 +112,12 @@ void main() {
         }
     }
     
+	// Apply vignetting
+	// Max distance from center to corner is ~0.7. Scale that to 1.0.
+	float d = distance(vec2(0.5, 0.5), texCoord) * 1.414213;
+	float vignetting = clamp((m_OuterVignetting - d) / (m_OuterVignetting - m_InnerVignetting), 0.0, 1.0);
+	finalColour.xyz *= vignetting;
+	
     // Apply colour
     fragColor.rgb = finalColour;
     fragColor.a = 1.0;

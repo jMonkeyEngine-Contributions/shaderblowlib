@@ -2,6 +2,7 @@ package com.shaderblow.test.filter.oldfilm;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.plugins.FileLocator;
+import com.jme3.font.BitmapText;
 import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.AnalogListener;
@@ -15,7 +16,7 @@ public class TestOldFilm extends SimpleApplication {
 
 	private FilterPostProcessor fpp;
 	private boolean enabled = true;
-	private OldFilmFilter colorScale;
+	private OldFilmFilter oldFilmFilter;
 
 	public static void main(final String[] args) {
 		final TestOldFilm app = new TestOldFilm();
@@ -38,10 +39,19 @@ public class TestOldFilm extends SimpleApplication {
 
 		this.fpp = new FilterPostProcessor(this.assetManager);
 		// this.fpp.setNumSamples(4);
-		this.colorScale = new OldFilmFilter(new ColorRGBA(112f / 255f, 66f / 255f, 20f / 255f, 1.0f), 0.7f, 0.4f, 0.3f);
-		this.fpp.addFilter(this.colorScale);
+		this.oldFilmFilter = new OldFilmFilter(new ColorRGBA(112f / 255f, 66f / 255f, 20f / 255f, 1.0f), 0.7f, 0.4f,
+				0.3f, 0.9f);
+		this.fpp.addFilter(this.oldFilmFilter);
 		this.viewPort.addProcessor(this.fpp);
 		this.initInputs();
+
+		guiFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
+		BitmapText ch = new BitmapText(guiFont, false);
+		ch.setSize(guiFont.getCharSet().getRenderedSize());
+		ch.setText("space: Filter ON/OFF\nY/H: Color Density UP/DOWN\nU/J: Noise Density UP/DOWN\nI/K: Scratching Density UP/DOWN\nO/L: Vignetting Diameter UP/DOWN"); // crosshairs
+		ch.setColor(new ColorRGBA(1f, 0.8f, 0.1f, 1f));
+		ch.setLocalTranslation(settings.getWidth() * 0.01f, settings.getHeight() * 0.99f, 0);
+		guiNode.attachChild(ch);
 	}
 
 	private void initInputs() {
@@ -52,6 +62,8 @@ public class TestOldFilm extends SimpleApplication {
 		this.inputManager.addMapping("NoiseDensityDown", new KeyTrigger(KeyInput.KEY_J));
 		this.inputManager.addMapping("ScratchDensityUp", new KeyTrigger(KeyInput.KEY_I));
 		this.inputManager.addMapping("ScratchDensityDown", new KeyTrigger(KeyInput.KEY_K));
+		this.inputManager.addMapping("VignettingValueUp", new KeyTrigger(KeyInput.KEY_O));
+		this.inputManager.addMapping("VignettingValueDown", new KeyTrigger(KeyInput.KEY_L));
 
 		final ActionListener acl = new ActionListener() {
 
@@ -75,39 +87,55 @@ public class TestOldFilm extends SimpleApplication {
 			@Override
 			public void onAnalog(final String name, final float isPressed, final float tpf) {
 				if (name.equals("ColorDensityUp")) {
-					TestOldFilm.this.colorScale.setColorDensity(TestOldFilm.this.colorScale.getColorDensity() + 0.01f);
-					System.out.println("ColorScale color density : " + TestOldFilm.this.colorScale.getColorDensity());
+					TestOldFilm.this.oldFilmFilter
+							.setColorDensity(TestOldFilm.this.oldFilmFilter.getColorDensity() + 0.01f);
+					System.out.println("OldFilm color density : " + TestOldFilm.this.oldFilmFilter.getColorDensity());
 				}
 				if (name.equals("ColorDensityDown")) {
-					TestOldFilm.this.colorScale.setColorDensity(TestOldFilm.this.colorScale.getColorDensity() - 0.01f);
-					System.out.println("ColorScale color density : " + TestOldFilm.this.colorScale.getColorDensity());
+					TestOldFilm.this.oldFilmFilter
+							.setColorDensity(TestOldFilm.this.oldFilmFilter.getColorDensity() - 0.01f);
+					System.out.println("OldFilm color density : " + TestOldFilm.this.oldFilmFilter.getColorDensity());
 				}
 				if (name.equals("NoiseDensityUp")) {
-					TestOldFilm.this.colorScale.setNoiseDensity(TestOldFilm.this.colorScale.getNoiseDensity() + 0.01f);
-					System.out.println("ColorScale noise density : " + TestOldFilm.this.colorScale.getNoiseDensity());
+					TestOldFilm.this.oldFilmFilter
+							.setNoiseDensity(TestOldFilm.this.oldFilmFilter.getNoiseDensity() + 0.01f);
+					System.out.println("OldFilm noise density : " + TestOldFilm.this.oldFilmFilter.getNoiseDensity());
 				}
 				if (name.equals("NoiseDensityDown")) {
-					TestOldFilm.this.colorScale.setNoiseDensity(TestOldFilm.this.colorScale.getNoiseDensity() - 0.01f);
-					System.out.println("ColorScale noise density : " + TestOldFilm.this.colorScale.getNoiseDensity());
+					TestOldFilm.this.oldFilmFilter
+							.setNoiseDensity(TestOldFilm.this.oldFilmFilter.getNoiseDensity() - 0.01f);
+					System.out.println("OldFilm noise density : " + TestOldFilm.this.oldFilmFilter.getNoiseDensity());
 				}
 				if (name.equals("ScratchDensityUp")) {
-					TestOldFilm.this.colorScale
-							.setScratchDensity(TestOldFilm.this.colorScale.getScratchDensity() + 0.01f);
-					System.out.println("ColorScale scratch density : "
-							+ TestOldFilm.this.colorScale.getScratchDensity());
+					TestOldFilm.this.oldFilmFilter
+							.setScratchDensity(TestOldFilm.this.oldFilmFilter.getScratchDensity() + 0.01f);
+					System.out.println("OldFilm scratch density : "
+							+ TestOldFilm.this.oldFilmFilter.getScratchDensity());
 				}
 				if (name.equals("ScratchDensityDown")) {
-					TestOldFilm.this.colorScale
-							.setScratchDensity(TestOldFilm.this.colorScale.getScratchDensity() - 0.01f);
-					System.out.println("ColorScale scratch density : "
-							+ TestOldFilm.this.colorScale.getScratchDensity());
+					TestOldFilm.this.oldFilmFilter
+							.setScratchDensity(TestOldFilm.this.oldFilmFilter.getScratchDensity() - 0.01f);
+					System.out.println("OldFilm scratch density : "
+							+ TestOldFilm.this.oldFilmFilter.getScratchDensity());
+				}
+				if (name.equals("VignettingValueUp")) {
+					TestOldFilm.this.oldFilmFilter.setVignettingValue(TestOldFilm.this.oldFilmFilter
+							.getVignettingValue() + 0.01f);
+					System.out.println("OldFilm vignetting diameter : "
+							+ TestOldFilm.this.oldFilmFilter.getVignettingValue());
+				}
+				if (name.equals("VignettingValueDown")) {
+					TestOldFilm.this.oldFilmFilter.setVignettingValue(TestOldFilm.this.oldFilmFilter
+							.getVignettingValue() - 0.01f);
+					System.out.println("OldFilm vignetting diameter : "
+							+ TestOldFilm.this.oldFilmFilter.getVignettingValue());
 				}
 			}
 		};
 
 		this.inputManager.addListener(acl, "toggle");
 		this.inputManager.addListener(anl, "ColorDensityUp", "ColorDensityDown", "NoiseDensityUp", "NoiseDensityDown",
-				"ScratchDensityUp", "ScratchDensityDown");
+				"ScratchDensityUp", "ScratchDensityDown", "VignettingValueUp", "VignettingValueDown");
 
 	}
 }
