@@ -57,24 +57,30 @@ import com.jme3.texture.Texture;
 public class ForceShieldControl implements Control {
 
     private final Material material;
-    private float maxTime = 0.5f;
-    private final ArrayList<Vector3f> collisions = new ArrayList<Vector3f>();
-    private final ArrayList<Float> collisionTimes = new ArrayList<Float>();
+    private float maxTime;
+    private final ArrayList<Vector3f> collisions;
+    private final ArrayList<Float> collisionTimes;
     private Spatial model;
     private boolean numChanged = false;
     private boolean enabled = true;
     private boolean work = false;
-    private float timer = 0;
+    private float timer;
     private final float timerSize;
 
     /** Max number of hits displayed I've experienced crashes with 7 or 8 hits */
-    private final int MAX_HITS = 4;
+    private final int MAX_HITS;
 
     public ForceShieldControl(final AssetManager assetManager) {
         this.material = new Material(assetManager, "ShaderBlow/MatDefs/ForceShield/ForceShield.j3md");
         this.material.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
         this.material.setFloat("MaxDistance", 1);
-        this.timerSize = 4f;
+
+        timerSize = 4f;
+        maxTime  = 0.5f;
+        collisionTimes = new ArrayList<Float>();
+        collisions  = new ArrayList<Vector3f>();
+        MAX_HITS  = 4;
+        timer  = 0;
     }
 
     /**
