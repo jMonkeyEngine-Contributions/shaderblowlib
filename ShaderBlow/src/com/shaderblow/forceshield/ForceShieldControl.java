@@ -61,13 +61,14 @@ public class ForceShieldControl implements Control {
     private final ArrayList<Vector3f> collisions;
     private final ArrayList<Float> collisionTimes;
     private Spatial model;
-    private boolean numChanged = false;
-    private boolean enabled = true;
-    private boolean work = false;
+    private boolean numChanged;
+    private boolean enabled;
+    private boolean work;
     private float timer;
     private final float timerSize;
-
-    /** Max number of hits displayed I've experienced crashes with 7 or 8 hits */
+    /**
+     * Max number of hits displayed I've experienced crashes with 7 or 8 hits
+     */
     private final int MAX_HITS;
 
     public ForceShieldControl(final AssetManager assetManager) {
@@ -75,12 +76,15 @@ public class ForceShieldControl implements Control {
         this.material.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
         this.material.setFloat("MaxDistance", 1);
 
+        numChanged = false;
+        enabled = true;
+        work = false;
         timerSize = 4f;
-        maxTime  = 0.5f;
+        maxTime = 0.5f;
         collisionTimes = new ArrayList<Float>();
-        collisions  = new ArrayList<Vector3f>();
-        MAX_HITS  = 4;
-        timer  = 0;
+        collisions = new ArrayList<Vector3f>();
+        MAX_HITS = 4;
+        timer = 0;
     }
 
     /**
