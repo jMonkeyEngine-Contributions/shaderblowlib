@@ -12,9 +12,9 @@ uniform sampler2D m_water_dudvmap;
 //uniform sampler2D m_water_depthmap;
 //uniform vec4 m_waterColor;
 //uniform float m_waterDepth;
-uniform vec4 m_distortionScale;
-uniform vec4 m_distortionMix;
-uniform vec4 m_texScale;
+uniform float m_distortionScale;
+uniform float m_distortionMix;
+uniform float m_texScale;
 //uniform vec2 m_FrustumNearFar;
 uniform float m_waterTransparency;
 
@@ -64,7 +64,7 @@ void main(void)
     // vec4 viewt = normalize(viewDir);
      vec4 disdis = texture2D(m_water_dudvmap, vec2(waterTex2.xy * vec2(m_texScale)));
      vec4 fdist = texture2D(m_water_dudvmap, vec2(waterTex1.xy + disdis.xy*vec2(m_distortionMix)));
-     fdist = normalize( fdist * 2.0 - 1.0)* m_distortionScale;
+     fdist = normalize( fdist * 2.0 - 1.0)* vec4(m_distortionScale);
   
 
      //load normalmap

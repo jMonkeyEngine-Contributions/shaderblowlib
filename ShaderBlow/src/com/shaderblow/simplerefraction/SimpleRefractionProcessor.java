@@ -84,9 +84,9 @@ public class SimpleRefractionProcessor implements SceneProcessor {
         this.material.setFloat("waterTransparency", this.waterTransparency / 10);
 
 
-        this.material.setColor("distortionScale", new ColorRGBA(0.2f, 0.2f, 0.2f, 0.2f));
-        this.material.setColor("distortionMix", new ColorRGBA(0.5f, 0.5f, 0.5f, 0.5f));
-        this.material.setColor("texScale", new ColorRGBA(1.0f, 1.0f, 1.0f, 1.0f));
+        this.material.setFloat("distortionScale", 0.2f);
+        this.material.setFloat("distortionMix", 0.5f);
+        this.material.setFloat("texScale", 1.0f);
         // updateClipPlanes();
 
     }
