@@ -37,7 +37,6 @@ import com.jme3.input.KeyInput;
 import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.KeyTrigger;
 import com.jme3.material.Material;
-import com.jme3.math.Vector3f;
 import com.jme3.post.FilterPostProcessor;
 import com.jme3.scene.Spatial;
 import com.jme3.util.TangentBinormalGenerator;
@@ -77,10 +76,10 @@ public class TestCircularFading extends SimpleApplication {
         this.fpp = new FilterPostProcessor(this.assetManager);
         this.fpp.setNumSamples(4);
 
-        final Vector3f screenCoordinates = getCamera().getScreenCoordinates(char_boy2.getWorldTranslation());
-
-        this.circleFadingFilter = new CircularFadingFilter(screenCoordinates);
+        this.circleFadingFilter = new CircularFadingFilter(getCamera(), char_boy2.getWorldTranslation());
+        this.circleFadingFilter.setFadingSpeed(0.5f);
         this.fpp.addFilter(this.circleFadingFilter);
+
         this.viewPort.addProcessor(this.fpp);
     }
 
