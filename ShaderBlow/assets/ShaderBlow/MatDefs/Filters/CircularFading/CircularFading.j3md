@@ -1,0 +1,35 @@
+MaterialDef ColorScale {
+  
+    MaterialParameters {
+        Int NumSamples
+        Texture2D Texture
+        Vector3 CircleCenter
+        Float CircleRadius
+    }
+  
+    Technique {
+        VertexShader GLSL150:   Common/MatDefs/Post/Post15.vert
+        FragmentShader GLSL150: ShaderBlow/Filters/CircularFading/CircularFading15.frag
+  
+        WorldParameters {
+            WorldViewProjectionMatrix
+            Aspect
+            Resolution
+        }
+ 
+        Defines {
+            RESOLVE_MS : NumSamples
+        }
+    }
+  
+    Technique {
+        VertexShader GLSL100:   Common/MatDefs/Post/Post.vert
+        FragmentShader GLSL100: ShaderBlow/Filters/CircularFading/CircularFading.frag
+  
+        WorldParameters {
+            WorldViewProjectionMatrix
+            Aspect
+            Resolution
+        }
+    }
+}
