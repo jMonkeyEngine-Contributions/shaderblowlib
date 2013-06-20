@@ -59,6 +59,7 @@ MaterialDef LightBlow {
         // Switch Hemispherical Lighting on/off
         Boolean Hemi_Lighting_1
         Boolean Hemi_Lighting_2
+        Boolean Linear_Lighting
 
         // Specular lighting
         Boolean Specular_Lighting
@@ -235,6 +236,7 @@ MaterialDef LightBlow {
             IBL_SIMPLE : IblMap_Simple
             HEMI_LIGHTING_1 : Hemi_Lighting_1
             HEMI_LIGHTING_2 : Hemi_Lighting_2
+            LINEAR_LIGHTING : Linear_Lighting
             SPECULAR_LIGHTING : Specular_Lighting
             SPEC_A_NOR : Spec_A_Nor 
             SPEC_A_DIF : Spec_A_Dif

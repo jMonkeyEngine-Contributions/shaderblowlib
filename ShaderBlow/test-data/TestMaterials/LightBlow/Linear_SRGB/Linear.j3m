@@ -1,0 +1,8 @@
+Material My Material : ShaderBlow/MatDefs/LightBlow/LightBlow.j3md {
+     MaterialParameters {
+DiffuseMap : Flip Repeat TestMaterials/LightBlow/Linear_SRGB/test.png
+        Linear_Lighting : true
+     }
+    AdditionalRenderState {
+    }
+}
