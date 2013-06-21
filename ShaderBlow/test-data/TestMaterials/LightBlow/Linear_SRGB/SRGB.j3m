@@ -1,9 +1,0 @@
-Material My Material : ShaderBlow/MatDefs/LightBlow/LightBlow.j3md {
-     MaterialParameters {
-DiffuseMap : Flip Repeat TestMaterials/LightBlow/Linear_SRGB/test.png
-        Specular_Lighting : false
-        Shininess : 9.0
-     }
-    AdditionalRenderState {
-    }
-}

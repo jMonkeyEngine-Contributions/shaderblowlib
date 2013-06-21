@@ -1,6 +1,8 @@
 Material My Material : ShaderBlow/MatDefs/LightBlow/LightBlow.j3md {
      MaterialParameters {
-DiffuseMap : Flip Repeat TestMaterials/LightBlow/Linear_SRGB/test.png
+        NormalMap : TestModels/LightBlow/jme_lightblow_nor.png
+        Nor_Inv_Y : true
+        Nor_Inv_X : false
         Linear_Lighting : true
      }
     AdditionalRenderState {
