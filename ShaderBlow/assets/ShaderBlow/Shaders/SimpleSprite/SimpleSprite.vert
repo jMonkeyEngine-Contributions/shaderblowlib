@@ -1,3 +1,5 @@
+#import "Common/ShaderLib/Skinning.glsllib"
+
 uniform mat4 g_WorldViewProjectionMatrix;
 uniform float g_Time;
 
@@ -21,8 +23,14 @@ varying vec2 texCoordAni;
 #endif 
 
 void main(){
- 
-   gl_Position = g_WorldViewProjectionMatrix * vec4(inPosition, 1.0);
+
+    vec4 pos = vec4(inPosition, 1.0);
+
+    #ifdef NUM_BONES
+      Skinning_Compute(pos);
+    #endif 
+
+   gl_Position = g_WorldViewProjectionMatrix * pos;
    texCoordAni = inTexCoord;
 
 	int iNumTilesU = int(m_numTilesU);

@@ -36,6 +36,10 @@ MaterialDef FakeParticleBlow {
         Color Multiply_Color : 1.0 1.0 1.0 1.0
         Float colorIntensity : 1.0   
 
+        // For hardware skinning
+        Int NumberOfBones
+        Matrix4Array BoneMatrices
+
         // Refraction Filter
         Boolean DoRefract : False
         Float Distance : 200.0
@@ -67,6 +71,7 @@ MaterialDef FakeParticleBlow {
             FOG : FogColor
             FOG_SKY : FogSkyBox
             TOON_EDGES : EdgesColor
+            NUM_BONES : NumberOfBones
             
         }
     }
@@ -86,6 +91,7 @@ MaterialDef FakeParticleBlow {
             ViewMatrix
             CameraPosition
             WorldMatrix
+            NUM_BONES : NumberOfBones
         }
 
         Defines {

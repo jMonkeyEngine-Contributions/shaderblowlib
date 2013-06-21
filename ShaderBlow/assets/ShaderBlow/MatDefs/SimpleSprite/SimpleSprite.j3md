@@ -16,6 +16,10 @@ MaterialDef SimpleSprite {
         // Multiply Color system
         Color Multiply_Color
 
+        // For hardware skinning
+        Int NumberOfBones
+        Matrix4Array BoneMatrices
+
         // Refraction Filter
         Boolean DoRefract : False
         Float Distance : 200.0
@@ -37,6 +41,7 @@ MaterialDef SimpleSprite {
             MULTIPLY_COLOR : Multiply_Color
             FOG : FogColor
             FOG_SKY : FogSkyBox
+            NUM_BONES : NumberOfBones
             
         }
     }

@@ -11,6 +11,10 @@ MaterialDef FakeParticleBlow {
         Boolean Animation_X
         Boolean Change_Direction
 
+        // For hardware skinning
+        Int NumberOfBones
+        Matrix4Array BoneMatrices
+
         // Fog
         Color FogColor
         TextureCubeMap FogSkyBox
@@ -39,6 +43,7 @@ MaterialDef FakeParticleBlow {
         CHANGE_DIR : Change_Direction
         FOG : FogColor
         FOG_SKY : FogSkyBox
+        NUM_BONES : NumberOfBones
 
 
         }

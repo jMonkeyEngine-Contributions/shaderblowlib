@@ -1,3 +1,5 @@
+#import "Common/ShaderLib/Skinning.glsllib"
+
 uniform mat4 g_WorldViewProjectionMatrix;
 uniform float g_Time;
 
@@ -25,6 +27,11 @@ varying vec2 texCoordAni;
 
 void main(){
     vec4 pos = vec4(inPosition, 1.0);
+
+       #ifdef NUM_BONES
+         Skinning_Compute(pos);
+       #endif
+
     gl_Position = g_WorldViewProjectionMatrix * pos;
 
     #if defined (ANY_DIR_Y) || defined (ANY_DIR_X) 

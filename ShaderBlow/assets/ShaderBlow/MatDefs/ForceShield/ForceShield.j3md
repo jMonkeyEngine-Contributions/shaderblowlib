@@ -11,6 +11,10 @@ MaterialDef Solid Color {
         Int CollisionNum
         Boolean Work : False
 
+        // For hardware skinning
+        Int NumberOfBones
+        Matrix4Array BoneMatrices
+
         // Refraction Filter
         Boolean DoRefract : False
         Float Distance : 200.0
@@ -29,6 +33,7 @@ MaterialDef Solid Color {
             HAS_COLORMAP : ColorMap
             HAS_COLOR : Color
             WORK : Work
+            NUM_BONES : NumberOfBones
         }
     }
 

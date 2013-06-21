@@ -1,4 +1,5 @@
 // author: cvlad
+#import "Common/ShaderLib/Skinning.glsllib"
 
 uniform mat4 g_WorldViewProjectionMatrix;
 uniform mat4 g_WorldViewMatrixInverse;
@@ -17,7 +18,12 @@ varying float viewDir;
 
 void main() { 
     vec4 vertex = vec4(inPosition, 1.0) + vec4(inNormal * vec3(m_width), 0.0);
+
+       #ifdef NUM_BONES
+         Skinning_Compute(vertex);
+       #endif
     gl_Position = g_WorldViewProjectionMatrix * vertex;
+
     uv = normalize(inTexCoord);
 
     vec4 objectSpaceCamPos = g_WorldViewMatrixInverse * vec4(0.0, 0.0, 0.0, 1.0);

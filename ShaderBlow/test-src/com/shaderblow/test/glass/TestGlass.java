@@ -1,5 +1,8 @@
 package com.shaderblow.test.glass;
 
+import com.jme3.animation.AnimChannel;
+import com.jme3.animation.AnimControl;
+import com.jme3.animation.SkeletonControl;
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.TextureKey;
 import com.jme3.asset.plugins.FileLocator;
@@ -38,6 +41,13 @@ public class TestGlass extends SimpleApplication {
 		char_boy1.setMaterial(mat1);
 		char_boy1.setLocalTranslation(0, 0, 0);
 		TangentBinormalGenerator.generate(char_boy1);
+                
+             AnimControl   control = char_boy1.getControl(AnimControl.class);
+             AnimChannel  channel = control.createChannel();
+             channel.setAnim("Action");
+             SkeletonControl skeletonControl = char_boy1.getControl(SkeletonControl.class);
+             skeletonControl.setHardwareSkinningPreferred(true);        
+             
 		this.rootNode.attachChild(char_boy1);
 
 		final Spatial char_boy2 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");

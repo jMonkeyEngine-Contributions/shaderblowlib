@@ -1,3 +1,5 @@
+#import "Common/ShaderLib/Skinning.glsllib"
+
 #define ATTENUATION
 //#define HQ_ATTENUATION
 
@@ -157,10 +159,15 @@ float specularFactor = lightComputeSpecular(wvNorm, wvViewDir, lightDir.xyz, m_S
 
 
 void main(){
+   vec4 modelSpacePos = vec4(inPosition, 1.0);
+   vec3 modelSpaceNorm = inNormal;
+   vec3 modelSpaceTan  = inTangent.xyz;
 
+   #ifdef NUM_BONES
+     Skinning_Compute(modelSpacePos, modelSpaceNorm, modelSpaceTan);
+   #endif
 
-   vec4 pos = vec4(inPosition, 1.0);
-   gl_Position = g_WorldViewProjectionMatrix * pos;
+   gl_Position = g_WorldViewProjectionMatrix * modelSpacePos;
    texCoord = inTexCoord;
 
 #ifdef SEPERATE_TEXCOORD
@@ -172,8 +179,8 @@ void main(){
     #endif
 
 
-   vec3 wvPosition = (g_WorldViewMatrix * pos).xyz;
-   vec3 wvNormal  = normalize(g_NormalMatrix * inNormal);
+   vec3 wvPosition = (g_WorldViewMatrix * modelSpacePos).xyz;
+   vec3 wvNormal  = normalize(g_NormalMatrix * modelSpaceNorm);
    vec3 viewDir = normalize(-wvPosition);
 
        //vec4 lightColor = g_LightColor[gl_InstanceID];
@@ -186,7 +193,7 @@ void main(){
    vec4 lightColor = g_LightColor;
 
    #if defined(NORMALMAP) || defined(NORMALMAP_1) || defined(NORMALMAP_2) || defined(NORMALMAP_3) && !defined(VERTEX_LIGHTING) 
-     vec3 wvTangent = normalize(g_NormalMatrix * inTangent.xyz);
+     vec3 wvTangent = normalize(g_NormalMatrix * modelSpaceTan);
      vec3 wvBinormal = cross(wvNormal, wvTangent);
 
 
@@ -212,7 +219,7 @@ void main(){
      lightComputeDir(wvPosition, lightColor, wvLightPos, vLightDir);
      
      #ifdef V_TANGENT
-        vNormal = normalize(g_NormalMatrix * inTangent.xyz);
+        vNormal = normalize(g_NormalMatrix * modelSpaceTan.xyz);
         vNormal = -cross(cross(vLightDir.xyz, vNormal), vNormal);
      #endif
    #endif
@@ -255,14 +262,14 @@ void main(){
 
 
 #if defined (REFLECTION) || defined (IBL) || defined(FOG_SKY) || defined(IBL_SIMPLE)
-       vec3 worldPos = (g_WorldMatrix * pos).xyz;
+       vec3 worldPos = (g_WorldMatrix * modelSpacePos).xyz;
        I = normalize( g_CameraPosition -  worldPos  ).xyz;
 #endif
 
 #if defined (REFLECTION) || defined (IBL) || defined(IBL_SIMPLE)
 //Reflection vectors calculation
 
-       vec3 N = normalize( (g_WorldMatrix * vec4(inNormal, 0.0)).xyz );      
+       vec3 N = normalize( (g_WorldMatrix * vec4(modelSpaceNorm, 0.0)).xyz );      
        refVec = reflect(I, N);
 
     #endif

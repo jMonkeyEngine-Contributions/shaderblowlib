@@ -190,6 +190,10 @@ MaterialDef LightBlow {
         Float PCFEdge
         Float ShadowMapSize
 
+        // For hardware skinning
+        Int NumberOfBones
+        Matrix4Array BoneMatrices
+
         // Refraction Filter
         Boolean DoRefract : False
         Float Distance : 200.0
@@ -279,6 +283,8 @@ MaterialDef LightBlow {
             TOON_EDGES : EdgesColor
             FOG_EDGES : Fog_Edges
 
+            NUM_BONES : NumberOfBones
+
         }
 
     }
@@ -299,6 +305,7 @@ MaterialDef LightBlow {
             ViewMatrix
             CameraPosition
             WorldMatrix
+            NUM_BONES : NumberOfBones
         }
 
         Defines {
@@ -308,6 +315,7 @@ MaterialDef LightBlow {
             FOG_SKY : FogSkyBox
             TOON_EDGES : EdgesColor
             FOG_EDGES : Fog_Edges
+            NUM_BONES : NumberOfBones
         }
 
         RenderState {
@@ -330,6 +338,7 @@ MaterialDef LightBlow {
         Defines {
             COLOR_MAP : ColorMap
             DISCARD_ALPHA : AlphaDiscardThreshold
+            NUM_BONES : NumberOfBones
         }
 
         ForcedRenderState {
@@ -361,6 +370,7 @@ Technique PostShadow15{
             FADE : FadeInfo
             PSSM : Splits
             POINTLIGHT : LightViewProjectionMatrix5
+            NUM_BONES : NumberOfBones
         }
 
          ForcedRenderState {
@@ -389,6 +399,7 @@ Technique PostShadow15{
             FADE : FadeInfo
             PSSM : Splits
             POINTLIGHT : LightViewProjectionMatrix5
+            NUM_BONES : NumberOfBones
         }
 
         ForcedRenderState {
@@ -411,6 +422,7 @@ Technique PostShadow15{
 
         Defines {
             DIFFUSEMAP_ALPHA : DiffuseMap
+            NUM_BONES : NumberOfBones
             
         }
 
@@ -418,11 +430,6 @@ Technique PostShadow15{
 
         }
 
-    }
-
-
-    Technique  {
-        LightMode FixedPipeline
     }
 
     Technique GBuf {
@@ -458,15 +465,17 @@ Technique PostShadow15{
     Technique Glow {
 
         VertexShader GLSL100:   Common/MatDefs/Misc/Unshaded.vert
-        FragmentShader GLSL100: ShaderBlow/Shaders/PostBlow/GlowBlow.frag
+        FragmentShader GLSL100: Common/MatDefs/Light/Glow.frag
 
         WorldParameters {
             WorldViewProjectionMatrix
         }
 
         Defines {
+            NEED_TEXCOORD1
             HAS_GLOWMAP : GlowMap
             HAS_GLOWCOLOR : GlowColor
+            NUM_BONES : NumberOfBones
         }
     }
 

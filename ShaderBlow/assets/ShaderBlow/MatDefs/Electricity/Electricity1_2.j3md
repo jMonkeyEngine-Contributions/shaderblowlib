@@ -12,6 +12,10 @@ MaterialDef Electricity1 {
         Texture2D noise
         Texture2D ramp
 
+        // For hardware skinning
+        Int NumberOfBones
+        Matrix4Array BoneMatrices
+
         // Fog
         Float Fog
 
@@ -36,6 +40,7 @@ MaterialDef Electricity1 {
 
         Defines {
             FOG : Fog
+            NUM_BONES : NumberOfBones
         }
 
         RenderState {

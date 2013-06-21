@@ -1,3 +1,4 @@
+#import "Common/ShaderLib/Skinning.glsllib"
 #define ATTENUATION
 
 uniform float m_EdgeSize; 
@@ -34,6 +35,11 @@ void main(){
 
    normal = normalize(normal);
    pos = pos + normal * m_EdgeSize;
+
+    #ifdef NUM_BONES
+      Skinning_Compute(pos);
+    #endif
+
    gl_Position = g_WorldViewProjectionMatrix * pos;
 
 

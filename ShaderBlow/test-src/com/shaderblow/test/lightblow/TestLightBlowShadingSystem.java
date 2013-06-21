@@ -1,5 +1,8 @@
 package com.shaderblow.test.lightblow;
 
+import com.jme3.animation.AnimChannel;
+import com.jme3.animation.AnimControl;
+import com.jme3.animation.SkeletonControl;
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.TextureKey;
 import com.jme3.asset.plugins.FileLocator;
@@ -28,7 +31,7 @@ public class TestLightBlowShadingSystem extends SimpleApplication {
         skyhi.setGenerateMips(true);
         skyhi.setAsCube(true);
 
-        this.flyCam.setMoveSpeed(20f);
+        this.flyCam.setMoveSpeed(5f);
         // TextureKey skylow = new TextureKey("TestTextures/Water32.dds", true);
         // skylow.setGenerateMips(true);
         // skylow.setAsCube(true);
@@ -39,6 +42,13 @@ public class TestLightBlowShadingSystem extends SimpleApplication {
         final Material mat = this.assetManager.loadMaterial("TestMaterials/LightBlow/Shading_System/LightBlow_ibl.j3m");
         char_boy.setMaterial(mat);
         TangentBinormalGenerator.generate(char_boy);
+        
+             AnimControl   control = char_boy.getControl(AnimControl.class);
+             AnimChannel  channel = control.createChannel();
+             channel.setAnim("Action");
+             SkeletonControl skeletonControl = char_boy.getControl(SkeletonControl.class);
+             skeletonControl.setHardwareSkinningPreferred(true);        
+        
         this.rootNode.attachChild(char_boy);
 
         final Spatial char_boy2 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
@@ -79,6 +89,13 @@ public class TestLightBlowShadingSystem extends SimpleApplication {
         char_boy5.setMaterial(mat5);
         char_boy5.setLocalTranslation(-8f, 0, 0);
         TangentBinormalGenerator.generate(char_boy5);
+        
+             AnimControl control5 = char_boy5.getControl(AnimControl.class);
+             AnimChannel channel5 = control5.createChannel();
+             channel5.setAnim("Action");
+             SkeletonControl skeletonControl5 = char_boy5.getControl(SkeletonControl.class);
+             skeletonControl5.setHardwareSkinningPreferred(true);   
+                
         this.rootNode.attachChild(char_boy5);
 
         final Spatial char_boy6 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");

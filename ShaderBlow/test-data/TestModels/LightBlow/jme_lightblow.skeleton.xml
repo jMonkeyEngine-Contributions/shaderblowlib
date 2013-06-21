@@ -182,36 +182,36 @@
     </bone>
   </bones>
   <bonehierarchy >
-    <boneparent parent="Bone_L.002" bone="Bone_L.001" />
-    <boneparent parent="Bone_L.001" bone="Bone_L" />
-    <boneparent parent="Bone_L.002" bone="Bone_L.004" />
-    <boneparent parent="Bone_R.002" bone="Bone_R.001" />
-    <boneparent parent="Bone_R.001" bone="Bone_R" />
-    <boneparent parent="Bone_R.002" bone="Bone_R.004" />
-    <boneparent parent="rrr" bone="root" />
-    <boneparent parent="root" bone="spine1" />
-    <boneparent parent="spine1" bone="spine2" />
-    <boneparent parent="spine2" bone="neck" />
-    <boneparent parent="neck" bone="head" />
-    <boneparent parent="spine2" bone="spine2_L" />
-    <boneparent parent="spine2_L" bone="spine2_L.001" />
-    <boneparent parent="spine2_L.001" bone="spine2_L.002" />
-    <boneparent parent="spine2_L.002" bone="spine2_L.003" />
-    <boneparent parent="spine2" bone="spine2_R" />
-    <boneparent parent="spine2_R" bone="spine2_R.001" />
-    <boneparent parent="spine2_R.001" bone="spine2_R.002" />
-    <boneparent parent="spine2_R.002" bone="spine2_R.003" />
-    <boneparent parent="root" bone="leg_L.001" />
-    <boneparent parent="leg_L.001" bone="leg_L.002" />
-    <boneparent parent="leg_L.002" bone="leg_L.003" />
-    <boneparent parent="leg_L.003" bone="leg_L.004" />
-    <boneparent parent="root" bone="leg_R.001" />
-    <boneparent parent="leg_R.001" bone="leg_R.002" />
-    <boneparent parent="leg_R.002" bone="leg_R.003" />
-    <boneparent parent="leg_R.003" bone="leg_R.004" />
+    <boneparent bone="Bone_L.001" parent="Bone_L.002" />
+    <boneparent bone="Bone_L" parent="Bone_L.001" />
+    <boneparent bone="Bone_L.004" parent="Bone_L.002" />
+    <boneparent bone="Bone_R.001" parent="Bone_R.002" />
+    <boneparent bone="Bone_R" parent="Bone_R.001" />
+    <boneparent bone="Bone_R.004" parent="Bone_R.002" />
+    <boneparent bone="root" parent="rrr" />
+    <boneparent bone="spine1" parent="root" />
+    <boneparent bone="spine2" parent="spine1" />
+    <boneparent bone="neck" parent="spine2" />
+    <boneparent bone="head" parent="neck" />
+    <boneparent bone="spine2_L" parent="spine2" />
+    <boneparent bone="spine2_L.001" parent="spine2_L" />
+    <boneparent bone="spine2_L.002" parent="spine2_L.001" />
+    <boneparent bone="spine2_L.003" parent="spine2_L.002" />
+    <boneparent bone="spine2_R" parent="spine2" />
+    <boneparent bone="spine2_R.001" parent="spine2_R" />
+    <boneparent bone="spine2_R.002" parent="spine2_R.001" />
+    <boneparent bone="spine2_R.003" parent="spine2_R.002" />
+    <boneparent bone="leg_L.001" parent="root" />
+    <boneparent bone="leg_L.002" parent="leg_L.001" />
+    <boneparent bone="leg_L.003" parent="leg_L.002" />
+    <boneparent bone="leg_L.004" parent="leg_L.003" />
+    <boneparent bone="leg_R.001" parent="root" />
+    <boneparent bone="leg_R.002" parent="leg_R.001" />
+    <boneparent bone="leg_R.003" parent="leg_R.002" />
+    <boneparent bone="leg_R.004" parent="leg_R.003" />
   </bonehierarchy>
   <animations >
-    <animation name="Action" length="8.291666666666666" >
+    <animation length="8.291666666666666" name="Action" >
       <tracks >
         <track bone="Bone_L.002" >
           <keyframes >

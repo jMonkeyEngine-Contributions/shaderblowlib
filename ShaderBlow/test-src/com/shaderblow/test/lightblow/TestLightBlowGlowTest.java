@@ -14,12 +14,12 @@ import com.jme3.texture.Texture;
 import com.jme3.util.SkyFactory;
 import com.jme3.util.TangentBinormalGenerator;
 
-public class TestLightBlowGlowBlow extends SimpleApplication {
+public class TestLightBlowGlowTest extends SimpleApplication {
 
     private FilterPostProcessor fpp;
 
     public static void main(final String[] args) {
-        final TestLightBlowGlowBlow app = new TestLightBlowGlowBlow();
+        final TestLightBlowGlowTest app = new TestLightBlowGlowTest();
         app.start();
     }
 
