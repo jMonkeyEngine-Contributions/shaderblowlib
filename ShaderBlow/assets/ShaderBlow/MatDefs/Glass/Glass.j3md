@@ -101,6 +101,7 @@ MaterialDef FakeParticleBlow {
             FOG_SKY : FogSkyBox
             TOON_EDGES : EdgesColor
             FOG_EDGES : Fog_Edges
+            NUM_BONES : NumberOfBones
         }
 
         RenderState {
@@ -125,6 +126,12 @@ MaterialDef FakeParticleBlow {
                 NormalMatrix
             }
 
+        Defines {
+            DIFFUSEMAP_ALPHA : DiffuseMap
+            NUM_BONES : NumberOfBones
+            
+        }
+
             RenderState {
             }
         }
@@ -141,6 +148,7 @@ WorldViewProjectionMatrix
 Defines {
 DO_REFRACT : DoRefract
 MASK_TEXTURE : Mask_Texture
+NUM_BONES : NumberOfBones
 }
 }
 

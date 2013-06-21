@@ -184,6 +184,8 @@ MaterialDef Phong Lighting {
 
             DISSOLVE_MAP : DissolveMap
             DISSOLVE_PARAMS : DissolveParams
+            
+            NUM_BONES : NumberOfBones
         }
     }
 
@@ -200,6 +202,7 @@ MaterialDef Phong Lighting {
         Defines {
             COLOR_MAP : ColorMap
             DISCARD_ALPHA : AlphaDiscardThreshold
+            NUM_BONES : NumberOfBones
         }
 
         ForcedRenderState {
@@ -231,6 +234,7 @@ Technique PostShadow15{
             FADE : FadeInfo
             PSSM : Splits
             POINTLIGHT : LightViewProjectionMatrix5
+            NUM_BONES : NumberOfBones
         }
 
          ForcedRenderState {
@@ -259,6 +263,7 @@ Technique PostShadow15{
             FADE : FadeInfo
             PSSM : Splits
             POINTLIGHT : LightViewProjectionMatrix5
+            NUM_BONES : NumberOfBones
         }
 
         ForcedRenderState {
@@ -281,6 +286,7 @@ Technique PostShadow15{
 
         Defines {
             DIFFUSEMAP_ALPHA : DiffuseMap
+            NUM_BONES : NumberOfBones
         }
 
         RenderState {
@@ -349,6 +355,7 @@ WorldViewProjectionMatrix
 Defines {
 DO_REFRACT : DoRefract
 MASK_TEXTURE : Mask_Texture
+NUM_BONES : NumberOfBones
 }
 }
 

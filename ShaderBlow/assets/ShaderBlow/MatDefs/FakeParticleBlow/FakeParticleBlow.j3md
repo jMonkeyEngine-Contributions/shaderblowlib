@@ -60,7 +60,8 @@ WorldViewProjectionMatrix
 
 Defines {
 DO_REFRACT : DoRefract
-MASK_TEXTURE : Mask_Texture
+MASK_TEXTURE : Mask_Texture 
+NUM_BONES : NumberOfBones
 }
 }
 

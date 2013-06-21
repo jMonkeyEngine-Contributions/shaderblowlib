@@ -5,7 +5,11 @@ MaterialDef Refraction {
         // Refraction Filter
         Boolean DoRefract : False
         Float Distance : 200.0
-        Texture2D Mask_Texture        
+        Texture2D Mask_Texture     
+
+        // For hardware skinning
+        Int NumberOfBones
+        Matrix4Array BoneMatrices   
 
     }
 
@@ -29,6 +33,7 @@ WorldViewProjectionMatrix
 Defines {
 DO_REFRACT : DoRefract
 MASK_TEXTURE : Mask_Texture
+NUM_BONES : NumberOfBones
 }
 }
 

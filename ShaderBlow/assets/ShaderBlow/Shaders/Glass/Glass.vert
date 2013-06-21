@@ -44,17 +44,25 @@ void main() {
       Skinning_Compute(pos);
     #endif
 
-    gl_Position = g_WorldViewProjectionMatrix * pos;
+   vec4 modelSpacePos = vec4(inPosition, 1.0);
+   vec3 modelSpaceNorm = inNormal;
+   vec3 modelSpaceTan  = inTangent.xyz;
+
+    #ifdef NUM_BONES
+      Skinning_Compute(modelSpacePos, modelSpaceNorm, modelSpaceTan);
+    #endif
+
+    gl_Position = g_WorldViewProjectionMatrix * modelSpacePos;
     texCoord = inTexCoord;
 
-    vec3 wvPosition = (g_WorldViewMatrix * pos).xyz;
-    vec3 wvNormal  = normalize(g_NormalMatrix * inNormal);
+    vec3 wvPosition = (g_WorldViewMatrix * modelSpacePos).xyz;
+    vec3 wvNormal  = normalize(g_NormalMatrix * modelSpaceNorm);
     vec3 viewDir = normalize(-wvPosition);
 
     vNormal = wvNormal;
 
     #ifdef NORMALMAP
-        vec3 wvTangent = normalize(g_NormalMatrix * inTangent.xyz);
+        vec3 wvTangent = normalize(g_NormalMatrix * modelSpaceTan);
         vec3 wvBinormal = cross(wvNormal, wvTangent);
 
         mat3 tbnMat = mat3(wvTangent, wvBinormal * -inTangent.w, wvNormal);
@@ -70,7 +78,7 @@ void main() {
 
 
     //Reflection vectors calculation
-    vec3 worldPos = (g_WorldMatrix * pos).xyz;
+    vec3 worldPos = (g_WorldMatrix * modelSpacePos).xyz;
 
     vec3 I = normalize( g_CameraPosition -  worldPos  ).xyz;
     vec3 N = normalize( (g_WorldMatrix * vec4(inNormal, 0.0)).xyz );
