@@ -443,30 +443,31 @@ vec4 diffuseColor;
 
     #if defined(NORMALMAP) && !defined(VERTEX_LIGHTING)
       normalHeight = normalHeightCalc;
-      vec3 normal = (normalHeight.xyz * vec3(2.0) - vec3(1.0));
-      normal = normalize(normal);
-     #ifdef LATC
-        normal.z = sqrt(1.0 - (normal.x * normal.x) - (normal.y * normal.y));
-      #endif
-    #if defined (NOR_INV_X) && (NORMALMAP) 
-    normal.x = -normal.x;
-    #endif
+      vec3 normal = normalize(normalHeight.xyz * vec3(2.0) - vec3(1.0));
 
-    #if defined (NOR_INV_Y) && (NORMALMAP)
-    normal.y = -normal.y;
-    #endif
+       #ifdef LATC
+         normal.z = sqrt(1.0 - (normal.x * normal.x) - (normal.y * normal.y));
+       #endif
 
-    #if defined (NOR_INV_Z) && (NORMALMAP)
-    normal.z = -normal.z;
-    #endif
+       #if defined (NOR_INV_X) && (NORMALMAP) 
+         normal.x = -normal.x;
+       #endif
+
+       #if defined (NOR_INV_Y) && (NORMALMAP)
+         normal.y = -normal.y;
+       #endif
+
+       #if defined (NOR_INV_Z) && (NORMALMAP)
+        normal.z = -normal.z;
+       #endif
  
-          #elif !defined(VERTEX_LIGHTING)
-      vec3 normal = vNormal;
- 
+    #elif !defined(VERTEX_LIGHTING)
+        vec3 normal = vNormal;
+   
+        #if !defined(LOW_QUALITY) && !defined(V_TANGENT)
+           normal = normalize(normal);
+        #endif
     #endif
- #if !defined(LOW_QUALITY) && !defined(V_TANGENT)
-         normal = normalize(normal);
-      #endif
 
 
     #if defined(SPECULAR_LIGHTING) && defined(SPECULARMAP)
