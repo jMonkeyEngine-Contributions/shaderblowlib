@@ -7,7 +7,7 @@ Material LightBlow_1 : ShaderBlow/MatDefs/LightBlow/LightBlow.j3md {
         Spec_A_Nor : false
         Specular : 1.0 1.0 1.0 1.0
         Shininess : 5.0
-        Nor_Inv_Y : true
+        Nor_Inv_Y : false
 
 
 

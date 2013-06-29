@@ -57,6 +57,10 @@ public class TestLightBlowShadingSystem extends SimpleApplication {
         char_boy2.setMaterial(mat2);
         char_boy2.setLocalTranslation(-1.5f, 0, 0);
         TangentBinormalGenerator.generate(char_boy2);
+
+             SkeletonControl skeletonControlx = char_boy2.getControl(SkeletonControl.class);
+             skeletonControlx.setHardwareSkinningPreferred(true);
+             
         this.rootNode.attachChild(char_boy2);
 
         final Spatial char_boy2_2 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
@@ -65,6 +69,13 @@ public class TestLightBlowShadingSystem extends SimpleApplication {
         char_boy2_2.setMaterial(mat2_2);
         char_boy2_2.setLocalTranslation(-2.5f, 0, 0);
         TangentBinormalGenerator.generate(char_boy2_2);
+
+             AnimControl   control2 = char_boy2_2.getControl(AnimControl.class);
+             AnimChannel  channel2 = control2.createChannel();
+             channel2.setAnim("Action");
+             SkeletonControl skeletonControl2 = char_boy2_2.getControl(SkeletonControl.class);
+             skeletonControl2.setHardwareSkinningPreferred(true);
+             
         this.rootNode.attachChild(char_boy2_2);
 
         final Spatial char_boy3 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
@@ -73,6 +84,10 @@ public class TestLightBlowShadingSystem extends SimpleApplication {
         char_boy3.setMaterial(mat3);
         char_boy3.setLocalTranslation(-4f, 0, 0);
         TangentBinormalGenerator.generate(char_boy3);
+        
+             SkeletonControl skeletonControl3 = char_boy3.getControl(SkeletonControl.class);
+             skeletonControl3.setHardwareSkinningPreferred(true);
+             
         this.rootNode.attachChild(char_boy3);
 
         final Spatial char_boy4 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
@@ -81,6 +96,10 @@ public class TestLightBlowShadingSystem extends SimpleApplication {
         char_boy4.setMaterial(mat4);
         char_boy4.setLocalTranslation(-6f, 0, 0);
         TangentBinormalGenerator.generate(char_boy4);
+
+             SkeletonControl skeletonControl4 = char_boy4.getControl(SkeletonControl.class);
+             skeletonControl4.setHardwareSkinningPreferred(true);
+             
         this.rootNode.attachChild(char_boy4);
 
         final Spatial char_boy5 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
@@ -90,9 +109,9 @@ public class TestLightBlowShadingSystem extends SimpleApplication {
         char_boy5.setLocalTranslation(-8f, 0, 0);
         TangentBinormalGenerator.generate(char_boy5);
         
-             AnimControl control5 = char_boy5.getControl(AnimControl.class);
-             AnimChannel channel5 = control5.createChannel();
-             channel5.setAnim("Action");
+             AnimControl   control5 = char_boy5.getControl(AnimControl.class);
+             AnimChannel  channel5 = control5.createChannel();
+             channel5.setAnim("Action");        
              SkeletonControl skeletonControl5 = char_boy5.getControl(SkeletonControl.class);
              skeletonControl5.setHardwareSkinningPreferred(true);   
                 
@@ -104,6 +123,10 @@ public class TestLightBlowShadingSystem extends SimpleApplication {
         char_boy6.setMaterial(mat6);
         char_boy6.setLocalTranslation(-10f, 0, 0);
         TangentBinormalGenerator.generate(char_boy6);
+
+             SkeletonControl skeletonControl6 = char_boy6.getControl(SkeletonControl.class);
+             skeletonControl6.setHardwareSkinningPreferred(true);
+             
         this.rootNode.attachChild(char_boy6);
 
         final DirectionalLight dl = new DirectionalLight();

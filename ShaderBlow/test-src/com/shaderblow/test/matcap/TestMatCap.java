@@ -31,6 +31,9 @@
  */
 package com.shaderblow.test.matcap;
 
+import com.jme3.animation.AnimChannel;
+import com.jme3.animation.AnimControl;
+import com.jme3.animation.SkeletonControl;
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.plugins.FileLocator;
 import com.jme3.light.DirectionalLight;
@@ -44,58 +47,85 @@ import com.shaderblow.lightblow.CartoonEdgeProcessor;
 
 public class TestMatCap extends SimpleApplication {
 
-	public static void main(final String[] args) {
-		final TestMatCap app = new TestMatCap();
-		app.start();
-	}
+    public static void main(final String[] args) {
+        final TestMatCap app = new TestMatCap();
+        app.start();
+    }
 
-	@Override
-	public void simpleInitApp() {
+    @Override
+    public void simpleInitApp() {
 
-		this.assetManager.registerLocator("assets", FileLocator.class);
+        this.assetManager.registerLocator("assets", FileLocator.class);
 
-		final Spatial char_boy1 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
-		final Material mat1 = this.assetManager.loadMaterial("TestMaterials/MatCap/MatCap1.j3m");
-		char_boy1.setMaterial(mat1);
-		char_boy1.setLocalTranslation(0, 0, 0);
-		TangentBinormalGenerator.generate(char_boy1);
-		this.rootNode.attachChild(char_boy1);
+        final Spatial char_boy1 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
+        final Material mat1 = this.assetManager.loadMaterial("TestMaterials/MatCap/MatCap1.j3m");
+        char_boy1.setMaterial(mat1);
+        char_boy1.setLocalTranslation(0, 0, 0);
+        TangentBinormalGenerator.generate(char_boy1);
 
-		final Spatial char_boy2 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
-		final Material mat2 = this.assetManager.loadMaterial("TestMaterials/MatCap/MatCapBump1.j3m");
-		char_boy2.setMaterial(mat2);
-		char_boy2.setLocalTranslation(1, 0, 0);
-		TangentBinormalGenerator.generate(char_boy2);
-		this.rootNode.attachChild(char_boy2);
+        AnimControl control1 = char_boy1.getControl(AnimControl.class);
+        AnimChannel channel1 = control1.createChannel();
+        channel1.setAnim("Action");
+        SkeletonControl skeletonControl1 = char_boy1.getControl(SkeletonControl.class);
+        skeletonControl1.setHardwareSkinningPreferred(true);
 
-		final Spatial char_boy3 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
-		final Material mat3 = this.assetManager.loadMaterial("TestMaterials/MatCap/MatCap2.j3m");
-		char_boy3.setMaterial(mat3);
-		char_boy3.setLocalTranslation(-1, 0, 0);
-		TangentBinormalGenerator.generate(char_boy3);
-		this.rootNode.attachChild(char_boy3);
+        this.rootNode.attachChild(char_boy1);
 
-		final Spatial char_boy4 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
-		final Material mat4 = this.assetManager.loadMaterial("TestMaterials/MatCap/MatCapBump2.j3m");
-		char_boy4.setMaterial(mat4);
-		char_boy4.setLocalTranslation(-2, 0, 0);
-		TangentBinormalGenerator.generate(char_boy4);
-		this.rootNode.attachChild(char_boy4);
+        final Spatial char_boy2 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
+        final Material mat2 = this.assetManager.loadMaterial("TestMaterials/MatCap/MatCapBump1.j3m");
+        char_boy2.setMaterial(mat2);
+        char_boy2.setLocalTranslation(1, 0, 0);
+        TangentBinormalGenerator.generate(char_boy2);
 
-		this.flyCam.setMoveSpeed(10);
-		this.viewPort.setBackgroundColor(ColorRGBA.Gray);
+        AnimControl control2 = char_boy2.getControl(AnimControl.class);
+        AnimChannel channel2 = control2.createChannel();
+        channel2.setAnim("Action");
+        SkeletonControl skeletonControl2 = char_boy2.getControl(SkeletonControl.class);
+        skeletonControl2.setHardwareSkinningPreferred(true);
 
-		if (this.renderer.getCaps().contains(Caps.GLSL100)) {
-			final CartoonEdgeProcessor cartoonEdgeProcess = new CartoonEdgeProcessor();
-			this.viewPort.addProcessor(cartoonEdgeProcess);
-		}
+        this.rootNode.attachChild(char_boy2);
 
-		// Requiered for toon edge effect
-		final DirectionalLight dl = new DirectionalLight();
-		dl.setDirection(new Vector3f(-0.8f, -0.6f, -0.08f).normalizeLocal());
-		dl.setColor(new ColorRGBA(1, 1, 1, 1));
-		this.rootNode.addLight(dl);
+        final Spatial char_boy3 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
+        final Material mat3 = this.assetManager.loadMaterial("TestMaterials/MatCap/MatCap2.j3m");
+        char_boy3.setMaterial(mat3);
+        char_boy3.setLocalTranslation(-1, 0, 0);
+        TangentBinormalGenerator.generate(char_boy3);
 
-	}
+        AnimControl control3 = char_boy3.getControl(AnimControl.class);
+        AnimChannel channel3 = control3.createChannel();
+        channel3.setAnim("Action");
+        SkeletonControl skeletonControl3 = char_boy3.getControl(SkeletonControl.class);
+        skeletonControl3.setHardwareSkinningPreferred(true);
 
+        this.rootNode.attachChild(char_boy3);
+
+        final Spatial char_boy4 = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
+        final Material mat4 = this.assetManager.loadMaterial("TestMaterials/MatCap/MatCapBump2.j3m");
+        char_boy4.setMaterial(mat4);
+        char_boy4.setLocalTranslation(-2, 0, 0);
+        TangentBinormalGenerator.generate(char_boy4);
+
+        AnimControl control4 = char_boy4.getControl(AnimControl.class);
+        AnimChannel channel4 = control4.createChannel();
+        channel4.setAnim("Action");
+        SkeletonControl skeletonControl4 = char_boy4.getControl(SkeletonControl.class);
+        skeletonControl4.setHardwareSkinningPreferred(true);
+
+        this.rootNode.attachChild(char_boy4);
+
+        this.flyCam.setMoveSpeed(10);
+        this.viewPort.setBackgroundColor(ColorRGBA.Gray);
+
+        if (this.renderer.getCaps().contains(Caps.GLSL100)) {
+            final CartoonEdgeProcessor cartoonEdgeProcess = new CartoonEdgeProcessor();
+            this.viewPort.addProcessor(cartoonEdgeProcess);
+        }
+
+        // Requiered for toon edge effect
+        final DirectionalLight dl = new DirectionalLight();
+        dl.setDirection(new Vector3f(-0.8f, -0.6f, -0.08f).normalizeLocal());
+        dl.setColor(new ColorRGBA(1, 1, 1, 1));
+        this.rootNode.addLight(dl);
+
+    }
 }
