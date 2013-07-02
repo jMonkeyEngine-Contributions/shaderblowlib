@@ -63,7 +63,7 @@ void main() {
 
     #if defined (NORMALMAP)
         vec3  normalz = mat.xyz * normal.xyz;
-        diffuseColor = texture2D(m_DiffuseMap, vec2(((normalz.xyz* vec3(m_NormalMapPower) + coords.xyz ) * vec3(0.495) + vec3(0.5)))).rgb;
+        diffuseColor = texture2D(m_DiffuseMap, vec2(((coords.xyz + normalz.xyz* vec3(m_NormalMapPower)) * vec3(0.495) + vec3(0.5)))).rgb;
     #else
         diffuseColor = texture2D(m_DiffuseMap, vec2(coords.xyz * vec3(0.495) + vec3(0.5))).rgb;
         //diffuseColor = (diffuseColor - vec3(0.5, 0.5, 0.5) * 2.0);
