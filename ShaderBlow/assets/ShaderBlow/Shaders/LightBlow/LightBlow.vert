@@ -161,10 +161,17 @@ float specularFactor = lightComputeSpecular(wvNorm, wvViewDir, lightDir.xyz, m_S
 void main(){
    vec4 modelSpacePos = vec4(inPosition, 1.0);
    vec3 modelSpaceNorm = inNormal;
-   vec3 modelSpaceTan  = inTangent.xyz;
+
+   #ifndef VERTEX_LIGHTING
+      vec3 modelSpaceTan  = inTangent.xyz;
+   #endif
 
    #ifdef NUM_BONES
-     Skinning_Compute(modelSpacePos, modelSpaceNorm, modelSpaceTan);
+        #ifndef VERTEX_LIGHTING
+           Skinning_Compute(modelSpacePos, modelSpaceNorm, modelSpaceTan);
+        #else
+           Skinning_Compute(modelSpacePos, modelSpaceNorm);
+        #endif
    #endif
 
    gl_Position = g_WorldViewProjectionMatrix * modelSpacePos;
