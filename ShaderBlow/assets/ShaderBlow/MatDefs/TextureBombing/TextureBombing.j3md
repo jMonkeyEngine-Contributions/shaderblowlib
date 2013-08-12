@@ -1,0 +1,37 @@
+MaterialDef TextureBomb {
+
+    MaterialParameters {
+
+        Color Color
+        Texture2D ColorMap
+        Texture2D TextureAtlas
+        Texture2D NoiseTex
+        Float ScaleFactor
+        Float Percentage : 0.5
+        Float SamplesPerCell : 1.0
+        Float RO1 : 0.01
+        Float NumImages
+
+        Boolean Animated : False
+        Boolean RandomScale : False
+        Boolean RandomRotate : False
+        Boolean UseAtlasColors : True
+    }
+
+    Technique {
+
+        VertexShader GLSL100:   ShaderBlow/Shaders/TextureBombing/TextureBombing.vert
+        FragmentShader GLSL100: ShaderBlow/Shaders/TextureBombing/TextureBombing.frag
+
+        WorldParameters {
+            WorldViewProjectionMatrix
+            Time
+        }
+
+        Defines {
+            HAS_COLORMAP : ColorMap
+            HAS_COLOR : Color
+        }
+    }
+}
+    
