@@ -1,0 +1,30 @@
+MaterialDef ColorScale {
+  
+    MaterialParameters {
+        Int       NumSamples
+        Color     Color
+        Texture2D Texture
+        Texture2D Noise
+        Texture2D Mask
+    }
+  
+    Technique {
+        VertexShader GLSL150:   Common/MatDefs/Post/Post15.vert
+        FragmentShader GLSL150: ShaderBlow/Filters/NightVision/NightVision15.frag
+  
+        WorldParameters {
+            WorldViewProjectionMatrix
+            Time
+        }
+    }
+  
+    Technique {
+        VertexShader GLSL100:   Common/MatDefs/Post/Post.vert
+        FragmentShader GLSL100: ShaderBlow/Filters/NightVision/NightVision.frag
+  
+        WorldParameters {
+            WorldViewProjectionMatrix
+            Time
+        }
+    }
+}
