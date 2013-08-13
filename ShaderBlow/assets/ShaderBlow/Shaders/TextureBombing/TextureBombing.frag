@@ -79,13 +79,12 @@ void main()
                         glyphIndex /= vec2(0.5 * random.r + 0.5); 
                     }
  
-                    glyphIndex = (clamp(glyphIndex, 0.0, 1.0) + index) * (1 / m_NumImages); 
+                    glyphIndex = (clamp(glyphIndex, 0.0, 1.0) + index) * (1.0 / m_NumImages); 
  
                     vec4 image = texture2D(m_TextureAtlas, glyphIndex); 
  
                     if (image.r != 1.0) {
                         if (m_UseAtlasColors) {
-                           // color.rgb = mix(.rgb, color.rgb, 0.01);
                             color.rgb = mix(image.rgb, color.rgb, image.r);
                         } else {
                             color.rgb = mix(random.rgb, color.rgb, image.r);
