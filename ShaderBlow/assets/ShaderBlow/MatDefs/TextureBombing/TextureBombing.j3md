@@ -20,8 +20,8 @@ MaterialDef TextureBomb {
 
     Technique {
 
-        VertexShader GLSL100:   ShaderBlow/Shaders/TextureBombing/TextureBombing.vert
-        FragmentShader GLSL100: ShaderBlow/Shaders/TextureBombing/TextureBombing.frag
+        VertexShader GLSL110:   ShaderBlow/Shaders/TextureBombing/TextureBombing.vert
+        FragmentShader GLSL110: ShaderBlow/Shaders/TextureBombing/TextureBombing.frag
 
         WorldParameters {
             WorldViewProjectionMatrix

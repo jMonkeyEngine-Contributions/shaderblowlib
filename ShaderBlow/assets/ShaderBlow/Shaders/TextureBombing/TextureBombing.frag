@@ -39,9 +39,9 @@ void main()
         color *= m_Color;
     #endif
 
-    texCoord *= m_ScaleFactor;
-    vec2 cell = floor(texCoord); 
-    vec2 offset = texCoord - cell; 
+    vec2 scaledTexCoord = texCoord * m_ScaleFactor;
+    vec2 cell = floor(scaledTexCoord); 
+    vec2 offset = scaledTexCoord - cell; 
  
     for (int i = -1; i <= int (m_RandomRotate); i++) { 
         for (int j = -1; j <= int (m_RandomRotate); j++) { 
