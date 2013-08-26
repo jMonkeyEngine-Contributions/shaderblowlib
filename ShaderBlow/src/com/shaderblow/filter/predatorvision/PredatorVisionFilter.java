@@ -44,6 +44,8 @@ import com.jme3.renderer.ViewPort;
  */
 public class PredatorVisionFilter extends Filter {
 
+    private float screenWidth = 1.0f;
+    
     public PredatorVisionFilter() {
         super("PreadtorVisionFilter");
     }
@@ -52,6 +54,15 @@ public class PredatorVisionFilter extends Filter {
     protected void initFilter(final AssetManager manager, final RenderManager renderManager, final ViewPort vp,
             final int w, final int h) {
         material = new Material(manager, "ShaderBlow/MatDefs/Filters/PredatorVision/PredatorVision.j3md");
+        material.setFloat("ScreenWidth", screenWidth);
+    }
+
+    public float getScreenWidth() {
+        return screenWidth;
+    }
+
+    public void setScreenWidth(float screenWidth) {
+        this.screenWidth = screenWidth;
     }
 
     @Override

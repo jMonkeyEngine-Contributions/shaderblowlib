@@ -3,6 +3,7 @@ MaterialDef ColorScale {
     MaterialParameters {
         Int       NumSamples
         Texture2D Texture
+        Float     ScreenWidth
     }
   
     Technique {

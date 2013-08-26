@@ -79,6 +79,7 @@ public class TestPredatorVision extends SimpleApplication implements ActionListe
 
         // Create a green filter
         predatorVisFilter = new PredatorVisionFilter();
+        predatorVisFilter.setScreenWidth(0.5f);
         fpp.addFilter(predatorVisFilter);
         viewPort.addProcessor(fpp);
 
