@@ -1,0 +1,25 @@
+MaterialDef ColorScale {
+  
+    MaterialParameters {
+        Int       NumSamples
+        Texture2D Texture
+    }
+  
+    Technique {
+        VertexShader GLSL150:   Common/MatDefs/Post/Post15.vert
+        FragmentShader GLSL150: ShaderBlow/Filters/PredatorVision/PredatorVision15.frag
+  
+        WorldParameters {
+            WorldViewProjectionMatrix
+        }
+    }
+  
+    Technique {
+        VertexShader GLSL110:   Common/MatDefs/Post/Post.vert
+        FragmentShader GLSL110: ShaderBlow/Filters/PredatorVision/PredatorVision.frag
+  
+        WorldParameters {
+            WorldViewProjectionMatrix
+        }
+    }
+}
