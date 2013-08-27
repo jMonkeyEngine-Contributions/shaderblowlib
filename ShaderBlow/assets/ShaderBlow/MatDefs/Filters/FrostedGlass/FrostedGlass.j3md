@@ -1,0 +1,27 @@
+MaterialDef ColorScale {
+  
+    MaterialParameters {
+        Int       NumSamples
+        Texture2D Texture
+        Float     RandomScale
+        Float     RandomFactor
+    }
+  
+    Technique {
+        VertexShader GLSL150:   Common/MatDefs/Post/Post15.vert
+        FragmentShader GLSL150: ShaderBlow/Filters/FrostedGlass/FrostedGlass15.frag
+  
+        WorldParameters {
+            WorldViewProjectionMatrix
+        }
+    }
+  
+    Technique {
+        VertexShader GLSL110:   Common/MatDefs/Post/Post.vert
+        FragmentShader GLSL110: ShaderBlow/Filters/FrostedGlass/FrostedGlass.frag
+  
+        WorldParameters {
+            WorldViewProjectionMatrix
+        }
+    }
+}
