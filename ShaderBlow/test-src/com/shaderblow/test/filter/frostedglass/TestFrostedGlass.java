@@ -79,7 +79,7 @@ public class TestFrostedGlass extends SimpleApplication implements ActionListene
 
         // Create a green filter
         frostedGlassFilter = new FrostedGlassFilter();
-        frostedGlassFilter.setRandomFactor(0.05f);
+        frostedGlassFilter.setRandomFactor(0.025f);
         frostedGlassFilter.setRandomScale(2.1f);
 
         // Create Noise and mask textures

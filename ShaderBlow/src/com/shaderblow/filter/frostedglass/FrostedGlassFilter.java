@@ -47,8 +47,8 @@ import com.jme3.texture.Texture;
 public class FrostedGlassFilter extends Filter {
 
     // Default values
-    private float randomFactor = 0.05f;
-    private float randomScale = 5.1f;
+    private float randomFactor = 0.025f;
+    private float randomScale = 2.1f;
     
     public FrostedGlassFilter() {
         super("FrostedGlassFilter");
