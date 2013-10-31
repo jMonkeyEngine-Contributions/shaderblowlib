@@ -1,0 +1,27 @@
+MaterialDef Pixelation {
+  
+    MaterialParameters {
+        Int NumSamples
+        Texture2D Texture
+        Float ResX
+        Float ResY
+    }
+  
+    Technique {
+        VertexShader GLSL150:   Common/MatDefs/Post/Post15.vert
+        FragmentShader GLSL150: ShaderBlow/Filters/Pixelation/Pixelation15.frag
+  
+        WorldParameters {
+            WorldViewProjectionMatrix
+        }
+    }
+  
+    Technique {
+        VertexShader GLSL100:   Common/MatDefs/Post/Post.vert
+        FragmentShader GLSL100: ShaderBlow/Filters/Pixelation/Pixelation.frag
+  
+        WorldParameters {
+            WorldViewProjectionMatrix
+        }
+    }
+}
