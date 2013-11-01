@@ -140,7 +140,7 @@ public class SimpleRefractionProcessor implements SceneProcessor {
         this.rm.getRenderer().setFrameBuffer(this.vp.getOutputFrameBuffer());
         this.rm.setCamera(sceneCam, false);
 
-//        this.rm.getRenderer().clearBuffers(true, true, true);   
+        this.rm.getRenderer().clearBuffers(true, true, true);   
      
         
 //        this.rm.setForcedTechnique("Simple_Refraction");
