@@ -11,12 +11,12 @@ public class MotionBlurFilter extends Filter {
 
 	
 	
-	private float strength = 0.25f;
+	private float strength = 1f;
 	private int blurSamples = 8;
 
 	private ViewPort viewPort;
 	
-	private Matrix4f prevModelViewProjMatrix = new Matrix4f();
+	private Matrix4f tempMat = new Matrix4f();
 	private Matrix4f currentProjectionMatrix = new Matrix4f();
 	private Matrix4f currentToPreviousMatrix = new Matrix4f();
 	
@@ -30,13 +30,13 @@ public class MotionBlurFilter extends Filter {
 	@Override
 	protected boolean isRequiresDepthTexture() { return true; }
 
-	/** Sets the strength/scale of the "blur" at 30 FPS */
+	/** Sets the strength/scale of the "blur" at 100 FPS */
 	public float getStrength() { return strength; }
 
-	/** Gets the strength/scale of the "blur" at 30 FPS */
+	/** Gets the strength/scale of the "blur" at 100 FPS */
 	public void setStrength(float s) { strength = s; }
 
-	/** Gets how "smooth" the blur is. Higher is more smoother, but more GPU intensive. */
+	/** Gets how "smooth" the blur is. Higher is more smooth, but more GPU intensive. */
 	public int getBlurSamples() { return blurSamples; }
 
 	/** Sets the smoothness of the "blur". Lower is faster, but banding is more noticeable.  Higher is slower, but the blur is smoother. 8 is a good balance. */
@@ -68,15 +68,14 @@ public class MotionBlurFilter extends Filter {
 	
 	
 	/** Calculates and sets the material's curr-to-prev Transformation matrix 
-	 * We do this once the CPU to avoid calling an extra 4x4 matrix-multiplication per fragment on the GPU :) */
+	 *  We do this once the CPU to avoid calling one extra 4x4 matrix-multiplication per fragment on the GPU, which nets ~10% performance increase */
 	private void setCurrToPrevMatrix() {
-		currentProjectionMatrix.set(viewPort.getCamera().getViewProjectionMatrix());
+		currentToPreviousMatrix.set(currentProjectionMatrix); // "previous projection matrix"
+		
+		currentProjectionMatrix.set(viewPort.getCamera().getViewProjectionMatrix()); // "current projection matrix"
 
-		currentToPreviousMatrix.set(currentProjectionMatrix).invertLocal().multLocal(prevModelViewProjMatrix);
-		
+		currentToPreviousMatrix.multLocal(currentProjectionMatrix.invert(tempMat)); // "prev proj mat" * "curr proj mat INVERTED"
 		material.setMatrix4("CurrentToPreviousMat", currentToPreviousMatrix);
-		
-		prevModelViewProjMatrix.set(currentProjectionMatrix);
 	}
 	
 	
@@ -85,9 +84,9 @@ public class MotionBlurFilter extends Filter {
 	protected void preFrame(float delta) {
 		// makes the blur framerate independent
 		// makes more sense to do 1 calculation on CPU versus 1 per fragment on GPU
-		material.setFloat("Strength", strength * delta / DELTA_AT_30_FPS);
+		material.setFloat("Strength", strength * (1f / delta / 100f));
 		
+		// calculate the currentToPrevious transformation matrix
 		setCurrToPrevMatrix();
 	}
-	private static final float DELTA_AT_30_FPS = 1/30f;
 }

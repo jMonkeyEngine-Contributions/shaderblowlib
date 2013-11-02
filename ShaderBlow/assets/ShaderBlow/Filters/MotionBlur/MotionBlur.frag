@@ -15,10 +15,10 @@ void main() {
   float z = texture2D(m_DepthTexture, texCoord).r;
   vec3 currentPos = vec3(texCoord * 2.0 - 1.0, z * 2.0 -1.0);
   
+  
   // determine previous world pos
   vec4 previousPos = m_CurrentToPreviousMat * vec4(currentPos, 1.0);
   previousPos.xy /= previousPos.w;
-  
   
   
   // the blur vector, calculated as the difference between the
@@ -26,14 +26,11 @@ void main() {
   vec2 blurVector = m_Strength * vec2(currentPos.xy - previousPos.xy);
 
 
-
   // sample over the blurVector to accumulate the final color
   gl_FragColor = texture(m_Texture, texCoord);
    
   for (int i = 1; i < m_BlurSamples; ++i) {
-    // to "blur" from the center
-    vec2 offset = blurVector * (float(i) / float(m_BlurSamples - 1) - 0.5);
-
+    vec2 offset = blurVector * (float(i) / float(m_BlurSamples - 1) - 0.5); // centered over blurVector
     gl_FragColor += texture(m_Texture, texCoord + offset);
   }
  
