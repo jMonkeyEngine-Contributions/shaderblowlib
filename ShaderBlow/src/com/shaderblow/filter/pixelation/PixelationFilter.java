@@ -36,8 +36,14 @@ public class PixelationFilter extends Filter {
 		screenWidth = w;
 		screenHeight = h;
 		
-		material.setFloat("ResX", pixelWidth / screenWidth);
-		material.setFloat("ResY", pixelHeight / screenHeight);
+		// set the material parameters to whatever the fields actually are
+		// since this initFilter() method doesnt get called
+		// til right before the first render, but by then every AppStates'
+		// update() methods have run once and if we are changing these
+		// parameters in that time, they have already changed but since the material was null
+		// at that point the material's value wasn't set!... just trust me on this one...
+		setPixelWidth(pixelWidth);
+		setPixelHeight(pixelHeight);
 	}
 
 	

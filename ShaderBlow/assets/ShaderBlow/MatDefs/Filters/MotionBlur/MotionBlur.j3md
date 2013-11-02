@@ -1,0 +1,16 @@
+MaterialDef MotionBlur {
+
+	MaterialParameters {
+		Texture2D Texture
+		Texture2D DepthTexture
+		Matrix4 CurrentToPreviousMat
+		Float Strength
+		Int BlurSamples
+		Int NumSamples
+	}
+	
+	Technique {
+		VertexShader GLSL100: ShaderBlow/Filters/MotionBlur/MotionBlur.vert
+		FragmentShader GLSL100: ShaderBlow/Filters/MotionBlur/MotionBlur.frag
+	}
+}
