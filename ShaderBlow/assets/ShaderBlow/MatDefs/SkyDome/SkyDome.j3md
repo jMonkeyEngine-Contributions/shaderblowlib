@@ -15,8 +15,8 @@ Boolean VertexColor
 Boolean SeperateTexCoord
 
 Texture2D MoonMap
-Vector2 MoonDirection
-Vector2 MoonSpeed
+Float MoonDirection
+Float MoonSpeed
 
 Texture2D CloudMap1
 Float CloudsAlpha

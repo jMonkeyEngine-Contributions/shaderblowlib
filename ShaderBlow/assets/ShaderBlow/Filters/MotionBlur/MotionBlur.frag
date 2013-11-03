@@ -27,11 +27,11 @@ void main() {
 
 
   // sample over the blurVector to accumulate the final color
-  gl_FragColor = texture(m_Texture, texCoord);
+  gl_FragColor = texture2D(m_Texture, texCoord);
    
   for (int i = 1; i < m_BlurSamples; ++i) {
     vec2 offset = blurVector * (float(i) / float(m_BlurSamples - 1) - 0.5); // centered over blurVector
-    gl_FragColor += texture(m_Texture, texCoord + offset);
+    gl_FragColor += texture2D(m_Texture, texCoord + offset);
   }
  
   gl_FragColor /= float(m_BlurSamples);
