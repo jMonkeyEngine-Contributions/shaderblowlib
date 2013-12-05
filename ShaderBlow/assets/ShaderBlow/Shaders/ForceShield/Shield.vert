@@ -4,7 +4,7 @@ uniform mat4 g_WorldViewProjectionMatrix;
 uniform mat4 g_WorldViewMatrix;
 attribute vec3 inPosition;
 
-uniform int m_CollisionNum;
+// uniform int m_CollisionNum;
 uniform vec3 m_Collisions[4];
 varying float dists[4];
 

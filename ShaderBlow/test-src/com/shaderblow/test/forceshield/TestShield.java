@@ -40,6 +40,7 @@ import com.jme3.input.controls.ActionListener;
 import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
+import com.jme3.material.RenderState;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
@@ -81,15 +82,24 @@ public class TestShield extends SimpleApplication implements ActionListener {
         final Geometry shield = new Geometry("forceshield", sphere);
         shield.setQueueBucket(Bucket.Transparent); // Remenber to set the queue bucket to transparent for the spatial
 
-        // Create ForceShieldControl
-        this.forceShieldControl = new ForceShieldControl(this.assetManager, 0.5f);
+        // Create ForceShield
+        Material forceMaterial = new Material(assetManager, "ShaderBlow/MatDefs/ForceShield/ForceShield.j3md");
+        forceMaterial.getAdditionalRenderState().setBlendMode(RenderState.BlendMode.Alpha);
+        forceMaterial.getAdditionalRenderState().setDepthWrite(false);
+        forceMaterial.setFloat("MaxDistance", 1);
+        forceMaterial.setTexture("ColorMap", this.assetManager.loadTexture("TestTextures/ForceShield/fs_texture.png"));
+//        forceMaterial.setColor("Color", new ColorRGBA(1, 0, 0, 3));
+//        forceMaterial.setFloat("MinAlpha", 0.1f);
+        
+        this.forceShieldControl = new ForceShieldControl(forceMaterial);
         shield.addControl(this.forceShieldControl); // Add the control to the spatial
-        this.forceShieldControl.setEffectSize(2f); // Set the effect size
+        this.forceShieldControl.setEffectSize(1.2f); // Set the effect size
         this.forceShieldControl.setColor(new ColorRGBA(1, 0, 0, 3)); // Set effect color
-        this.forceShieldControl.setVisibility(0.1f); // Set shield visibility.
+        this.forceShieldControl.setVisibility(0.03f); // Set shield visibility.
+        this.forceShieldControl.setMaxTime(0.5f);
 
         // Set a texture to the shield
-        this.forceShieldControl.setTexture(this.assetManager.loadTexture("TestTextures/ForceShield/fs_texture.png"));
+//        this.forceShieldControl.setTexture(this.assetManager.loadTexture("TestTextures/ForceShield/fs_texture.png"));
 
         // this.forceShieldControl.setEnabled(false); // Enable, disable animation.
 

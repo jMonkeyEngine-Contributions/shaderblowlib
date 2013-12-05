@@ -12,7 +12,7 @@ const float e = 2.71828183;
 	uniform vec4 m_Color;
 #endif
 
-uniform int m_CollisionNum;
+// uniform int m_CollisionNum;
 uniform float m_CollisionAlphas[4];
 varying float dists[4];
 

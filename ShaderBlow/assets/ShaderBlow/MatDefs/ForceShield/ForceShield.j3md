@@ -8,7 +8,7 @@ MaterialDef Solid Color {
         
         Float MinAlpha
         Float MaxDistance
-        Int CollisionNum
+        // Int CollisionNum
         Boolean Work : False
 
         // For hardware skinning
