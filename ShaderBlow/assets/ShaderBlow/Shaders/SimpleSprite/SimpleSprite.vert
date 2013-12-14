@@ -37,14 +37,14 @@ void main(){
 	int iNumTilesV = int(m_numTilesV);
 
 	int numTilesTotal = iNumTilesU * iNumTilesV;
-	int selectedTile = 1;
+	int selectedTile = 0;
 	
 
         selectedTile += int(g_Time*float(m_Speed));
 
 	// the "1 - " bit is because otherwise it goes from right to left
-	texCoordAni.x = -(1.0 - float((texCoordAni.x + mod(float(selectedTile),  float(iNumTilesU))) / float(iNumTilesU))); ///selectedTile;
-        texCoordAni.y = (-texCoordAni.y - float(selectedTile / iNumTilesU)) / float(iNumTilesV); ///selectedTile;
+	texCoordAni.x = (float((texCoordAni.x + mod(float(selectedTile),  float(iNumTilesU))) / float(iNumTilesU))); ///selectedTile;
+        texCoordAni.y = 1.0 - (texCoordAni.y + float(selectedTile / iNumTilesU)) / float(iNumTilesV); ///selectedTile;
 
 
 
