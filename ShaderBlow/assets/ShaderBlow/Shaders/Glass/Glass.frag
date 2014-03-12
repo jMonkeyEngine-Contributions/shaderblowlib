@@ -80,15 +80,15 @@ void main() {
 
     #if defined (NORMALMAP)
         vec3  normalz = mat.xyz * normal.xyz;
-        vec4 refGet = Optics_GetEnvColor(m_RefMap, (refVec - normalz * m_NormalMapPower));
+        vec4 refGet = Optics_GetEnvColor(m_RefMap, (refVec + normalz * m_NormalMapPower));
 
         #ifdef CHROMATIC_ABERRATION
-            refGet.g = Optics_GetEnvColor(m_RefMap, (refVecG - normalz * m_NormalMapPower)).g;
-            refGet.b = Optics_GetEnvColor(m_RefMap, (refVecB - normalz * m_NormalMapPower)).b;
+            refGet.g = Optics_GetEnvColor(m_RefMap, (refVecG + normalz * m_NormalMapPower)).g;
+            refGet.b = Optics_GetEnvColor(m_RefMap, (refVecB + normalz * m_NormalMapPower)).b;
         #endif
 
         #if defined (SPECULAR)
-            specularColor = texture2D(m_MatCapSpecular, vec2(coords.xyz * vec3(0.495) + vec3(0.5)) + (normalz.xyz) * vec3(m_NormalMapPower)).rgb;
+            specularColor = texture2D(m_MatCapSpecular, vec2(((coords.xyz + normalz.xyz* vec3(m_NormalMapPower)) * vec3(0.495) + vec3(0.5))) ).rgb;
         #endif
 
     #else

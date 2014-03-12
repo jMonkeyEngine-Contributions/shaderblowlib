@@ -42,11 +42,11 @@ public class TestLightBlowLightMapDirty extends SimpleApplication {
         this.rootNode.attachChild(char_boy);
 
         final Spatial char_boy2 = this.assetManager.loadModel("TestModels/LightBlow/lightmap/lightmap.mesh.xml");
-        final Material mat2 = this.assetManager.loadMaterial("TestMaterials/LightBlow/lightmap/lightmap_dirty.j3m");
-        char_boy2.setMaterial(mat2);
-        TangentBinormalGenerator.generate(char_boy2);
-        char_boy2.move(7f, 0f, 0f);
-        this.rootNode.attachChild(char_boy2);
+//        final Material mat2 = this.assetManager.loadMaterial("TestMaterials/LightBlow/lightmap/lightmap_dirty.j3m");
+//        char_boy2.setMaterial(mat2);
+//        TangentBinormalGenerator.generate(char_boy2);
+//        char_boy2.move(7f, 0f, 0f);
+//        this.rootNode.attachChild(char_boy2);
 
         this.flyCam.setMoveSpeed(25);
 
@@ -56,7 +56,7 @@ public class TestLightBlowLightMapDirty extends SimpleApplication {
         this.rootNode.addLight(dl);
 
         final AmbientLight al = new AmbientLight();
-        al.setColor(new ColorRGBA(3.0f, 3.0f, 3.2f, 1));
+        al.setColor(new ColorRGBA(0.5f, 0.9f, 0.5f, 1));
         this.rootNode.addLight(al);
 
     }

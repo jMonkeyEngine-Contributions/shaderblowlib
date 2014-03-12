@@ -30,23 +30,19 @@ uniform vec4 m_Diffuse;
   varying vec4 vColor;
 #endif
 
-#ifndef VERTEX_LIGHTING
   uniform vec4 g_LightDirection;
 //  varying vec3 vPosition;
   varying vec3 vViewDir;
   varying vec4 vLightDir;
   varying vec3 mat;
   varying vec3 lightVec;
-#else
-  varying vec2 vertexLightValues;
-#endif
 
 
 #ifdef SPECULARMAP
   uniform sampler2D m_SpecularMap;
 #endif
 
-#if defined(PARALLAXMAP) || defined(NORMALMAP_PARALLAX) && defined(NORMALMAP) && !defined(VERTEX_LIGHTING) 
+#if defined(PARALLAXMAP) || defined(NORMALMAP_PARALLAX) && defined(NORMALMAP)
   #import "Common/ShaderLib/Parallax.glsllib"
   uniform sampler2D m_ParallaxMap;
   float m_ParallaxHeight;
@@ -136,11 +132,6 @@ uniform vec4 m_Diffuse;
 #endif
 
  uniform float m_AlphaDiscardThreshold;
-
-
-#ifndef VERTEX_LIGHTING
-
-
 
 #ifdef HQ_ATTENUATION
 uniform vec4 g_LightPosition;
@@ -266,7 +257,7 @@ float lightComputeDiffuse(in vec3 norm, in vec3 lightdir, in vec3 viewdir){
 }
 
 
-#if defined(SPECULAR_LIGHTING) && !defined(VERTEX_LIGHTING)
+#if defined(SPECULAR_LIGHTING)
 float lightComputeSpecular(in vec3 norm, in vec3 viewdir, in vec3 lightdir, in float shiny){
     // NOTE: check for shiny <= 1 removed since shininess is now 
     // 1.0 by default (uses matdefs default vals)
@@ -324,7 +315,7 @@ specularFactor = 0.0; // should be one instruction on most cards ..
 
 return vec2(diffuseFactor, specularFactor) * vec2(att);
 }
-#endif
+
 
 
 
@@ -353,7 +344,7 @@ vec4 textureBlend;
 #endif
 
 
-#if defined(NORMALMAP) && !defined(VERTEX_LIGHTING)
+#if defined(NORMALMAP)
 vec4 normalHeightCalc;
 
     #if  !defined(TEXTURE_MASK) && !defined(VERTEX_COLOR)
@@ -384,7 +375,7 @@ vec4 normalHeightCalc;
     #endif
 
 
-   #if (defined(PARALLAXMAP) || (defined(NORMALMAP_PARALLAX) && defined(NORMALMAP))) && !defined(VERTEX_LIGHTING) 
+   #if (defined(PARALLAXMAP) || (defined(NORMALMAP_PARALLAX) && defined(NORMALMAP)))
 
        #ifdef STEEP_PARALLAX
            #ifdef NORMALMAP_PARALLAX
@@ -441,7 +432,7 @@ vec4 diffuseColor;
 #endif
 
 
-    #if defined(NORMALMAP) && !defined(VERTEX_LIGHTING)
+    #if defined(NORMALMAP)
       normalHeight = normalHeightCalc;
       vec3 normal = normalize(normalHeight.xyz * vec3(2.0) - vec3(1.0));
 
@@ -461,7 +452,7 @@ vec4 diffuseColor;
         normal.z = -normal.z;
        #endif
  
-    #elif !defined(VERTEX_LIGHTING)
+    #else
         vec3 normal = vNormal;
    
         #if !defined(LOW_QUALITY) && !defined(V_TANGENT)
@@ -524,7 +515,6 @@ vec4 diffuseColor;
     }
 
 
-     #ifndef VERTEX_LIGHTING
         float spotFallOff = 1.0;
 
         #if __VERSION__ >= 110
@@ -552,30 +542,10 @@ vec4 diffuseColor;
           #else
              spotFallOff = clamp(spotFallOff, step(g_LightDirection.w, 0.001), 1.0);
           #endif
-     #endif
 
 
 
-    #ifdef VERTEX_LIGHTING
-      vec2 light = vertexLightValues.xy;
-       #ifdef COLORRAMP
-           light.x = texture2D(m_ColorRamp, vec2(light.x, 0.0)).r;
-           light.y = texture2D(m_ColorRamp, vec2(light.y, 0.0)).r;
-       #endif
 
-     #if defined(SPECULAR_LIGHTING) && defined(VERTEX_LIGHTING)
-       gl_FragColor.rgb =  AmbientSum2     * diffuseColor.rgb + 
-                           DiffuseSum.rgb * diffuseColor.rgb  * vec3(light.x) +
-                           SpecularSum.rgb    * specularColor.rgb * vec3(light.y);
-        #endif
-
-
-    #if !defined(SPECULAR_LIGHTING) && defined(VERTEX_LIGHTING)
-                        gl_FragColor.rgb = AmbientSum2 * diffuseColor.rgb + 
-                                       DiffuseSum.rgb * diffuseColor.rgb  * vec3(light.x);
-        #endif
-
-    #else
        vec4 lightDir = vLightDir;
        lightDir.xyz = normalize(lightDir.xyz);
        vec3 viewDir = normalize(vViewDir);
@@ -583,9 +553,9 @@ vec4 diffuseColor;
        vec2   light = computeLighting(normal, viewDir, lightDir.xyz) * spotFallOff;
 
 
-    #ifdef MULTIPLY_COLOR
-diffuseColor.rgb *= m_Diffuse.rgb;
-    #endif
+      #ifdef MULTIPLY_COLOR
+        diffuseColor.rgb *= m_Diffuse.rgb;
+       #endif
 
 
        #ifdef COLORRAMP
@@ -601,7 +571,7 @@ diffuseColor.rgb *= m_Diffuse.rgb;
 
            vec4 tempVec1;
            #if  defined (IBL_SIMPLE) && defined (NORMALMAP)
-              vec3 iblLight = texture2D(m_IblMap_Simple, vec2((((refVec) - mat * normal) * vec3(0.49)) + vec3(0.49)));
+              vec3 iblLight = texture2D(m_IblMap_Simple, vec2((((refVec) + mat * normal) * vec3(0.49)) + vec3(0.49)));
            #elif  defined (IBL_SIMPLE) && !defined (NORMALMAP)
               vec3 iblLight = texture2D(m_IblMap_Simple,  vec2((refVec * vec3(0.49)) + vec3(0.49)));
            #endif
@@ -615,7 +585,7 @@ diffuseColor.rgb *= m_Diffuse.rgb;
            vec4 tempVecIBL;
            
            #if  defined (IBL) && defined (NORMALMAP)
-            vec4 iblLight = Optics_GetEnvColor(m_IblMap, (refVec - mat * normal));
+            vec4 iblLight = Optics_GetEnvColor(m_IblMap, (refVec + mat * normal));
            #elif  defined (IBL) && !defined (NORMALMAP)
             vec4 iblLight = Optics_GetEnvColor(m_IblMap,  refVec);
            #endif
@@ -641,7 +611,7 @@ diffuseColor.rgb *= m_Diffuse.rgb;
 #if defined (REFLECTION) 
     
     #if  defined (REFLECTION) && defined (NORMALMAP)
-      vec4 refGet = Optics_GetEnvColor(m_RefMap, (refVec - (mat * normal)));
+      vec4 refGet = Optics_GetEnvColor(m_RefMap, (refVec + (mat * normal)));
    #elif defined (REFLECTION) && !defined (NORMALMAP)
       vec4 refGet = Optics_GetEnvColor(m_RefMap, refVec);
     #endif
@@ -718,99 +688,37 @@ light.x = max(vec3(light.x), refColor);
 
 
     #if defined(LIGHTMAP_R)
-            #if defined(OVERLAYLIGHTMAP)
-                diffuseColor.r = overlayMode(diffuseColor.r, lightMapColor.r);
-                diffuseColor.g = overlayMode(diffuseColor.g, lightMapColor.r);
-                diffuseColor.b = overlayMode(diffuseColor.b, lightMapColor.r);
-             #else
                 diffuseColor.rgb  *= vec3(lightMapColor.r);
-             #endif
 
 
         #elif defined(LIGHTMAP_G)
-            #if defined(OVERLAYLIGHTMAP)
-                diffuseColor.r = overlayMode(diffuseColor.r, lightMapColor.g);
-                diffuseColor.g = overlayMode(diffuseColor.g, lightMapColor.g);
-                diffuseColor.b = overlayMode(diffuseColor.b, lightMapColor.g);
-             #else
                 diffuseColor.rgb  *= vec3(lightMapColor.g);
-             #endif   
 
         #elif defined(LIGHTMAP_B)
-            #if defined(OVERLAYLIGHTMAP)
-                diffuseColor.r = overlayMode(diffuseColor.r, lightMapColor.b);
-                diffuseColor.g = overlayMode(diffuseColor.g, lightMapColor.b);
-                diffuseColor.b = overlayMode(diffuseColor.b, lightMapColor.b);
-             #else
                 diffuseColor.rgb  *= vec3(lightMapColor.b);
-             #endif
 
         #elif defined(LIGHTMAP_A)
-            #if defined(OVERLAYLIGHTMAP)
-                diffuseColor.r = overlayMode(diffuseColor.r, lightMapColor.a);
-                diffuseColor.g = overlayMode(diffuseColor.g, lightMapColor.a);
-                diffuseColor.b = overlayMode(diffuseColor.b, lightMapColor.a);
-             #else
                 diffuseColor.rgb  *= vec3(lightMapColor.a);
-             #endif
 
         #else
-            #if defined(OVERLAYLIGHTMAP)
-                diffuseColor.r = overlayMode(diffuseColor.r, lightMapColor.r);
-                diffuseColor.g = overlayMode(diffuseColor.g, lightMapColor.g);
-                diffuseColor.b = overlayMode(diffuseColor.b, lightMapColor.b);
-             #else
                 diffuseColor.rgb  *= lightMapColor.rgb;
-             #endif
     #endif
 
      #ifdef SPECULAR_LIGHTING
         #if defined(LIGHTMAP_R)
-            #if defined(OVERLAYLIGHTMAP)
-                specularColor.r = overlayMode(specularColor.r, lightMapColor.r);
-                specularColor.g = overlayMode(specularColor.g, lightMapColor.r);
-                specularColor.b = overlayMode(specularColor.b, lightMapColor.r);
-             #else
                 specularColor.rgb  *= vec3(lightMapColor.r);
-             #endif
-
 
         #elif defined(LIGHTMAP_G)
-            #if defined(OVERLAYLIGHTMAP)
-                specularColor.r = overlayMode(specularColor.r, lightMapColor.g);
-                specularColor.g = overlayMode(specularColor.g, lightMapColor.g);
-                specularColor.b = overlayMode(specularColor.b, lightMapColor.g);
-             #else
                 specularColor.rgb  *= vec3(lightMapColor.g);
-             #endif
 
         #elif defined(LIGHTMAP_B)
-            #if defined(OVERLAYLIGHTMAP)
-                specularColor.r = overlayMode(specularColor.r, lightMapColor.b);
-                specularColor.g = overlayMode(specularColor.g, lightMapColor.b);
-                specularColor.b = overlayMode(specularColor.b, lightMapColor.b);
-             #else
                 specularColor.rgb  *= vec3(lightMapColor.b);
-             #endif
-
 
         #elif defined(LIGHTMAP_A)
-            #if defined(OVERLAYLIGHTMAP)
-                specularColor.r = overlayMode(specularColor.r, lightMapColor.a);
-                specularColor.g = overlayMode(specularColor.g, lightMapColor.a);
-                specularColor.b = overlayMode(specularColor.b, lightMapColor.a);
-             #else
                 specularColor.rgb  *= vec3(lightMapColor.a);
-             #endif
-
         #else
-            #if defined(OVERLAYLIGHTMAP)
-                specularColor.r = overlayMode(specularColor.r, lightMapColor.r);
-                specularColor.g = overlayMode(specularColor.g, lightMapColor.g);
-                specularColor.b = overlayMode(specularColor.b, lightMapColor.b);
-             #else
                 specularColor.rgb  *= lightMapColor.rgb;
-             #endif
+
         #endif
     #endif
 
@@ -856,6 +764,6 @@ gl_FragColor.rgb = mix(fogColor.rgb,gl_FragColor.rgb,vec3(fogFactor));
 #endif
 
 
- #endif
+
     gl_FragColor.a = alpha;
 }
