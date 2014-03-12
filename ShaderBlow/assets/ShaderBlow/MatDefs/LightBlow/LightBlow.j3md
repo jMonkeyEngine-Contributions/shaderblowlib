@@ -74,9 +74,6 @@ MaterialDef LightBlow {
         Float RefIntensity : 1 // Reflection Intensity
         Boolean AdditiveReflection
 
-        // Compute vertex lighting in the shader
-        // For better performance
-        Boolean VertexLighting
 
         // Use more efficent algorithms to improve performance
         Boolean LowQuality
@@ -250,9 +247,8 @@ MaterialDef LightBlow {
             
             LATC : LATC
             VERTEX_COLOR : UseVertexColor
-            VERTEX_LIGHTING : VertexLighting
             ATTENUATION : Attenuation
-            MATERIAL_COLORS : UseMaterialColors
+            MATERIAL_COLORS : UseMaterialColors  // NEED TO REMOVE!
             V_TANGENT : VTangent
             MINNAERT  : Minnaert
             WARDISO   : WardIso
