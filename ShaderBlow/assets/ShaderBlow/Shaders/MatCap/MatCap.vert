@@ -59,7 +59,7 @@ void main() {
         vec3 wvTangent = normalize(g_NormalMatrix * modelSpaceTan);
         vec3 wvBinormal = cross(wvNormal, wvTangent);
 
-        mat3 tbnMat = mat3(wvTangent, wvBinormal * -inTangent.w, wvNormal);
+        mat3 tbnMat = mat3(wvTangent, wvBinormal * inTangent.w, wvNormal);
         mat = vec3(1.0) * tbnMat;
         mat = normalize(mat);
         //vPosition = wvPosition * tbnMat;

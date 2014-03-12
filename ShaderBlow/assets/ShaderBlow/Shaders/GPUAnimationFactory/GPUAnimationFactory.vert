@@ -828,7 +828,7 @@ void main(){
      vec3 wvTangent = normalize(g_NormalMatrix * inTangent.xyz);
      vec3 wvBinormal = cross(wvNormal, wvTangent);
  
-     mat3 tbnMat = mat3(wvTangent, wvBinormal * -inTangent.w,wvNormal);
+     mat3 tbnMat = mat3(wvTangent, wvBinormal * inTangent.w,wvNormal);
       
      //vPosition = wvPosition * tbnMat;
      //vViewDir  = viewDir * tbnMat;

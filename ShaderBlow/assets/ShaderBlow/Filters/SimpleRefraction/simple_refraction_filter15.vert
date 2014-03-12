@@ -32,7 +32,7 @@ void main(void)
    vec3 wvNormal  = normalize(g_NormalMatrix * inNormal);
    vec3 wvTangent = normalize(g_NormalMatrix * inTangent);
    vec3 wvBinormal = cross(wvNormal, wvTangent);
-   mat3 tbnMat = mat3(wvTangent, wvBinormal, wvNormal);
+   mat3 tbnMat = mat3(wvTangent, wvBinormal * inTangent.w, wvNormal);
 
     float t1 = -g_Time*m_timeFlow;
     float t2 = g_Time*m_timeFlow;

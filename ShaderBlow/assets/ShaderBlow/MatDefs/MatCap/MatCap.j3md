@@ -60,6 +60,7 @@ MaterialDef FakeParticleBlow {
         Matrix4 LightViewProjectionMatrix4
         Matrix4 LightViewProjectionMatrix5
         Vector3 LightPos
+        Vector3 LightDir
 
         Float PCFEdge
 

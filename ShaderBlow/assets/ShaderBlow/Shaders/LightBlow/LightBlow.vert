@@ -204,7 +204,7 @@ void main(){
      vec3 wvBinormal = cross(wvNormal, wvTangent);
 
 
-     mat3 tbnMat = mat3(wvTangent, wvBinormal * -inTangent.w,wvNormal);
+     mat3 tbnMat = mat3(wvTangent, wvBinormal * inTangent.w,wvNormal);
 
      
      mat = vec3(1.0) * tbnMat;
