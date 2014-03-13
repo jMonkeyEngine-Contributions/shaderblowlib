@@ -180,6 +180,14 @@ public class BasicSSAO extends Filter {
         this.ssaoMat.setParam("Samples", VarType.Vector3Array, this.samples);
 
     }
+    
+    
+    @Override
+    protected void cleanUpFilter(Renderer r) {
+//        reflectionPass.cleanup(r);
+        normalPass.cleanup(r);
+        ssaoPass.cleanup(r);
+    }
 
     /**
      * Enables fine detail pass for help in blending out artifacting in the wider area pass without losing detail
