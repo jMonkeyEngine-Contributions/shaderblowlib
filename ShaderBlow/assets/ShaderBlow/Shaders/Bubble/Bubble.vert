@@ -31,7 +31,7 @@ void main(){
     
     
     vec3 wave = vec3(abs(inPosition.x), abs(inPosition.y), abs(inPosition.z));
-    wave *=  vec3(waveSpeed.x*sin(g_Time / 3.0),waveSpeed.y*sin(g_Time / 200.0),waveSpeed.z*sin(g_Time /400.0))*(sin(g_Time)+0.5);
+    wave *=  vec3(waveSpeed.x * sin(g_Time / 3.0), waveSpeed.y * sin(g_Time / 200.0), waveSpeed.z * sin(g_Time /400.0)) * (sin(g_Time)+0.5);
     vec3 newPos = inNormal * wave;
     newPos = inPosition + newPos;
 
