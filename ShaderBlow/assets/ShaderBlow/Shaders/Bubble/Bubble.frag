@@ -38,7 +38,7 @@ void main() {
     modulatedColor.a = ( 1.0 - vNdotV.x ) * 0.5 - 0.01;		
     float opacity =  clamp(4.0 * (groundColor.a * groundColor.a - 0.75), 0.0, 1.0);
 
-    gl_FragColor.rgb = mix(modulatedColor, groundColor, opacity) + specularLightWeighting.rgb;
+    gl_FragColor.rgb = mix(modulatedColor.rgb, groundColor.rgb, opacity) + specularLightWeighting.rgb;
     gl_FragColor.a = modulatedColor.a + opacity ;
     gl_FragColor.a /= 2.0;
     gl_FragColor.a += specularLightWeighting.a;
