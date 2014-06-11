@@ -73,17 +73,22 @@ float snoise (vec2 v)
 }
 
 void main() {
-    // Convert to grayscale
-    vec3 color = getColor(m_Texture, texCoord).rgb;
-    float gray = (color.r + color.g + color.b) / 3.0;
-    vec3 grayscale = vec3(gray);
-
-    // Apply overlay
-    vec3 finalColour = overlay(m_FilterColor.rgb, grayscale);
-
-    // Lerp final colour
     float colorFactor = clamp(m_ColorDensity, 0.0, 1.0);
-    finalColour = grayscale + colorFactor * (finalColour - grayscale);    
+    
+    vec3 color = getColor(m_Texture, texCoord).rgb;
+    vec3 finalColour = color;
+     
+    if (colorFactor > 0.0) {
+	    // Convert to grayscale
+	    float gray = (color.r + color.g + color.b) / 3.0;
+	    vec3 grayscale = vec3(gray);
+	
+	    // Apply overlay
+	    finalColour = overlay(m_FilterColor.rgb, grayscale);
+	
+	    // Lerp final colour
+	    finalColour = grayscale + colorFactor * (finalColour - grayscale);
+    }    
 
     // Add noise
     float noiseFactor = clamp(m_NoiseDensity, 0.0, 1.0);
