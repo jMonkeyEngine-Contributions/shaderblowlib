@@ -57,8 +57,6 @@ public class TestBasicSSAO extends SimpleApplication {
 
     public void setupFilters() {
         
-        assetManager.registerLocator("assets", FileLocator.class);
-        
         this.fpp = new FilterPostProcessor(this.assetManager);
 
         // BasicSSAO ssao = new BasicSSAO();
@@ -81,6 +79,8 @@ public class TestBasicSSAO extends SimpleApplication {
 
     @Override
     public void simpleInitApp() {
+      assetManager.registerLocator("assets", FileLocator.class);
+  		assetManager.registerLocator("test-data", FileLocator.class);          
 
         final Spatial char_boy = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
         final Material mat = new Material(this.assetManager, "Common/MatDefs/Light/Lighting.j3md");

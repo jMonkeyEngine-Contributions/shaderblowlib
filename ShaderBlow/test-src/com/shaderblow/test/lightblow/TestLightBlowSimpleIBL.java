@@ -12,6 +12,10 @@ import com.jme3.scene.shape.Box;
 import com.jme3.scene.shape.Sphere;
 import com.jme3.util.TangentBinormalGenerator;
 
+/**
+ * @ERRORAT 705	              vec3 iblLight = texture2D(m_IblMap_Simple, vec2((((refVec) + mat * normal) * vec3(0.49)) + vec3(0.49))); 
+ * @ERROR com.jme3.renderer.RendererException: compile error in: ShaderSource[name=ShaderBlow/Shaders/LightBlow/LightBlow.frag, defines, type=Fragment, language=GLSL100] 0(705) : error C7011: implicit cast from "vec4" to "vec3"
+ */
 public class TestLightBlowSimpleIBL extends SimpleApplication {
 
     public static void main(final String[] args) {
@@ -22,6 +26,7 @@ public class TestLightBlowSimpleIBL extends SimpleApplication {
     public void Models() {
         
         assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         // Material
         final Material mat = this.assetManager.loadMaterial("TestMaterials/LightBlow/Simple_IBL/Simple_IBL.j3m");

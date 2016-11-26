@@ -7,6 +7,9 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Spatial;
 import com.jme3.util.TangentBinormalGenerator;
 
+/**
+ * TODO working? just a gray screen?
+ */
 public class TestSimpleSprite extends SimpleApplication {
 
     public static void main(final String[] args) {
@@ -18,6 +21,7 @@ public class TestSimpleSprite extends SimpleApplication {
     public void simpleInitApp() {
         
         assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         final Spatial char_boy1 = this.assetManager.loadModel("TestModels/SimpleSprite/SimpleSprite.blend");
         final Material mat1 = this.assetManager.loadMaterial("TestMaterials/SimpleSprite/SimpleSprite_1.j3m");

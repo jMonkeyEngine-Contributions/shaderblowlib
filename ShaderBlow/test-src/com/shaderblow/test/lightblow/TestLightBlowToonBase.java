@@ -21,6 +21,7 @@ public class TestLightBlowToonBase extends SimpleApplication {
     public void simpleInitApp() {
         
         assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         final Spatial toon = this.assetManager.loadModel("TestModels/ToonBlow/toon.obj");
         final Material mat = this.assetManager.loadMaterial("TestMaterials/LightBlow/Toon_System/Toon_Base.j3m");

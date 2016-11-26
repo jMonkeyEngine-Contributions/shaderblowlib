@@ -48,6 +48,7 @@ import com.jme3.post.FilterPostProcessor;
 import com.jme3.renderer.Caps;
 import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
+import com.jme3.texture.Texture.Type;
 import com.jme3.util.SkyFactory;
 import com.jme3.util.TangentBinormalGenerator;
 import com.shaderblow.filter.nightvision.NightVisionFilter;
@@ -71,6 +72,7 @@ public class TestNightVision extends SimpleApplication implements ActionListener
     @Override
     public void simpleInitApp() {
         assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         flyCam.setMoveSpeed(5);
 
@@ -109,7 +111,8 @@ public class TestNightVision extends SimpleApplication implements ActionListener
     private void buildScene() {
         final TextureKey skyhi = new TextureKey("TestTextures/Water256.dds", true);
         skyhi.setGenerateMips(true);
-        skyhi.setAsCube(true);
+//        skyhi.setAsCube(true);
+        skyhi.setTextureTypeHint(Type.CubeMap);
 
         final Texture texlow = this.assetManager.loadTexture(skyhi);
         this.rootNode.attachChild(SkyFactory.createSky(this.assetManager, texlow, false));

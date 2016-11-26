@@ -31,6 +31,7 @@ public class Electricity extends SimpleApplication {
     public void simpleInitApp() {
         
         this.assetManager.registerLocator("assets", FileLocator.class);        
+        this.assetManager.registerLocator("test-data", FileLocator.class);          
 
         electro_01_2();
         electro_01();

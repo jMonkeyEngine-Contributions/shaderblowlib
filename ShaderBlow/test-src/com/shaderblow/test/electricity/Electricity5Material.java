@@ -21,12 +21,12 @@ public class Electricity5Material extends Material {
     
     public Electricity5Material(MaterialDef def){
         super(def);
-        this.layers = layers;
+//        this.layers = layers;
     }
     
     public Electricity5Material(AssetManager contentMan, String defName){
         super(contentMan, defName);
-        this.layers = layers;
+//        this.layers = layers;
     }
     
     public void setLayers(int layers){

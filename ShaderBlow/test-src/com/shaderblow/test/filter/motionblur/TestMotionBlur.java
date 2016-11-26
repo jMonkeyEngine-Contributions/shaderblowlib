@@ -56,6 +56,7 @@ public class TestMotionBlur extends SimpleApplication {
 	public void simpleInitApp() {
 
 		this.assetManager.registerLocator("assets", FileLocator.class);
+		assetManager.registerLocator("test-data", FileLocator.class);          
 
 		TestObjectBuilder.buildTestModel(this.assetManager, this.rootNode);
 		TestObjectBuilder.buildSkybox(this.assetManager, this.rootNode);
@@ -67,6 +68,7 @@ public class TestMotionBlur extends SimpleApplication {
 		this.fpp = new FilterPostProcessor(this.assetManager);
 		
 		motionBlurFilter = new MotionBlurFilter();
+//		motionBlurFilter.setStrength(2f);
 		
 		this.fpp.addFilter(motionBlurFilter);
 		this.viewPort.addProcessor(this.fpp);

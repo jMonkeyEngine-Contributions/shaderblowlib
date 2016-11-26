@@ -23,7 +23,7 @@ void main() {
     vec2 UV = uv;
     
     vec4 noiseColor1 = texture2D(m_noise, uv * vec2(4.0) + vec2(g_Time, g_Time * 2.0) * vec2(0.01));
-    vec4 noiseColor2 = texture2D(m_noise, uv * vec2(4.0) - vec2(g_Time*3, -g_Time) * vec2(0.01));
+    vec4 noiseColor2 = texture2D(m_noise, uv * vec2(4.0) - vec2(g_Time*3.0, -g_Time) * vec2(0.01));
 
     float noiseDotted = dot(noiseColor1, noiseColor2);
 

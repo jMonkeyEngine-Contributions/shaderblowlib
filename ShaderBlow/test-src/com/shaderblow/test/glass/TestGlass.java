@@ -13,6 +13,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.Caps;
 import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
+import com.jme3.texture.Texture.Type;
 import com.jme3.util.SkyFactory;
 import com.jme3.util.TangentBinormalGenerator;
 import com.shaderblow.lightblow.CartoonEdgeProcessor;
@@ -28,10 +29,11 @@ public class TestGlass extends SimpleApplication {
     public void simpleInitApp() {
 
         this.assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         final TextureKey skyhi = new TextureKey("TestTextures/Water256.dds", true);
         skyhi.setGenerateMips(true);
-        skyhi.setAsCube(true);
+        skyhi.setTextureTypeHint(Type.CubeMap);//skyhi.setAsCube(true);
 
         final Texture texlow = this.assetManager.loadTexture(skyhi);
         this.rootNode.attachChild(SkyFactory.createSky(this.assetManager, texlow, false));

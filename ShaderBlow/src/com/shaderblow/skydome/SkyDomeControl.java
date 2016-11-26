@@ -470,9 +470,9 @@ return this.cloudCycleSpeed;
 * @return r  The resulting ColorRGBA
 */
 private ColorRGBA mix(ColorRGBA c1, ColorRGBA c2, float amount) {
-ColorRGBA r = new ColorRGBA();
-r.interpolate(c1, c2, amount);
-return  r;
+	ColorRGBA r = new ColorRGBA();
+	r.interpolateLocal(c1, c2, amount);
+	return  r;
 }
 
 // Day to night/night to day cycles
