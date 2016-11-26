@@ -10,10 +10,6 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Sphere;
 import com.jme3.util.SkyFactory;
 
-/**
- * @ERRORAT 46	    vNdotV = dot(inNormal, viewVec);
- * @ERROR SEVERE: Uncaught exception thrown in Thread[jME3 Main,5,main] com.jme3.renderer.RendererException: compile error in: ShaderSource[name=ShaderBlow/Shaders/Bubble/Bubble.vert, defines, type=Vertex, language=GLSL100] 0(46) : error C7011: implicit cast from "float" to "vec3" 
- */
 public class Bubble extends SimpleApplication {
     
     public static void main(String[] args) {
@@ -44,8 +40,9 @@ public class Bubble extends SimpleApplication {
         rootNode.attachChild(SkyFactory.createSky(
             assetManager, "Textures/Sky/Bright/BrightSky.dds", false));
         
-        flyCam.setEnabled(false);
-        ChaseCamera chaseCam = new ChaseCamera(cam, geom, inputManager);
+//        flyCam.setEnabled(false);
+        this.flyCam.setMoveSpeed(40);
+//        ChaseCamera chaseCam = new ChaseCamera(cam, geom, inputManager);
         
        
     }
