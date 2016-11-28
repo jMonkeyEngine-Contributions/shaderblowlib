@@ -71,6 +71,7 @@ public class TestSimpleRefractionFilter_Objects extends SimpleApplication {
     public void simpleInitApp() {
 
         assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
         
         initScene();
         

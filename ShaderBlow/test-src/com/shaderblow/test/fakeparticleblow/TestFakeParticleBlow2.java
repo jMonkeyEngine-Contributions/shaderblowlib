@@ -42,6 +42,7 @@ import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Quad;
 import com.jme3.texture.Texture;
+import com.jme3.texture.Texture.Type;
 import com.jme3.texture.Texture.WrapMode;
 import com.jme3.util.SkyFactory;
 import com.jme3.util.TangentBinormalGenerator;
@@ -56,12 +57,13 @@ public class TestFakeParticleBlow2 extends SimpleApplication {
     @Override
     public void simpleInitApp() {
         this.assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         this.flyCam.setMoveSpeed(55);
 
         final TextureKey skylow = new TextureKey("TestTextures/Water256.dds", true);
         skylow.setGenerateMips(true);
-        skylow.setAsCube(true);
+        skylow.setTextureTypeHint(Type.CubeMap); //        skylow.setAsCube(true);
         final Texture texlow = this.assetManager.loadTexture(skylow);
         this.rootNode.attachChild(SkyFactory.createSky(this.assetManager, texlow, false));
 

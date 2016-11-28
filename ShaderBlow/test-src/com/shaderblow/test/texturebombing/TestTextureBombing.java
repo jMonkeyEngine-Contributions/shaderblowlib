@@ -33,6 +33,7 @@ public class TestTextureBombing extends SimpleApplication {
     public void simpleInitApp() {
 
         this.assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         Box b = new Box(1, 1, 1);
         Spatial spatial = new Geometry("box", b);
@@ -77,14 +78,16 @@ public class TestTextureBombing extends SimpleApplication {
         // 3rd model (same one but with animations)
         Spatial clone = char_boy1.clone(true);
         clone.setLocalTranslation(4, -1, 0);
-        Geometry child = (Geometry) ((Node) clone).getChild("jme_lightblow-geom-1");
+//        Geometry child = (Geometry) ((Node) clone).getChild("jme_lightblow-geom-1");
+        Geometry child = (Geometry) ((Node) clone).getChild(0); //there is only one geom
         child.getMaterial().setBoolean("Animated", true);       // Should the images be animated?
         rootNode.attachChild(clone);
 
         // 4th model (Using a 9x9 blood atlas)
         Spatial clone1 = char_boy1.clone(true);
         clone1.setLocalTranslation(0, -1, 3);
-        Geometry child1 = (Geometry) ((Node) clone1).getChild("jme_lightblow-geom-1");
+//        Geometry child1 = (Geometry) ((Node) clone1).getChild("jme_lightblow-geom-1");
+        Geometry child1 = (Geometry) ((Node) clone1).getChild(0); //there is only one geom
 
         Material childMat = child1.getMaterial();
         childMat.setColor("Color", ColorRGBA.White);

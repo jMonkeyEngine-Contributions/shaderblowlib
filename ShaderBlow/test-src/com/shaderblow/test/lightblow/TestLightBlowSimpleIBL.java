@@ -22,6 +22,7 @@ public class TestLightBlowSimpleIBL extends SimpleApplication {
     public void Models() {
         
         assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         // Material
         final Material mat = this.assetManager.loadMaterial("TestMaterials/LightBlow/Simple_IBL/Simple_IBL.j3m");

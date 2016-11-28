@@ -62,6 +62,7 @@ public class TestShield extends SimpleApplication implements ActionListener {
     public void simpleInitApp() {
 
         this.assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         initCrossHairs();
 

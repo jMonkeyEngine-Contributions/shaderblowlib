@@ -21,6 +21,7 @@ public class TestGPUAnimationFactory extends SimpleApplication {
     public void simpleInitApp() {
 
         this.assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         final Spatial char_boy = this.assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
 

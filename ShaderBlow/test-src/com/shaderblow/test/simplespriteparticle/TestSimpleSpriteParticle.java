@@ -40,6 +40,7 @@ public class TestSimpleSpriteParticle extends SimpleApplication {
     public void simpleInitApp() {
 
         this.assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         getFlyByCamera().setMoveSpeed(50);
 

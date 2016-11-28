@@ -33,13 +33,14 @@ public class Electricity5Demo extends SimpleApplication {
     @Override
     public void simpleInitApp() {
         
-        this.assetManager.registerLocator("assets", FileLocator.class);          
+      this.assetManager.registerLocator("assets", FileLocator.class);          
+      this.assetManager.registerLocator("test-data", FileLocator.class);          
         
         Spatial man = assetManager.loadModel("TestModels/LightBlow/jme_lightblow.mesh.xml");
         Material matMan = new Material(assetManager, "Common/MatDefs/Light/Lighting.j3md");
         man.setMaterial(matMan);
         
-        Electricity5Material mat = new Electricity5Material(assetManager, "ShaderBlow/MatDefs/Electricity/Electricity5.j3md");
+        Electricity5Material mat = new Electricity5Material(assetManager, "ShaderBlow/MatDefs/Electricity/Electricity5_2.j3md");
         mat.setLayers(10);
         mat.setWidth(0.2f);
         mat.setFloat("speed", 0.1f);

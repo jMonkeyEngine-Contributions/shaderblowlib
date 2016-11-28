@@ -12,6 +12,7 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
+import com.jme3.texture.Texture.Type;
 import com.jme3.util.SkyFactory;
 import com.jme3.util.TangentBinormalGenerator;
 
@@ -26,10 +27,11 @@ public class TestLightBlowShadingSystem extends SimpleApplication {
     public void simpleInitApp() {
         
         assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         final TextureKey skyhi = new TextureKey("TestTextures/Water256.dds", true);
         skyhi.setGenerateMips(true);
-        skyhi.setAsCube(true);
+        skyhi.setTextureTypeHint(Type.CubeMap);//skyhi.setAsCube(true);
 
         this.flyCam.setMoveSpeed(5f);
         // TextureKey skylow = new TextureKey("TestTextures/Water32.dds", true);

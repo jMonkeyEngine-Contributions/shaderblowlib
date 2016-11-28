@@ -58,6 +58,7 @@ public class TestOldFilm extends SimpleApplication {
 	public void simpleInitApp() {
 
 		this.assetManager.registerLocator("assets", FileLocator.class);
+    assetManager.registerLocator("test-data", FileLocator.class);          
 
 		this.flyCam.setMoveSpeed(10);
 

@@ -63,7 +63,8 @@ public class TestDissolve extends SimpleApplication {
     @Override
     public void simpleInitApp() {
 
-        this.assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         Texture t;
         Material mat;

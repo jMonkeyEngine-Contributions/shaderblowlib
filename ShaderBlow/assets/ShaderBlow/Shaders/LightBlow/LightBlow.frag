@@ -571,9 +571,9 @@ vec4 diffuseColor;
 
            vec4 tempVec1;
            #if  defined (IBL_SIMPLE) && defined (NORMALMAP)
-              vec3 iblLight = texture2D(m_IblMap_Simple, vec2((((refVec) + mat * normal) * vec3(0.49)) + vec3(0.49)));
+              vec3 iblLight = texture2D(m_IblMap_Simple, vec2((((refVec) + mat * normal) * vec3(0.49)) + vec3(0.49))).rgb;
            #elif  defined (IBL_SIMPLE) && !defined (NORMALMAP)
-              vec3 iblLight = texture2D(m_IblMap_Simple,  vec2((refVec * vec3(0.49)) + vec3(0.49)));
+              vec3 iblLight = texture2D(m_IblMap_Simple,  vec2((refVec * vec3(0.49)) + vec3(0.49))).rgb;
            #endif
         
         //Albedo 

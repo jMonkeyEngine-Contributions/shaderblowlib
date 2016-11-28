@@ -39,6 +39,7 @@ import com.jme3.material.RenderState;
 import com.jme3.renderer.queue.RenderQueue.Bucket;
 import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
+import com.jme3.texture.Texture.Type;
 import com.jme3.util.SkyFactory;
 import com.jme3.util.TangentBinormalGenerator;
 
@@ -53,10 +54,11 @@ public class TestFakeParticleBlow extends SimpleApplication {
     public void simpleInitApp() {
 
         this.assetManager.registerLocator("assets", FileLocator.class);
+        assetManager.registerLocator("test-data", FileLocator.class);          
 
         final TextureKey skylow = new TextureKey("TestTextures/Water32.dds", true);
         skylow.setGenerateMips(true);
-        skylow.setAsCube(true);
+        skylow.setTextureTypeHint(Type.CubeMap); //        skylow.setAsCube(true);
         final Texture texlow = this.assetManager.loadTexture(skylow);
 
         this.rootNode.attachChild(SkyFactory.createSky(this.assetManager, texlow, false));

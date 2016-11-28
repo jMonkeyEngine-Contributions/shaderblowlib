@@ -40,7 +40,7 @@ void main(){
 
     vec3 viewVec = normalize(vec4(g_CameraPosition,1.0) - vec4(newPos, 1.0) * g_WorldMatrix).xyz;
 
-    vNdotV = dot(inNormal, viewVec);
+    vNdotV = vec3(dot(inNormal, viewVec));
 
     vPosition = vec4(newPos, 1.0) * g_WorldMatrix;
     vTransformedNormal = inNormal*g_NormalMatrix;
